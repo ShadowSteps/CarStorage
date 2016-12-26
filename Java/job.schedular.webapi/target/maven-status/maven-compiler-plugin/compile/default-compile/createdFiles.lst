@@ -1,0 +1,5 @@
+com\shadows\carstorage\job\schedular\webapi\controller\BaseAPIController.class
+com\shadows\carstorage\job\schedular\webapi\config\GlobalConfiguration.class
+com\shadows\carstorage\job\schedular\webapi\controller\JobController.class
+com\shadows\carstorage\job\schedular\webapi\config\WebAppInitializer.class
+com\shadows\carstorage\job\schedular\webapi\config\AppConfig.class
