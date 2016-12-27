@@ -1,0 +1,22 @@
+{
+    "name": "john/job.crawler",
+    "version" : "1.0.0",
+    "license": "proprietary",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Shadows\\CarStorage\\Crawler\\": "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../Job.Core"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "mashape/unirest-php": "3.0.*",
+        "john/job.core": "1.0.*"
+    }
+}

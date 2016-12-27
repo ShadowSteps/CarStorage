@@ -1,0 +1,14 @@
+{
+    "name": "john/job.scheduler.data.interfaces",
+    "version" : "1.0.2",
+    "license": "proprietary",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Shadows\\CarStorage\\Data\\Interfaces\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.0"
+    }
+}
