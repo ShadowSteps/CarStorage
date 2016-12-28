@@ -15,6 +15,10 @@ class Configuration
         return ConstConfigHelper::GetStringParameter("CONTROL_API_URL");
     }
 
+    public static function SolrApiUrl(): string{
+        return ConstConfigHelper::GetStringParameter("SOLR_API_URL");
+    }
+
     public static function AvailablePlugins() : array{
         return ConstConfigHelper::GetArrayParameter("AVAILABLE_PLUGINS");
     }

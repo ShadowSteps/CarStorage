@@ -38,14 +38,15 @@ class JobSet extends BaseSet implements IJobSet
         $entity->setLocked($data->isLocked());
         $entity->setHash($data->getHash());
         $entity->setType($data->getJobType());
+        $entity->setDateAdded($data->getDateAdded());
     }
 
 
     public function Add(JobData $data): string
     {
         $entity = new Jobs();
+        $data->setDateAdded(new \DateTime());
         $this->FillEntityFromData($data, $entity);
-        $entity->setDateAdded(new \DateTime());
         $this->getManager()
             ->persist($entity);
         return $entity->getId();
@@ -70,8 +71,11 @@ class JobSet extends BaseSet implements IJobSet
 
     public function GetNextFreeJob(): Job
     {
+        $date = new \DateTime();
+        $date->sub(new \DateInterval("P2D"));
         $criteria = new Criteria();
         $criteria->where($criteria->expr()->eq('locked', false));
+        $criteria->orWhere($criteria->expr()->lte('dateAdded', $date));
         $criteria->orderBy(['dateAdded'=>'DESC']);
         $result = $this->getManager()
             ->getRepository('Shadows\CarStorage\Data\Postgres\Entities\Jobs')
@@ -103,6 +107,7 @@ class JobSet extends BaseSet implements IJobSet
         if (!($entity instanceof Jobs))
             throw new Exception("Entity is not of type Jobs!");
         $entity->setLocked(true);
+        $entity->setDateAdded(new \DateTime());
     }
 
     public function UnlockJob(string $id)

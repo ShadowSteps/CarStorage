@@ -13,6 +13,7 @@ use Shadows\CarStorage\Core\Communication\JobInformation;
 use Shadows\CarStorage\Core\Communication\JobRegistration;
 use Shadows\CarStorage\Core\Enum\JobType;
 use Shadows\CarStorage\Crawler\Index\JobExtractResult;
+use Shadows\CarStorage\Crawler\Index\JobIndexInformation;
 use Shadows\CarStorage\Crawler\Utils\XPathHelper;
 
 class CarsCrawlerPlugin implements ICrawlerPlugin
@@ -56,6 +57,44 @@ class CarsCrawlerPlugin implements ICrawlerPlugin
 
     public function doExtractJob(JobInformation $information, \DOMDocument $document): JobExtractResult
     {
-        return null;
+        $form = $document->getElementsByTagName("body")->item(0);
+        $XPath = new \DOMXPath($document);
+        $mainTable = XPathHelper::FindChildElement("table", $form, $XPath, 2);
+        $mainTd = XPathHelper::FindElement("td", $mainTable, $XPath);
+        $innerTable = XPathHelper::FindChildElement("table", $mainTd, $XPath, 2);
+        $mainHolderTable = XPathHelper::FindElementByClass("table", "ver13black", $innerTable, $XPath);
+        $headerHolder = XPathHelper::FindChildElement("tr", $mainHolderTable, $XPath, 0);
+        $headerText = trim($headerHolder->textContent);
+        $keywords = [];
+        $highlightsContainer = XPathHelper::FindChildElement("tr", $mainHolderTable, $XPath, 2);
+        $highlightsInner = XPathHelper::FindElement("table", $highlightsContainer, $XPath);
+        $highlightsTables = XPathHelper::FindElementList("table", $highlightsInner, $XPath);
+        for ($i = 0; $i<$highlightsTables->length; $i++) {
+            $table = $highlightsTables->item($i);
+            $highlightsTableRows = XPathHelper::FindElementList("tr", $table, $XPath);
+            for ($j = 0; $j < $highlightsTableRows->length; $j++) {
+                $row = $highlightsTableRows->item($j);
+                $td = XPathHelper::FindElement("td", $row, $XPath, 1);
+                $keywords[] = $td->textContent;
+            }
+        }
+        $extrasContainer = XPathHelper::FindChildElement("tr", $mainHolderTable, $XPath, 3);
+        $extrasInner = XPathHelper::FindElement("table", $extrasContainer, $XPath);
+        $extrasRows = XPathHelper::FindElementList("tr", $extrasInner, $XPath);
+        for ($i = 2; $i<$extrasRows->length; $i++) {
+            $row = $extrasRows->item($i);
+            $td = XPathHelper::FindElementList("td", $row, $XPath)->item(1);
+            $keywordList = $td->textContent;
+            foreach (explode(",", $keywordList) as $word)
+                $keywords[] = trim($word);
+        }
+        $descriptionContainer = XPathHelper::FindChildElement("tr", $mainHolderTable, $XPath, 4);
+        $descriptionInner = XPathHelper::FindElement("table", $descriptionContainer, $XPath);
+        $descriptionRow = XPathHelper::FindElement("tr", $descriptionInner, $XPath, 2);
+        $description = $descriptionRow->textContent;
+        return new JobExtractResult(
+            new JobRegistration($information->getId(), []),
+            new JobIndexInformation(str_replace("-", "", $information->getId()), $headerText, $description?:"", $information->getUrl(), $keywords)
+        );
     }
 }

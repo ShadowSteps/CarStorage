@@ -72,9 +72,9 @@ class Client
         return RequestDataMapper::ConvertStdToJobStatus($std);
     }
 
-    public function Unlock(string $id): JobStatus {
+    public function Delete(string $id): JobStatus {
         $response = Request::post(
-            $this->controlBaseApiUrl . "/job/unlock/".$id
+            $this->controlBaseApiUrl . "/job/remove/".$id
         );
         $std = $this->ValidateResponse($response);
         return RequestDataMapper::ConvertStdToJobStatus($std);

@@ -12,5 +12,5 @@ require_once __DIR__ . "/config.php";
 $crawler = new \Shadows\CarStorage\Crawler\Core\Crawler();
 while (true) {
     $crawler->Run();
-    sleep(10);
+    sleep(1+random_int(0,4));
 }

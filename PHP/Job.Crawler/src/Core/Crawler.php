@@ -11,6 +11,8 @@ namespace Shadows\CarStorage\Crawler\Core;
 
 use Shadows\CarStorage\Core\Communication\JobInformation;
 use Shadows\CarStorage\Core\Enum\JobType;
+use Shadows\CarStorage\Crawler\Exception\XPathElementNotFoundException;
+use Shadows\CarStorage\Crawler\Index\SolrClient;
 use Shadows\CarStorage\Crawler\Plugin\ICrawlerPlugin;
 use Shadows\CarStorage\Crawler\Scheduler\Client;
 use Shadows\CarStorage\Crawler\Utils\Configuration;
@@ -22,6 +24,10 @@ class Crawler
      * @var Client
      */
     private $client;
+    /**
+     * @var SolrClient
+     */
+    private $solrClient;
 
     /**
      * Crawler constructor.
@@ -30,23 +36,26 @@ class Crawler
     public function __construct()
     {
         $this->client = new Client(Configuration::ControlApiUrl());
+        $this->solrClient = new SolrClient(Configuration::SolrApiUrl());
     }
 
-    public function Run(){
+    public function Run()
+    {
         $status = $this->client->GetNextJob();
         if ($status->isStatus() && $status instanceof JobInformation) {
-            echo "Job ({$status->getJobType()}): {$status->getUrl()}".PHP_EOL;
+            echo "Job ({$status->getJobType()}): {$status->getUrl()}" . PHP_EOL;
             $this->doJob($status);
         }
     }
 
-    private function doJob(JobInformation $information) {
+    private function doJob(JobInformation $information)
+    {
         $url = $information->getUrl();
         $parsedUrl = parse_url($url);
         $host = $parsedUrl["host"];
         $host = str_replace("www.", "", $host);
         $availablePlugins = Configuration::AvailablePlugins();
-        if (array_key_exists($host, $availablePlugins)){
+        if (array_key_exists($host, $availablePlugins)) {
             $pluginName = $availablePlugins[$host];
             if (!class_exists($pluginName))
                 throw new \Exception("Plugin class does not exist!");
@@ -57,17 +66,25 @@ class Crawler
             if ($response->code != 200)
                 throw new \Exception("Crawler got job with non existing url!");
             $content = $response->raw_body;
-            $document = new \DOMDocument('1.0',"UTF-8");
+            $document = new \DOMDocument('1.0', "UTF-8");
             $document->loadHTML($content);
-            switch ($information->getJobType()){
-                case JobType::Harvest:
-                    $registerInformation = $plugin->doHarvestJob($information, $document);
-                    $this->client
-                        ->Register($registerInformation);
-                    break;
-                case JobType::Extract:
-                    $extractResult = $plugin->doExtractJob($information, $document);
-                    break;
+            try {
+                switch ($information->getJobType()) {
+                    case JobType::Harvest:
+                        $registerInformation = $plugin->doHarvestJob($information, $document);
+                        $this->client
+                            ->Register($registerInformation);
+                        break;
+                    case JobType::Extract:
+                        $extractResult = $plugin->doExtractJob($information, $document);
+                        $this->solrClient
+                            ->AddFileToIndex($extractResult->getJobIndexInformation());
+                        $this->client
+                            ->Register($extractResult->getJobRegistration());
+                        break;
+                }
+            } catch (XPathElementNotFoundException $exp) {
+                $this->client->Delete($information->getUrl());
             }
         }
     }

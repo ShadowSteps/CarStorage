@@ -27,6 +27,10 @@ class JobData
      * @var bool
      */
     private $locked;
+    /**
+     * @var \DateTime
+     */
+    private $dateAdded;
 
 
     /**
@@ -92,4 +96,21 @@ class JobData
     {
         $this->locked = $locked;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateAdded(): \DateTime
+    {
+        return $this->dateAdded;
+    }
+
+    /**
+     * @param \DateTime $dateAdded
+     */
+    public function setDateAdded(\DateTime $dateAdded)
+    {
+        $this->dateAdded = $dateAdded;
+    }
+
 }

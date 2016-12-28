@@ -101,16 +101,17 @@ class JobController extends BaseAPIController
     }
 
     /**
-     * @Route("/api/job/unlock/{id}", name="UnlockJob")
+     * @Route("/api/job/remove/{id}",name="RemoveJob")
      * @Method("POST")
      */
-    public function unlockAction($id) {
+    public function removeAction($id) {
         $response = null;
         $code = 200;
         try {
+            $this->init();
             $this->getContext()
                 ->getJobSet()
-                ->UnlockJob($id);
+                ->Delete($id);
             $this->getContext()
                 ->SaveChanges();
             $response = new JobStatus(true);
