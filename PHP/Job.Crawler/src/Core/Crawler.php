@@ -84,7 +84,7 @@ class Crawler
                         break;
                 }
             } catch (XPathElementNotFoundException $exp) {
-                $this->client->Delete($information->getUrl());
+                $this->client->Delete($information->getId());
             }
         }
     }
