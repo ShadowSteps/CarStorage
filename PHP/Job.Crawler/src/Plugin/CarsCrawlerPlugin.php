@@ -33,6 +33,8 @@ class CarsCrawlerPlugin implements ICrawlerPlugin
         for ($i = 0; $i < $nextPageLinks->length; $i++) {
             $pageNode = $nextPageLinks->item($i);
             $url = "http://cars.bg/".$pageNode->attributes->getNamedItem("href")->nodeValue;
+            $url = preg_replace("/&cref=[0-9]+/", "", $url);
+            $url = preg_replace("/&+/", "&", $url);
             if (strlen($url) > 0){
                 $jobRegistration->addNewJob(new JobInformation(
                     "new",
