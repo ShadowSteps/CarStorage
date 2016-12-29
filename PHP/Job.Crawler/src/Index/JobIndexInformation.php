@@ -33,6 +33,14 @@ class JobIndexInformation implements JsonSerializable
      * @var string
      */
     private $url;
+    /**
+     * @var float
+     */
+    private $price;
+    /**
+     * @var string
+     */
+    private $currency;
 
     /**
      * JobIndexInformation constructor.
@@ -41,7 +49,7 @@ class JobIndexInformation implements JsonSerializable
      * @param \string[] $keywords
      * @param string $description
      */
-    public function __construct(string $id, string $title, string $description, string $url, array $keywords =[])
+    public function __construct(string $id, string $title, string $description, string $url, float $price, string $currency, array $keywords =[])
     {
         $this->id = $id;
         $this->title = $title;
@@ -49,6 +57,8 @@ class JobIndexInformation implements JsonSerializable
         $this->url = $url;
         foreach ($keywords as $word)
             $this->addKeyword($word);
+        $this->price = $price;
+        $this->currency = $currency;
     }
 
     public function addKeyword(string $keyword) {
@@ -95,7 +105,21 @@ class JobIndexInformation implements JsonSerializable
         return $this->url;
     }
 
+    /**
+     * @return float
+     */
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
 
+    /**
+     * @return string
+     */
+    public function getCurrency(): string
+    {
+        return $this->currency;
+    }
 
     /**
      * Specify data which should be serialized to JSON
@@ -113,7 +137,9 @@ class JobIndexInformation implements JsonSerializable
                     "title" => $this->getTitle(),
                     "keywords" => $this->getKeywords(),
                     "description" => $this->getDescription(),
-                    "url" => $this->getUrl()
+                    "url" => $this->getUrl(),
+                    "price" => $this->getPrice(),
+                    "currency" => $this->getCurrency()
                 ]
             ],
             "commit" => [

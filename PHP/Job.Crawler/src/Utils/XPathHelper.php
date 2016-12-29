@@ -22,14 +22,14 @@ class XPathHelper
 
     public static function FindChildElement($tagName, $parentNode, \DOMXPath $path, $elementNumber = 0) {
         $list = self::FindChildElementList($tagName, $parentNode, $path);
-        if ($list->length < $elementNumber)
+        if ($list->length <= $elementNumber)
             throw new XPathElementNotFoundException("Element with index $elementNumber not found!");
         return $list->item($elementNumber);
     }
 
     public static function FindChildElementListByClass($element, $className, $parent, \DOMXPath $path)
     {
-        $list = $path->query('./' . $element.'[@class="' . $className . '"]', $parent);
+        $list = $path->query('./' . $element.'[contains(concat(\' \', normalize-space(@class), \' \'), \' '.$className.' \')]', $parent);
         if ($list->length <= 0)
             throw new XPathElementNotFoundException("No elements found!");
         return $list;
@@ -38,7 +38,7 @@ class XPathHelper
     public static function FindChildElementByClass($element, $className, $parent, \DOMXPath $path, $elementNumber = 0)
     {
         $list = self::FindChildElementListByClass($element, $className, $parent, $path);
-        if ($list->length < $elementNumber)
+        if ($list->length <= $elementNumber)
             throw new XPathElementNotFoundException("Element with index $elementNumber not found!");
         return $list->item($elementNumber);
     }
@@ -52,14 +52,14 @@ class XPathHelper
 
     public static function FindElement($tagName, $parentNode, \DOMXPath $path, $elementNumber = 0) {
         $list = self::FindElementList($tagName, $parentNode, $path);
-        if ($list->length < $elementNumber)
+        if ($list->length <= $elementNumber)
             throw new XPathElementNotFoundException("Element with index $elementNumber not found!");
         return $list->item($elementNumber);
     }
 
     public static function FindElementListByClass($element, $className, $parent, \DOMXPath $path)
     {
-        $list = $path->query('.//' . $element.'[@class="' . $className . '"]', $parent);
+        $list = $path->query('.//' . $element.'[contains(concat(\' \', normalize-space(@class), \' \'), \' '.$className.' \')]', $parent);
         if ($list->length <= 0)
             throw new XPathElementNotFoundException("No elements found!");
         return $list;
@@ -68,7 +68,7 @@ class XPathHelper
     public static function FindElementByClass($element, $className, $parent, \DOMXPath $path, $elementNumber = 0)
     {
         $list = self::FindElementListByClass($element, $className, $parent, $path);
-        if ($list->length < $elementNumber)
+        if ($list->length <= $elementNumber)
             throw new XPathElementNotFoundException("Element with index $elementNumber not found!");
         return $list->item($elementNumber);
     }

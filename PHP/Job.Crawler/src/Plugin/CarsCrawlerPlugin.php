@@ -67,6 +67,21 @@ class CarsCrawlerPlugin implements ICrawlerPlugin
         $headerHolder = XPathHelper::FindChildElement("tr", $mainHolderTable, $XPath, 0);
         $headerText = trim($headerHolder->textContent);
         $keywords = [];
+        $priceBlock = XPathHelper::FindElement(
+            "td",
+            XPathHelper::FindElement(
+                "table",
+                XPathHelper::FindChildElement(
+                    "tr",
+                    $mainHolderTable,
+                    $XPath,
+                    1),
+                $XPath),
+            $XPath,
+            1);
+        $price = trim(XPathHelper::FindElement("strong", $priceBlock, $XPath)->textContent);
+        $currency = trim(str_replace(["\n","\t"], "", str_replace($price, "", $priceBlock->textContent)));
+        $price = str_replace(",", "", $price);
         $highlightsContainer = XPathHelper::FindChildElement("tr", $mainHolderTable, $XPath, 2);
         $highlightsInner = XPathHelper::FindElement("table", $highlightsContainer, $XPath);
         $highlightsTables = XPathHelper::FindElementList("table", $highlightsInner, $XPath);
@@ -92,10 +107,11 @@ class CarsCrawlerPlugin implements ICrawlerPlugin
         $descriptionContainer = XPathHelper::FindChildElement("tr", $mainHolderTable, $XPath, 4);
         $descriptionInner = XPathHelper::FindElement("table", $descriptionContainer, $XPath);
         $descriptionRow = XPathHelper::FindElement("tr", $descriptionInner, $XPath, 2);
-        $description = $descriptionRow->textContent;
+        $description = trim(str_replace(["\n","\t"], "",$descriptionRow->textContent));
+        $keywords = array_map("mb_strtolower", $keywords);
         return new JobExtractResult(
             new JobRegistration($information->getId(), []),
-            new JobIndexInformation(str_replace("-", "", $information->getId()), $headerText, $description?:"", $information->getUrl(), $keywords)
+            new JobIndexInformation(str_replace("-", "", $information->getId()), $headerText, $description?:"", $information->getUrl(), floatval($price), mb_strtolower($currency), $keywords)
         );
     }
 }

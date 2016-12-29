@@ -76,7 +76,7 @@ class JobSet extends BaseSet implements IJobSet
         $criteria = new Criteria();
         $criteria->where($criteria->expr()->eq('locked', false));
         $criteria->orWhere($criteria->expr()->lte('dateAdded', $date));
-        $criteria->orderBy(['dateAdded'=>'DESC']);
+        $criteria->orderBy(['dateAdded'=>'ASC']);
         $result = $this->getManager()
             ->getRepository('Shadows\CarStorage\Data\Postgres\Entities\Jobs')
             ->matching($criteria);

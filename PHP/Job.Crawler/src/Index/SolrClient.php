@@ -27,7 +27,8 @@ class SolrClient
 
     public function AddFileToIndex(JobIndexInformation $information) {
         $postUrl = $this->solrApiUrl . "/update";
-        $body = json_encode($information);
+        $bodyJSON = $information->jsonSerialize();
+        $body = json_encode($bodyJSON);
         $response = Request::post($postUrl,["Content-Type"=>"application/json"],$body);
         if ($response->code != 200) {
             if (!isset($response->body->error))
