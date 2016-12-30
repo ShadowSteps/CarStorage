@@ -30,6 +30,7 @@
           <root url="phar://$MODULE_DIR$/Job.Scheduler.WebAPI/composer.phar/" />
           <root url="phar://$MODULE_DIR$/Job.Scheduler.WebAPI/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
           <root url="phar://$MODULE_DIR$/Job.Crawler/vendor/john/job.core/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.NLP/composer.phar/" />
         </CLASSES>
         <SOURCES>
           <root url="phar://$MODULE_DIR$/Job.Scheduler.WebAPI/vendor/john/job.scheduler.data.interfaces/composer.phar/" />
@@ -45,6 +46,7 @@
           <root url="phar://$MODULE_DIR$/Job.Scheduler.WebAPI/composer.phar/" />
           <root url="phar://$MODULE_DIR$/Job.Scheduler.WebAPI/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
           <root url="phar://$MODULE_DIR$/Job.Crawler/vendor/john/job.core/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.NLP/composer.phar/" />
         </SOURCES>
       </library>
     </orderEntry>

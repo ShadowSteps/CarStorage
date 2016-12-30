@@ -28,7 +28,7 @@ class OlxCrawlerPlugin implements ICrawlerPlugin
         $resultTable =  $document->getElementById("offers_table");
         $jobRegistration = new JobRegistration($information->getId(), []);
         $nextPageLinks = XPathHelper::FindElementList("a", $buttonsTable, $XPath);
-        $carLinks = XPathHelper::FindElementListByClass("a", "detailsLink", $resultTable, $XPath);
+        $carLinks = XPathHelper::FindElementListByClass("a", "link", $resultTable, $XPath);
         for ($i = 0; $i < $nextPageLinks->length; $i++) {
             $pageNode = $nextPageLinks->item($i);
             $url = $pageNode->attributes->getNamedItem("href")->nodeValue;

@@ -17,5 +17,5 @@ while (true) {
     catch (Exception $exp) {
         echo "Exception while doing job: ".$exp->getMessage().PHP_EOL;
     }
-    sleep(1+random_int(0,4));
+    usleep(500000+random_int(0,2000000));
 }
