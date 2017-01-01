@@ -9,30 +9,56 @@ foreach ($fields as $field)
     for ($i = 1;  $i <= $words; $i++) {
         $basicCombinations[] = [
             "query" => "($field:word$i)",
-            "combinations" => ["($field:word$i)" => true],
             "words" => ["word$i" => true]
         ];
     }
+
 $prevCombinations = $basicCombinations;
 $query = "";
 foreach ($prevCombinations as $prev)
     $query .= "||". $prev["query"];
 
 $query = ltrim($query, "||");
-for ($i = 2; $i <= ($words < 3 ? $words : 3); $i++){
+$counts = array_fill(0, count($prevCombinations), 0);
+if($words >= 2) {
     $newCombinations = [];
-    foreach ($basicCombinations as $key => $basicComb)
-        for ($j = $key + 1; $j < count($prevCombinations); $j++) {
-            $prev = $prevCombinations[$j];
+    foreach ($prevCombinations as $key => $prev) {
+        for ($j = $key + 1; $j < count($basicCombinations); $j++) {
+            $basicComb = $basicCombinations[$j];
             $word = array_keys($basicComb["words"])[0];
             if (isset($prev["words"][$word]))
                 continue;
-            $basicQuery = $basicComb["query"];
-            $prev["query"] = $prev["query"] . "&&" . $basicQuery;
-            $prev["combinations"][$basicQuery] = true;
-            $prev["words"][$word] = true;
-            $newCombinations[] = $prev;
+            $new = $prev;
+            $new["query"] = $prev["query"] . "&&" . $basicComb["query"];
+            $new["words"][$word] = true;
+            $newCombinations[] = $new;
+            $counts[$key]++;
         }
+    }
+    foreach ($newCombinations as $new)
+        $query .= "||". $new["query"];
+    $prevCombinations = $newCombinations;
+}
+
+if($words >= 3) {
+    $newCombinations = [];
+    foreach ($counts as $key => $count) {
+        if ($count == 0)
+            continue;
+        for ($i = 0; $i < $count; $i++) {
+            $prev = array_shift($prevCombinations);
+            for ($j = $key + 2 + $i; $j < count($basicCombinations); $j++) {
+                $basicComb = $basicCombinations[$j];
+                $word = array_keys($basicComb["words"])[0];
+                if (isset($prev["words"][$word]))
+                    continue;
+                $new = $prev;
+                $new["query"] = $prev["query"] . "&&" . $basicComb["query"];
+                $new["words"][$word] = true;
+                $newCombinations[] = $new;
+            }
+        }
+    }
     foreach ($newCombinations as $new)
         $query .= "||". $new["query"];
     $prevCombinations = $newCombinations;
