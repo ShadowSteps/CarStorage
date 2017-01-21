@@ -2,6 +2,7 @@
 
 namespace Shadows\CarStorage\NLP\NLP\Morphology;
 
+use Shadows\CarStorage\NLP\NLP\Autocorrect\Dictionary\BigramDictionary;
 use Shadows\CarStorage\NLP\NLP\Morphology\Word\Word;
 use Shadows\CarStorage\NLP\NLP\Morphology\Word\WordType;
 
@@ -35,5 +36,12 @@ class Dictionary
             return $this->wordArray[$hash];
         else
             return new Word($word, $word, WordType::Unrecognized);
+    }
+
+    public function buildBigramDictionary() : BigramDictionary {
+        $Dictionary = new BigramDictionary();
+        foreach ($this->wordArray as $word)
+            $Dictionary->addWordToDictionary($word);
+        return $Dictionary;
     }
 }
