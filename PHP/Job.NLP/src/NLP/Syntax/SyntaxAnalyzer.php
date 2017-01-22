@@ -2,6 +2,7 @@
 
 namespace Shadows\CarStorage\NLP\NLP\Syntax;
 
+use Shadows\CarStorage\NLP\NLP\Morphology\Word\Word;
 use Shadows\CarStorage\NLP\NLP\Morphology\Word\WordType;
 use Shadows\CarStorage\NLP\NLP\Syntax\Exception\NoMoreElementsInRuleException;
 use Shadows\CarStorage\NLP\NLP\Syntax\Group\SyntaxGroup;
@@ -58,6 +59,9 @@ class SyntaxAnalyzer
     public function analyze(array $words, float $threshold = 0.80): array {
         $possibilities = [];
         foreach ($words as $key => $word) {
+            /**
+             * @var $word Word[]
+             */
             $completeSets = [];
             foreach ($possibilities as $pkey => $possibility) {
                 /**
@@ -67,15 +71,18 @@ class SyntaxAnalyzer
                     continue;
                 if ($possibility->getPositionTo()!=$key)
                     continue;
-                try {
-                    $element = $possibility->getRule()->getCurrentElement();
+                $element = $possibility->getRule()->getCurrentElement();
                     $match = [];
-                    if (!(preg_match("/\\{SE:([A-Z]+)\\}/", $element, $match)&&WordType::isValidType($match[1])))
-                        continue;
-                    if ($match[1] != $word->getWordType() && $word->getWordType() != WordType::Unrecognized)
-                        continue;
-                    $possibility->getGroup()->addChild($word);
-                    $possibility->getRule()->moveToNextElement();
+                if (!(preg_match("/\\{SE:([A-Z]+)\\}/", $element, $match)&&WordType::isValidType($match[1])))
+                    continue;
+                try {
+                    foreach ($word as $meaning) {
+                        if ($match[1] != $meaning->getWordType() && $meaning->getWordType() != WordType::Unrecognized)
+                            continue;
+                        $possibility->getGroup()->addChild($meaning);
+                        $possibility->getRule()->moveToNextElement();
+                        break;
+                    }
                 }
                 catch (NoMoreElementsInRuleException $exp){
                     if ($possibility->isFinished()) {
@@ -91,18 +98,35 @@ class SyntaxAnalyzer
                 $schedulerRule->moveToNextElement();
                 $element = $schedulerRule->getCurrentElement();
                 $match = [];
-                if (preg_match("/\\{SE:([A-Z]+)\\}/", $element, $match)&&WordType::isValidType($match[1])){
-                    if ($match[1] != $word->getWordType() && $word->getWordType() != WordType::Unrecognized)
-                        continue;
-                    $rule = clone $schedulerRule;
-                    $group = new SyntaxGroup($rule->getType());
-                    $group->addChild($word);
-                    $possibility = new SyntaxMatch($key, $rule, $group);
-                    if (!$possibility->isFinished())
-                        $possibility->getRule()->moveToNextElement();
-                    $possibilities[] = $possibility;
-                } else if (preg_match("/\\{SG:([A-Z]+)\\}/", $element, $match)&&SyntaxGroupType::isSyntaxGroup($match[1])) {
+                if (preg_match("/\\{SE:([A-Za-z]+)\\}/", $element, $match)&&WordType::isValidType($match[1])){
+                    foreach ($word as $meaning) {
+                        if ($match[1] != $meaning->getWordType() && $meaning->getWordType() != WordType::Unrecognized)
+                            continue;
+                        $rule = clone $schedulerRule;
+                        $group = new SyntaxGroup($rule->getType());
+                        $group->addChild($meaning);
+                        $possibility = new SyntaxMatch($key, $rule, $group);
+                        if (!$possibility->isFinished())
+                            $possibility->getRule()->moveToNextElement();
+                        else
+                            $completeSets = array_merge($completeSets, $this->matchFinishProcedure($possibility, $possibilities));
+                        $possibilities[] = $possibility;
+                    }
+                }
+            }
+            foreach ($this->grammarRules as $schedulerRule) {
+                /**
+                 * @var $rule SyntaxRule
+                 */
+                $schedulerRule->resetPosition();
+                $schedulerRule->moveToNextElement();
+                $element = $schedulerRule->getCurrentElement();
+                $match = [];
+                if (preg_match("/\\{SG:([A-Z]+)\\}/", $element, $match)&&SyntaxGroupType::isSyntaxGroup($match[1])) {
                     foreach ($completeSets as $set) {
+                        /**
+                         * @var $set SyntaxMatch
+                         */
                         if ($match[1] != $set->getGroup()->getType())
                             continue;
                         if ($set->getPositionFrom() != 0)

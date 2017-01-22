@@ -21,7 +21,7 @@ class WordType
     const Conjunction = "CONJ"; //Съюз
     const Particle = "PC"; //Частица
     const Interjection = "INTJ"; //Междуметие
-    const Unrecognized = "U"; //Междуметие
+    const Unrecognized = "U"; //Неивестно
 
     private static $constArray = [];
 

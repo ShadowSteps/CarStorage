@@ -15,13 +15,13 @@ use Shadows\CarStorage\NLP\NLP\Morphology\Word\WordType;
 class Dictionary
 {
     /**
-     * @var Word[]
+     * @var array
      */
     private $wordArray = [];
 
     public function addNewWord(Word $word) {
         $wordHash = hash("sha256", $word->getRawForm());
-        $this->wordArray[$wordHash] = $word;
+        $this->wordArray[$wordHash][] = $word;
     }
 
     public function __construct(array $words = [])
@@ -30,18 +30,23 @@ class Dictionary
             $this->addNewWord($word);
     }
 
-    public function findWord(string $word): Word {
+    /**
+     * @param string $word
+     * @return Word[]
+     */
+    public function findWord(string $word): array {
         $hash = hash("sha256", $word);
         if (array_key_exists($hash, $this->wordArray))
             return $this->wordArray[$hash];
         else
-            return new Word($word, $word, WordType::Unrecognized);
+            return [new Word($word, $word, WordType::Unrecognized)];
     }
 
     public function buildBigramDictionary() : BigramDictionary {
         $Dictionary = new BigramDictionary();
-        foreach ($this->wordArray as $word)
-            $Dictionary->addWordToDictionary($word);
+        foreach ($this->wordArray as $wordTypes)
+            foreach ($wordTypes as $word)
+                $Dictionary->addWordToDictionary($word);
         return $Dictionary;
     }
 }
