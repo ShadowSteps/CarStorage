@@ -59,21 +59,21 @@ class SyntaxAnalyzer
     public function analyze(array $words, float $threshold = 0.80): array {
         $possibilities = [];
         foreach ($words as $key => $word) {
+            $completeSets = [];
             /**
              * @var $word Word[]
              */
-            $completeSets = [];
             foreach ($possibilities as $pkey => $possibility) {
                 /**
                  * @var $possibility SyntaxMatch
                  */
                 if ($possibility->isFinished())
                     continue;
-                if ($possibility->getPositionTo()!=$key)
+                if ($possibility->getPositionTo() != $key)
                     continue;
                 $element = $possibility->getRule()->getCurrentElement();
-                    $match = [];
-                if (!(preg_match("/\\{SE:([A-Z]+)\\}/", $element, $match)&&WordType::isValidType($match[1])))
+                $match = [];
+                if (!preg_match("/\\{SE:([A-Z]+)\\}/", $element, $match)||!WordType::isValidType($match[1]))
                     continue;
                 try {
                     foreach ($word as $meaning) {
@@ -129,14 +129,14 @@ class SyntaxAnalyzer
                          */
                         if ($match[1] != $set->getGroup()->getType())
                             continue;
-                        if ($set->getPositionFrom() != 0)
-                            continue;
                         $rule = clone $schedulerRule;
                         $group = new SyntaxGroup($rule->getType());
                         $group->addChild($set->getGroup());
-                        $possibility = new SyntaxMatch(0, $rule, $group);
+                        $possibility = new SyntaxMatch($set->getPositionFrom(), $rule, $group);
                         if (!$possibility->isFinished())
                             $possibility->getRule()->moveToNextElement();
+                        else
+                            $completeSets = array_merge($completeSets, $this->matchFinishProcedure($possibility, $possibilities));
                         $possibilities[] = $possibility;
                     }
                 }
@@ -146,7 +146,7 @@ class SyntaxAnalyzer
         $length = count($words);
         foreach ($possibilities as $possibility) {
             $similarity = ($possibility->getGroup()->getChildCount() / $length);
-            if ($similarity > $threshold&&$possibility->getGroup()->getType() == SyntaxGroupType::Sentence&&$possibility->isFinished())
+            if ($similarity > $threshold&&$possibility->isFinished())
                 $results[] = $possibility->getGroup();
         }
         return $results;

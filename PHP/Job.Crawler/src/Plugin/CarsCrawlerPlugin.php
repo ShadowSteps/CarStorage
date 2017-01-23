@@ -12,13 +12,27 @@ namespace Shadows\CarStorage\Crawler\Plugin;
 use Shadows\CarStorage\Core\Communication\JobInformation;
 use Shadows\CarStorage\Core\Communication\JobRegistration;
 use Shadows\CarStorage\Core\Enum\JobType;
+use Shadows\CarStorage\Crawler\Exception\XPathElementNotFoundException;
 use Shadows\CarStorage\Crawler\Index\JobExtractResult;
 use Shadows\CarStorage\Crawler\Index\JobIndexInformation;
 use Shadows\CarStorage\Crawler\Utils\XPathHelper;
 
 class CarsCrawlerPlugin implements ICrawlerPlugin
 {
-
+    private $dateReplaceStrings = [
+        "Януари" => "01",
+        "Февруари" => '02',
+        "Март" => '03',
+        "Април" => '04',
+        "Май" => '05',
+        "Юни" => '06',
+        "Юли" => '07',
+        "Август" => '08',
+        "Септември" => '09',
+        "Октомври" => '10',
+        "Ноември" => '11',
+        "Декември" => '12'
+    ];
     public function doHarvestJob(JobInformation $information, \DOMDocument $document): JobRegistration
     {
         $form = $document->getElementById("carsForm");
@@ -94,6 +108,12 @@ class CarsCrawlerPlugin implements ICrawlerPlugin
                 $keywords[] = $td->textContent;
             }
         }
+        $date = \DateTime::createFromFormat("m Y", str_replace(array_keys($this->dateReplaceStrings), array_values($this->dateReplaceStrings), $keywords[0]));
+        if (!$date)
+            throw new XPathElementNotFoundException("Could not find date in page!");
+        $kilometers = trim(str_replace([",", "км"], "", $keywords[1]));
+        if (mb_strlen($kilometers) <= 0||!is_numeric($kilometers))
+            throw new XPathElementNotFoundException("Could not find kilometers in page!");
         $extrasContainer = XPathHelper::FindChildElement("tr", $mainHolderTable, $XPath, 3);
         $extrasInner = XPathHelper::FindElement("table", $extrasContainer, $XPath);
         $extrasRows = XPathHelper::FindElementList("tr", $extrasInner, $XPath);
@@ -111,7 +131,7 @@ class CarsCrawlerPlugin implements ICrawlerPlugin
         $keywords = array_map("mb_strtolower", $keywords);
         return new JobExtractResult(
             new JobRegistration($information->getId(), []),
-            new JobIndexInformation(str_replace("-", "", $information->getId()), $headerText, $description?:"", $information->getUrl(), floatval($price), mb_strtolower($currency), $keywords)
+            new JobIndexInformation(str_replace("-", "", $information->getId()), $headerText, $description?:"", $information->getUrl(), floatval($price), mb_strtolower($currency), $date, $kilometers, $keywords)
         );
     }
 }

@@ -41,6 +41,14 @@ class JobIndexInformation implements JsonSerializable
      * @var string
      */
     private $currency;
+    /**
+     * @var \DateTime
+     */
+    private $date;
+    /**
+     * @var int
+     */
+    private $kilometers;
 
     /**
      * JobIndexInformation constructor.
@@ -49,7 +57,7 @@ class JobIndexInformation implements JsonSerializable
      * @param \string[] $keywords
      * @param string $description
      */
-    public function __construct(string $id, string $title, string $description, string $url, float $price, string $currency, array $keywords =[])
+    public function __construct(string $id, string $title, string $description, string $url, float $price, string $currency, \DateTime $year, int $kilometers, array $keywords = [])
     {
         $this->id = $id;
         $this->title = $title;
@@ -59,6 +67,8 @@ class JobIndexInformation implements JsonSerializable
             $this->addKeyword($word);
         $this->price = $price;
         $this->currency = $currency;
+        $this->date = $year;
+        $this->kilometers = $kilometers;
     }
 
     public function addKeyword(string $keyword) {
@@ -122,6 +132,23 @@ class JobIndexInformation implements JsonSerializable
     }
 
     /**
+     * @return \DateTime
+     */
+    public function getDate(): \DateTime
+    {
+        return $this->date;
+    }
+
+    /**
+     * @return int
+     */
+    public function getKilometers(): int
+    {
+        return $this->kilometers;
+    }
+
+
+    /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,
@@ -139,7 +166,9 @@ class JobIndexInformation implements JsonSerializable
                     "description" => $this->getDescription(),
                     "url" => $this->getUrl(),
                     "price" => $this->getPrice(),
-                    "currency" => $this->getCurrency()
+                    "currency" => $this->getCurrency(),
+                    "year" => $this->getDate()->format("Y-m-d\\TH:i:s\\Z"),
+                    "km" => $this->getKilometers()
                 ]
             ],
             "commit" => [

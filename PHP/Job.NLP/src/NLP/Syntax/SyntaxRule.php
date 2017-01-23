@@ -93,5 +93,14 @@ class SyntaxRule
         return ($this->elementCount == $this->ruleElementPointer + 1);
     }
 
+    public function __toString(): string
+    {
+        $string = "[{$this->getType()} ";
+        foreach ($this->ruleElements as $child) {
+            $string .= $child."+";
+        }
+        $string = rtrim($string, "+") .  "]";
+        return $string;
+    }
 
 }

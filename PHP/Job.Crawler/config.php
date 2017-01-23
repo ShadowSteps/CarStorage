@@ -6,7 +6,7 @@
  * Time: 19:53
  */
 define("CONTROL_API_URL", "http://np-dev.acstre.com/ccontrol/api");
-define("SOLR_API_URL", "http://81.161.246.26:8080/solr/car_storage_v2");
+define("SOLR_API_URL", "http://81.161.246.26:8080/solr/car_storage_v3");
 define("AVAILABLE_PLUGINS", [
     "cars.bg" => "Shadows\\CarStorage\\Crawler\\Plugin\\CarsCrawlerPlugin",
     "olx.bg" => "Shadows\\CarStorage\\Crawler\\Plugin\\OlxCrawlerPlugin"

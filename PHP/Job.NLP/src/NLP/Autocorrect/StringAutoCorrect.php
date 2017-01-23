@@ -44,8 +44,8 @@ class StringAutoCorrect
             $i++;
             if ($i > $topInterval)
                 break;
-            $similarity = ($next + 1) / ($length + abs($length - mb_strlen($key)));
-            if ($similarity > $topSimilarity && $similarity > $threshold){
+            $similarity = levenshtein($next, $word);
+            if ($similarity > $topSimilarity && $similarity < (1 - $threshold)){
                 $topword = $key;
                 $topSimilarity = $similarity;
             }
