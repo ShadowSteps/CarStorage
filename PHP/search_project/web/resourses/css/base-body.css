@@ -1,0 +1,93 @@
+html *{
+    font-family: 'Roboto', sans-serif;
+    box-sizing:border-box;
+}
+
+html body{
+    margin:0;
+    display:block;
+}
+
+.body-content{
+    display:inline-block;
+    width:100%;
+}
+
+.body-content .header-holder{
+    display:inline-block;
+    width:100%;
+    font-size:34px;
+    font-weight: bold;
+    color:#fff;
+}
+
+.body-content .header-holder .header{
+    background-color:#bdc3c7;
+    width:100%;
+    padding:20px;
+}
+
+.body-content .content-holder .content-title{
+    padding: 20px;
+    display: inline-block;
+    width:100%;
+}
+
+.body-content .content-holder .content{
+    display: inline-block;
+    width:100%;
+    padding:0 20px;
+}
+
+
+.body-content .content-holder .content .search-results-holder .pagination,
+.body-content .content-holder .content .search-results-holder .pagination{
+    display:inline-block;
+    padding:10px;
+    width:100%;
+    text-align:center;
+    background-color:#bdc3c7;
+}
+
+.body-content .content-holder .content .search-results-holder .pagination .paging-container-top,
+.body-content .content-holder .content .search-results-holder .pagination .paging-container-bottom{
+    display:inline-block;
+}
+
+.light-theme .current {
+    background: #666;
+    color: #FFF;
+    border-color: #444;
+    box-shadow: none;
+    cursor: default;
+}
+
+.simple-pagination {
+    display: block;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.light-theme a, .light-theme span {
+    float: left;
+    color: #666;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: normal;
+    text-align: center;
+    border: none;
+    min-width: 14px;
+    padding: 0 7px;
+    margin: 0 5px 0 0;
+    border-radius: 0px;
+    text-decoration: none;
+    box-shadow:none;
+    background: #efefef;
+    background: -moz-linear-gradient(top, #ffffff 0%, #efefef 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#efefef));
+    background: -webkit-linear-gradient(top, #ffffff 0%,#efefef 100%);
+    background: -o-linear-gradient(top, #ffffff 0%,#efefef 100%);
+    background: -ms-linear-gradient(top, #ffffff 0%,#efefef 100%);
+    background: linear-gradient(top, #ffffff 0%,#efefef 100%);
+}

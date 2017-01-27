@@ -1,0 +1,1 @@
+(title:word1)^6||(title:word2)^6||(description:word1)^2||(description:word2)^2||((title:word2)&&(title:word1))^12||((description:word2)&&(title:word1))^8||((description:word1)&&(title:word2))^8||((description:word2)&&(description:word1))^4

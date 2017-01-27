@@ -1,0 +1,1 @@
+(keywords:word1)^4||(keywords:word2)^4||(description:word1)^2||(description:word2)^2||((keywords:word2)&&(keywords:word1))^8||((description:word2)&&(keywords:word1))^6||((description:word1)&&(keywords:word2))^6||((description:word2)&&(description:word1))^4

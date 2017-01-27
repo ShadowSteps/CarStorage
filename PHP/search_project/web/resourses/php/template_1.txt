@@ -1,0 +1,1 @@
+(title:word1)^6||(keywords:word1)^4||(description:word1)^2

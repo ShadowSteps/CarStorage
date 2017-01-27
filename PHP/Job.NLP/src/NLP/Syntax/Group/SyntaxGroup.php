@@ -76,5 +76,16 @@ class SyntaxGroup
         return $string;
     }
 
+    public function cloneGroup() {
+        $group = new SyntaxGroup($this->getType());
+        foreach ($this->children as $child)
+        {
+            if ($child instanceof SyntaxGroup)
+                $group->addChild($child->cloneGroup());
+            else
+                $group->addChild($child);
+        }
+        return $group;
+    }
 
 }

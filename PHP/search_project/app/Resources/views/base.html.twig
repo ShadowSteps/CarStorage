@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link rel="stylesheet" href="resourses/jquery/pagination/simplePagination.css"/>
+        <link rel="stylesheet" href="resourses/jquery/basic/searchUiBuilder.css"/>
+        <link  href="resourses/jquery/datepicker-master/dist/datepicker.css" rel="stylesheet">
+        <link rel="stylesheet"  href="resourses/css/font-awesome-4.7.0/css/font-awesome.css">
+        <link href="{{ asset('resourses/css/base-body.css')}}" rel="stylesheet">
+        <script src = "{{ asset('resourses/jquery/jquery/jquery.js')}}"></script>
+        <script src = "{{ asset('resourses/jquery/pagination/jquery.simplePagination.js')}}"></script>
+        <script src = "{{ asset('resourses/jquery/datepicker-master/dist/datepicker.js')}}"></script>
+        <script src = "{{ asset('resourses/jquery/basic/searchUiBuilder.js')}}"></script>
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+
+        {% endblock %}
+    </body>
+</html>

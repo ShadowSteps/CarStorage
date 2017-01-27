@@ -1,0 +1,227 @@
+
+.body-content .content-holder .content .search-result{
+    display: inline-block;
+    width:100%;
+}
+
+.body-content .content-holder .content .input-holder{
+    display: inline-block;
+    width:100%;
+}
+
+.body-content .content-holder .content .input-holder .advanced-search{
+    display:none;
+    width:100%;
+    border:1px solid #bdc3c7;
+    border-top:0;
+}
+
+.body-content .content-holder .content .input-holder .advanced-search .advanced-search-section{
+    display:inline-block;
+    vertical-align:top;
+    padding:10px;
+}
+
+.body-content .content-holder .content .input-holder .advanced-search .advanced-search-section .advanced-search-section{
+    display:inline-block;
+    text-align:left;
+}
+
+.body-content .content-holder .content .input-holder .advanced-search .advanced-search-section .advanced-search-section-title{
+    display:inline-block;
+    width:100%;
+    border-bottom:1px solid #bdc3c7;
+    padding-bottom:2px;
+    margin-bottom:5px;
+}
+
+.body-content .content-holder .content .input-holder .advanced-search .advanced-search-section .search-option input,
+.body-content .content-holder .content .input-holder .advanced-search .advanced-search-section .search-option label {
+    cursor:pointer;
+}
+
+.body-content .content-holder .content .input-holder .advanced-search .advanced-search-section .search-option input[type=text]{
+    display:block;
+    cursor:text;
+    margin-bottom:5px;
+    border: 1px solid #bdc3c7;
+    border-radius: 2px;
+    width:100%;
+}
+
+.body-content .content-holder .content .input-holder .advanced-search .advanced-search-section .search-option input[type=text]:focus{
+    -webkit-box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,0.25);
+    -moz-box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,0.25);
+    box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,0.25);
+}
+
+.body-content .content-holder .content .input-holder .advanced-search-button{
+    display:inline-block;
+    width:250px;
+    padding:5px;
+    color:#fff;
+    text-align:center;
+    background-color:#bdc3c7;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    cursor:pointer;
+    -webkit-transition: background-color ease-out 0.5s,color ease-out 0.5s;
+    -moz-transition: background-color  ease-out 0.5s,color ease-out 0.5s;
+    -o-transition: background-color ease-out 0.5s,color ease-out 0.5s;
+    transition: background-color ease-out 0.5s,color ease-out 0.5s;
+}
+
+.noselect{
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.body-content .content-holder .content .input-holder .advanced-search-button:hover{
+    background-color:#95a5a6;
+    color:#fff;
+}
+
+.body-content .content-holder .content .input-holder .input{
+    display: inline-block;
+    width:calc(100% - 150px);
+    vertical-align:top;
+}
+
+.body-content .content-holder .content .input-holder .submit-button{
+    display: inline-block;
+    width:150px;
+    text-align:center;
+    padding:8px;
+    color:#fff;
+    background-color:#bdc3c7;
+    vertical-align: top;
+    cursor:pointer;
+    -webkit-transition: background-color ease-out 0.5s,color ease-out 0.5s;
+    -moz-transition: background-color  ease-out 0.5s,color ease-out 0.5s;
+    -o-transition: background-color ease-out 0.5s,color ease-out 0.5s;
+    transition: background-color ease-out 0.5s,color ease-out 0.5s;
+    border-top-right-radius: 3px;
+}
+
+.body-content .content-holder .content .input-holder .submit-button:hover{
+    background-color:#95a5a6;
+    color:#fff;
+}
+
+.body-content .content-holder .content .input-holder .input input{
+    display: inline-block;
+    width:100%;
+    height:36px;
+    border:1px solid #bdc3c7;
+    border-top-left-radius: 3px;
+    padding-left:10px;
+}
+
+.body-content .content-holder .content .search-results-holder{
+    display: inline-block;
+    width:100%;
+    margin-top:5px;
+    display:none;
+}
+
+.body-content .content-holder .content .search-results-holder .result-separator{
+    height:2px;
+    background-color:#95a5a6;
+}
+
+.body-content .content-holder .content .search-results-holder .search-result{
+    display:inline-block;
+    width:100%;
+    padding:5px 0;
+    text-align:right;
+}
+
+.body-content .content-holder .content .search-results-holder .search-result-empty{
+    display:inline-block;
+    width:100%;
+    padding:5px 0;
+    text-align:center;
+}
+
+
+.body-content .content-holder .content .search-results-holder .search-result em{
+    background-color:#3498db;
+    color:#fff;
+    border-radius:5px;
+    padding:0 7px;
+    text-decoration: underline;
+}
+
+.body-content .content-holder .content .search-results-holder .search-result .result-title{
+    display:inline-block;
+    font-size:14px;
+    font-weight:bold;
+    text-align:left;
+    text-decoration: underline;
+    width:100%;
+}
+
+.body-content .content-holder .content .search-results-holder .search-result .result-description{
+    display:inline-block;
+    font-size:12px;
+    width:100%;
+    text-align:left;
+}
+
+.body-content .content-holder .content .search-results-holder .search-result .result-keywords{
+    display:inline-block;
+    font-size:12px;
+    width:100%;
+    text-align:left;
+}
+
+.body-content .content-holder .content .search-results-holder .search-result .result-price{
+    display:inline-block;
+    font-size:12px;
+    width:100%;
+    text-align:left;
+}
+
+.body-content .content-holder .content .search-results-holder .search-result .result-year{
+    display:inline-block;
+    font-size:12px;
+    width:100%;
+    text-align:left;
+}
+
+.body-content .content-holder .content .search-results-holder .search-result .result-distance{
+    display:inline-block;
+    font-size:12px;
+    width:100%;
+    text-align:left;
+}
+
+.body-content .content-holder .content .search-results-holder .search-result .result-visit{
+    display:block;
+    font-size:12px;
+    width:100%;
+    text-align:right;
+}
+
+.body-content .content-holder .content .search-results-holder .search-result .result-visit a{
+    display:inline-block;
+    font-size:12px;
+    width:100px;
+    text-align:center;
+    padding:5px;
+    text-decoration: none;
+    background-color:#95a5a6;
+    color:#fff;
+    -webkit-transition: background-color ease-out 0.5s,color ease-out 0.5s;
+    -moz-transition: background-color  ease-out 0.5s,color ease-out 0.5s;
+    -o-transition: background-color ease-out 0.5s,color ease-out 0.5s;
+    transition: background-color ease-out 0.5s,color ease-out 0.5s;
+}
+
+.body-content .content-holder .content .search-results-holder .search-result .result-visit a:hover{
+    background-color:#bdc3c7;
+}

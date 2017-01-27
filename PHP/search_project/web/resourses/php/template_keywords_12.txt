@@ -1,0 +1,1 @@
+(description:word1)^2||(description:word2)^2||(description:word3)^2||(description:word4)^2||(description:word5)^2||(description:word6)^2||(description:word7)^2||(description:word8)^2||(description:word9)^2||(description:word10)^2||(description:word11)^2||(description:word12)^2

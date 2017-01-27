@@ -1,0 +1,1 @@
+(title:word1)^6||(title:word2)^6||(title:word3)^6||(title:word4)^6

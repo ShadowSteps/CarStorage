@@ -12,6 +12,7 @@ namespace Shadows\CarStorage\Crawler\Plugin;
 use Shadows\CarStorage\Core\Communication\JobInformation;
 use Shadows\CarStorage\Core\Communication\JobRegistration;
 use Shadows\CarStorage\Core\Enum\JobType;
+use Shadows\CarStorage\Crawler\Exception\XPathElementNotFoundException;
 use Shadows\CarStorage\Crawler\Index\JobExtractResult;
 use Shadows\CarStorage\Crawler\Index\JobIndexInformation;
 use Shadows\CarStorage\Crawler\Utils\XPathHelper;
@@ -85,11 +86,17 @@ class OlxCrawlerPlugin implements ICrawlerPlugin
             $td = XPathHelper::FindElement("td", $table, $XPath, 0);
             $keywords[] = str_replace(["\n","\t"], "", $td->textContent);
         }
+        $date = \DateTime::createFromFormat("Y г.", $keywords[4]);
+        if (!$date)
+            throw new XPathElementNotFoundException("Could not find date in page!");
+        $kilometers = trim(str_replace([",", "км."], "", $keywords[5]));
+        if (mb_strlen($kilometers) <= 0||!is_numeric($kilometers))
+            throw new XPathElementNotFoundException("Could not find kilometers in page!");
         $description = trim(str_replace(["\n","\t"], "", $document->getElementById("textContent")->textContent));
         $keywords = array_map("mb_strtolower", $keywords);
         return new JobExtractResult(
             new JobRegistration($information->getId(), []),
-            new JobIndexInformation(str_replace("-", "", $information->getId()), $title, $description?:"", $information->getUrl(), floatval($price), mb_strtolower($currency), $keywords)
+            new JobIndexInformation(str_replace("-", "", $information->getId()), $title, $description?:"", $information->getUrl(), floatval($price), mb_strtolower($currency), $date, $kilometers, $keywords)
         );
     }
 }

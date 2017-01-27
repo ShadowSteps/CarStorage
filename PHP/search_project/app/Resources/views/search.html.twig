@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block javascripts %}
+<script>
+    $(document).ready(function(){
+        $(".search-container").searchUiBuilder();
+    });
+</script>
+{% endblock %}
+{% block body %}
+    <div class="body-content">
+        <div class="header-holder">
+            <div class="header">
+                Търсачка на обяви за автомобили
+            </div>
+        </div>
+        <div class="content-holder">
+            <div class="content-title">
+                <span>Търсене в налични обяви </span>
+            </div>
+            <div class="content">
+                <div class="search-container">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
