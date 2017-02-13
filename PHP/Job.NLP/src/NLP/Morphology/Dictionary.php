@@ -2,7 +2,7 @@
 
 namespace Shadows\CarStorage\NLP\NLP\Morphology;
 
-use Shadows\CarStorage\NLP\NLP\Autocorrect\Dictionary\BigramDictionary;
+use Shadows\CarStorage\NLP\NLP\Autocorrect\Dictionary\TrigramDictionary;
 use Shadows\CarStorage\NLP\NLP\Morphology\Word\Word;
 use Shadows\CarStorage\NLP\NLP\Morphology\Word\WordType;
 
@@ -35,6 +35,8 @@ class Dictionary
      * @return Word[]
      */
     public function findWord(string $word): array {
+        if (is_numeric($word))
+            return [new Word($word, $word, WordType::Numeral)];
         $hash = hash("sha256", $word);
         if (array_key_exists($hash, $this->wordArray))
             return $this->wordArray[$hash];
@@ -42,8 +44,8 @@ class Dictionary
             return [new Word($word, $word, WordType::Unrecognized)];
     }
 
-    public function buildBigramDictionary() : BigramDictionary {
-        $Dictionary = new BigramDictionary();
+    public function buildTrigramDictionary() : TrigramDictionary {
+        $Dictionary = new TrigramDictionary();
         foreach ($this->wordArray as $wordTypes)
             foreach ($wordTypes as $word)
                 $Dictionary->addWordToDictionary($word);

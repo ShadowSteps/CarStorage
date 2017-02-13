@@ -10,181 +10,130 @@ use Shadows\CarStorage\NLP\NLP\Syntax\Group\SyntaxGroupType;
 
 class SyntaxAnalyzer
 {
-    /**
-     * @var SyntaxRule[]
-     */
     private $grammarRules = [];
-    /**
-     * @var SyntaxRule[]
-     */
-    private $indexedRules = [];
+    private $ruleIndex = [];
+
     public function addRule(SyntaxRule $rule) {
         $this->grammarRules[] = $rule;
-        $this->indexedRules[$rule->getType()][] = $rule;
-    }
-
-    private function matchFinishProcedure(SyntaxMatch $match, array &$possibilities): array {
-        $completeSets = [];
-        $completeSets[] = $match;
-        foreach ($possibilities as $key => $possibility) {
-            /**
-             * @var $possibility SyntaxMatch
-             */
-            if ($possibility->isFinished())
-                continue;
-            $element = $possibility->getRule()->getCurrentElement();
-            $matches = [];
-            if (!(preg_match("/\\{SG:([A-Z]+)\\}/", $element, $matches)&&SyntaxGroupType::isSyntaxGroup($matches[1])))
-                continue;
-            if ($matches[1] != $match->getGroup()->getType())
-                continue;
-            if ($possibility->getPositionTo() != $match->getPositionFrom())
-                continue;
-            $newPossibility = new SyntaxMatch(
-                $possibility->getPositionFrom(),
-                clone $possibility->getRule(),
-                $possibility->getGroup()->cloneGroup());
-            $newPossibility->getGroup()->addChild($match->getGroup()->cloneGroup());
-            $possibilities[] = $newPossibility;
-            try {
-                $newPossibility->getRule()->moveToNextElement();
-            }
-            catch (NoMoreElementsInRuleException $exp) {
-                $completeSets = array_merge($completeSets, $this->matchFinishProcedure($newPossibility, $possibilities));
-            }
+        for ($i = 0; $i < $rule->getElementCount(); $i++){
+            $item = $rule->getAtPosition($i);
+            $this->ruleIndex[$i][$item][] = $rule;
+            if ($item[2] == "E")
+                $this->ruleIndex[$i]["{SE:".WordType::Unrecognized."}"][] = $rule;
         }
-        return $completeSets;
     }
 
-    /**
-     * @param array $words
-     * @param float $threshold
-     * @return SyntaxGroup
-     */
     public function analyze(array $words, float $threshold = 0.80): array {
-        $possibilities = [];
-        $oldLength = 0;
-        $matches = [];
+        $possibilitiesCache = [];
+        $startPoint = 0;
+        $endPoint = count($words);
+        $thresholdPoint = floor(($endPoint - $startPoint) * (1 - $threshold));
+        $thresholdPoint = $thresholdPoint > 0 ? $thresholdPoint : 1;
+        $fullMatches = [];
         foreach ($words as $key => $word) {
-            foreach ($this->grammarRules as $schedulerRule) {
+            foreach ($word as $meaning)
+            {
                 /**
-                 * @var $rule SyntaxRule
+                 * @var $meaning Word
                  */
-                $schedulerRule->resetPosition();
-                $schedulerRule->moveToNextElement();
-                $element = $schedulerRule->getCurrentElement();
-                $match = [];
-                if (!(preg_match("/\\{SE:([A-Za-z]+)\\}/", $element, $match)&&WordType::isValidType($match[1])))
-                    continue;
-                foreach ($word as $meaning) {
-                    /**
-                     * @var $meaning Word
-                     */
-                    if ($match[1] != $meaning->getWordType() && $meaning->getWordType() != WordType::Unrecognized)
-                        continue;
-                    $rule = clone $schedulerRule;
-                    $group = new SyntaxGroup($rule->getType());
-                    $group->addChild($meaning);
-                    $possibility = new SyntaxMatch($key, $rule, $group);
-                    $matchString = $possibility->getRule()->__toString()."->".$possibility->getGroup()->__toString();
-                    $matchHASH = hash("sha256", $matchString);
-                    if (isset($matches[$matchHASH]))
-                        continue;
-                    $possibilities[] = $possibility;
-                    if (!$possibility->isFinished())
-                        $possibility->getRule()->moveToNextElement();
-                    $matches[$matchHASH] = true;
-                }
-            }
-        }
-        while ($oldLength != count($possibilities)) {
-            $oldLength = count($possibilities);
-            foreach ($possibilities as $key => $possibility) {
-                /**
-                 * @var $possibility SyntaxMatch
-                 */
-                if ($possibility->isFinished()) {
-                    foreach ($this->grammarRules as $schedulerRule) {
+                $item = $meaning->getWordTypeString();
+                $newFullRules = [];
+                if (isset($this->ruleIndex[0][$item])) {
+                    $newRules = $this->ruleIndex[0][$item];
+                    foreach ($newRules as $rule) {
                         /**
                          * @var $rule SyntaxRule
                          */
-                        $schedulerRule->resetPosition();
-                        $schedulerRule->moveToNextElement();
-                        $element = $schedulerRule->getCurrentElement();
-                        $match = [];
-                        if (preg_match("/\\{SG:([A-Z]+)\\}/", $element, $match)&&SyntaxGroupType::isSyntaxGroup($match[1])) {
-                            if ($match[1] != $possibility->getGroup()->getType())
-                                continue;
-                            $rule = clone $schedulerRule;
-                            $group = new SyntaxGroup($rule->getType());
-                            $group->addChild($possibility->getGroup()->cloneGroup());
-                            $newPossibility = new SyntaxMatch($possibility->getPositionFrom(), $rule, $group);
-                            $matchString = $newPossibility->getRule()->__toString()."->".$newPossibility->getGroup()->__toString();
-                            $matchHASH = hash("sha256", $matchString);
-                            if (isset($matches[$matchHASH]))
-                                continue;
-                            if (!$newPossibility->isFinished())
-                                $newPossibility->getRule()->moveToNextElement();
-                            $possibilities[] = $newPossibility;
-                            $matches[$matchHASH] = true;
-                        }
+                        $newGroup = new SyntaxGroup($rule->getType());
+                        $newGroup->addChild($meaning);
+                        $match = new SyntaxMatch($key, $rule, $newGroup);
+                        if ($match->getRule()->getElementCount() == 1)
+                            $newFullRules[] = $match;
+                        else
+                            $possibilitiesCache[$match->getPositionTo()][$match->getNextElement()][] = $match;
                     }
-                } else {
-                    $element = $possibility->getRule()->getCurrentElement();
-                    $matchStrings = [];
-                    if (preg_match("/\\{SE:([A-Z]+)\\}/", $element, $matchStrings)&&WordType::isValidType($matchStrings[1])){
-                        $word = $words[$possibility->getPositionTo()];
-                        foreach ($word as $meaning) {
-                            /**
-                             * @var $meaning Word
-                             */
-                            if ($matchStrings[1] != $meaning->getWordType() && $meaning->getWordType() != WordType::Unrecognized)
-                                continue;
-                            $rule = clone $possibility->getRule();
-                            $newPossibility = new SyntaxMatch($possibility->getPositionFrom(), $rule, $possibility->getGroup()->cloneGroup());
-                            $newPossibility->getGroup()->addChild($meaning);
-                            $matchString = $newPossibility->getRule()->__toString()."->".$newPossibility->getGroup()->__toString();
-                            $matchHASH = hash("sha256", $matchString);
-                            if (isset($matches[$matchHASH]))
-                                continue;
-                            $possibilities[] = $newPossibility;
-                            if (!$newPossibility->isFinished())
-                                $newPossibility->getRule()->moveToNextElement();
-                            $matches[$matchHASH] = true;
+                }
+                if (isset($possibilitiesCache[$key][$item])) {
+                    $newRules = $possibilitiesCache[$key][$item];
+                    foreach ($newRules as $rule) {
+                        /**
+                         * @var $rule SyntaxMatch
+                         */
+                        $newGroup = $rule->getGroup()->cloneGroup();
+                        $newGroup->addChild($meaning);
+                        $match = new SyntaxMatch($rule->getPositionFrom(), $rule->getRule(), $newGroup);
+                        if ($match->isFinished())
+                            array_push($newFullRules, $match);
+                        else
+                            $possibilitiesCache[$match->getPositionTo()][$match->getNextElement()][] = $match;
+                    }
+                }
+                while (count($newFullRules) > 0) {
+                    /**
+                     * @var $newRule SyntaxMatch
+                     */
+                    $newRule = array_shift($newFullRules);
+                    if ($newRule->getPositionFrom() <= ($startPoint + $thresholdPoint) &&
+                        $newRule->getPositionTo() >= $endPoint - $thresholdPoint &&
+                        $newRule->getGroup()->getType() == SyntaxGroupType::Sentence
+                    ) {
+                        $fullMatches[] = $newRule->getGroup();
+                    } else {
+                        if (isset($this->ruleIndex[0][$newRule->getRule()->getTypeString()])) {
+                            $newRules = $this->ruleIndex[0][$newRule->getRule()->getTypeString()];
+                            foreach ($newRules as $rule) {
+                                /**
+                                 * @var $rule SyntaxRule
+                                 */
+                                $newGroup = new SyntaxGroup($rule->getType());
+                                $newGroup->addChild($newRule->getGroup()->cloneGroup());
+                                $match = new SyntaxMatch($newRule->getPositionFrom(), $rule, $newGroup);
+                                if ($match->getRule()->getElementCount() == 1)
+                                    $newFullRules[] = $match;
+                                else
+                                    $possibilitiesCache[$match->getPositionTo()][$match->getNextElement()][] = $match;
+                            }
                         }
-                    } else if (preg_match("/\\{SG:([A-Z]+)\\}/", $element, $matchStrings)&&SyntaxGroupType::isSyntaxGroup($matchStrings[1])) {
-                        foreach ($possibilities as $mkey => $match) {
-                            /**
-                             * @var $match SyntaxMatch
-                             */
-                            if (!$match->isFinished())
-                                continue;
-                            if ($possibility->getPositionTo() != $match->getPositionFrom())
-                                continue;
-                            if ($matchStrings[1] != $match->getGroup()->getType())
-                                continue;
-                            $newPossibility = new SyntaxMatch($possibility->getPositionFrom(), clone $possibility->getRule(), $possibility->getGroup()->cloneGroup());
-                            $newPossibility->getGroup()->addChild($match->getGroup()->cloneGroup());
-                            $matchString = $newPossibility->getRule()->__toString()."->".$newPossibility->getGroup()->__toString();
-                            $matchHASH = hash("sha256", $matchString);
-                            if (isset($matches[$matchHASH]))
-                                continue;
-                            if (!$newPossibility->isFinished())
-                                $newPossibility->getRule()->moveToNextElement();
-                            $possibilities[] = $newPossibility;
-                            $matches[$matchHASH] = true;
+                        if (isset($possibilitiesCache[$newRule->getPositionFrom()][$newRule->getRule()->getTypeString()])) {
+                            foreach ($possibilitiesCache[$newRule->getPositionFrom()][$newRule->getRule()->getTypeString()] as $possibility) {
+                                /**
+                                 * @var $possibility SyntaxMatch
+                                 */
+                                $group = $possibility->getGroup()->cloneGroup();
+                                $group->addChild($newRule->getGroup()->cloneGroup());
+                                $match = new SyntaxMatch($possibility->getPositionFrom(), $possibility->getRule(), $group);
+                                if ($match->isFinished())
+                                    array_push($newFullRules, $match);
+                                else
+                                    $possibilitiesCache[$match->getPositionTo()][$match->getNextElement()][] = $match;
+                            }
                         }
                     }
                 }
             }
         }
+        $currentMinimum = 0;
         $results = [];
-        $length = count($words);
-        foreach ($possibilities as $possibility) {
-            echo $possibility->getGroup() . " -> " . $possibility->getRule() . PHP_EOL;
-            $similarity = 1 / (1 + abs($possibility->getGroup()->getChildCount() - $length));
-            if ($similarity > $threshold&&$possibility->isFinished())
-                $results[] = $possibility->getGroup();
+        foreach ($fullMatches as $match) {
+            /**
+             * @var $match SyntaxGroup
+             */
+            $matchCount = $match->getChildCount();
+            if ($matchCount >= $currentMinimum) {
+                $results[] = $match;
+                usort($results, function ($val, $val2){
+                    $a = $val->getChildCount();
+                    $b = $val2->getChildCount();
+                    if ($a == $b) {
+                        return 0;
+                    }
+                    return ($a > $b) ? -1 : 1;
+                });
+                if (count($results) > 5) {
+                    array_pop($results);
+                    $currentMinimum = $results[4]->getChildCount();
+                }
+            }
         }
         return $results;
     }

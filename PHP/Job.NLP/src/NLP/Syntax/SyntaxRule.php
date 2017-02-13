@@ -19,15 +19,9 @@ use Shadows\CarStorage\NLP\NLP\Syntax\Group\SyntaxGroupType;
 class SyntaxRule
 {
     private $ruleElements;
-    private $ruleElementPointer = -1;
     private $type;
     private $elementCount;
 
-    /**
-     * SyntaxRule constructor.
-     * @param $rule
-     * @param $type
-     */
     public function __construct(string $rule, string $type)
     {
         if (!SyntaxGroupType::isSyntaxGroup($type))
@@ -57,6 +51,22 @@ class SyntaxRule
         return $this->type;
     }
 
+    public function getTypeString(): string {
+        return "{SG:".$this->getType()."}";
+    }
+
+    public function isAtPosition(string $type, int $position){
+        if ($this->elementCount < $position)
+            throw new \OutOfBoundsException($position);
+        return strcmp($type, $this->ruleElements[$position]) == 0;
+    }
+
+    public function getAtPosition($position) {
+        if ($this->elementCount <= $position)
+            throw new \OutOfBoundsException($position);
+        return $this->ruleElements[$position];
+    }
+
     /**
      * @return int
      */
@@ -64,43 +74,4 @@ class SyntaxRule
     {
         return $this->elementCount;
     }
-
-    public function getCurrentElement(): string {
-        if ($this->elementCount < $this->ruleElementPointer)
-            throw new NoMoreElementsInRuleException();
-        return $this->ruleElements[$this->ruleElementPointer];
-    }
-
-    public function moveToNextElement() {
-        if ($this->elementCount <= $this->ruleElementPointer + 1)
-            throw new NoMoreElementsInRuleException();
-        $this->ruleElementPointer++;
-    }
-
-    public function resetPosition(){
-        $this->ruleElementPointer = -1;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRuleElementPointer(): int
-    {
-        return $this->ruleElementPointer;
-    }
-
-    public function isFinished(): bool {
-        return ($this->elementCount == $this->ruleElementPointer + 1);
-    }
-
-    public function __toString(): string
-    {
-        $string = "[{$this->getType()} ";
-        foreach ($this->ruleElements as $child) {
-            $string .= $child."+";
-        }
-        $string = rtrim($string, "+") .  "]";
-        return $string;
-    }
-
 }

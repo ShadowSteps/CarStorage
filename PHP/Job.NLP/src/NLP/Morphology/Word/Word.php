@@ -56,4 +56,7 @@ class Word
         return $this->wordType;
     }
 
+    public function getWordTypeString(): string {
+        return "{SE:".$this->getWordType()."}";
+    }
 }

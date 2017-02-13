@@ -9,7 +9,7 @@
 namespace Shadows\CarStorage\NLP\NLP\Autocorrect;
 
 
-use Shadows\CarStorage\NLP\NLP\Autocorrect\Dictionary\BigramDictionary;
+use Shadows\CarStorage\NLP\NLP\Autocorrect\Dictionary\TrigramDictionary;
 
 class StringAutoCorrect
 {
@@ -17,18 +17,18 @@ class StringAutoCorrect
 
     /**
      * StringAutoCorrect constructor.
-     * @param BigramDictionary $bigramDictionary
+     * @param TrigramDictionary $bigramDictionary
      */
-    public function __construct(BigramDictionary $bigramDictionary)
+    public function __construct(TrigramDictionary $bigramDictionary)
     {
         $this->bigramDictionary = $bigramDictionary;
     }
 
     public function findClosest(string $word, int $topInterval = 10, float $threshold = 0.85): string {
-        $bigrams = $this->bigramDictionary->getBigramArrayForString($word);
+        $trigrams = $this->bigramDictionary->getTrigramArrayForString($word);
         $words = [];
-        foreach ($bigrams as $bigram) {
-            foreach ($bigram as $strword) {
+        foreach ($trigrams as $trigram) {
+            foreach ($trigram as $strword) {
                 if (isset($words[$strword]))
                     $words[$strword]++;
                 else

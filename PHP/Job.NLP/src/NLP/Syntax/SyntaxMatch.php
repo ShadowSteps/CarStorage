@@ -23,12 +23,6 @@ class SyntaxMatch
      */
     private $rule;
 
-    /**
-     * SyntaxMatch constructor.
-     * @param int $positionFrom
-     * @param int $positionTo
-     * @param SyntaxGroup $group
-     */
     public function __construct(int $positionFrom, SyntaxRule $rule, SyntaxGroup $group)
     {
         $this->positionFrom = $positionFrom;
@@ -70,6 +64,12 @@ class SyntaxMatch
 
     public function isFinished(): bool {
         return $this->getRule()->getElementCount() == count($this->getGroup()->getChildren());
+    }
+
+    public function getNextElement(): string {
+        if ($this->isFinished())
+            throw new \OutOfBoundsException();
+        return $this->getRule()->getAtPosition(count($this->getGroup()->getChildren()));
     }
 
 }
