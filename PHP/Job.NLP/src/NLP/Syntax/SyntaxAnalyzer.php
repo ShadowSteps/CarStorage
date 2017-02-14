@@ -28,7 +28,7 @@ class SyntaxAnalyzer
         $startPoint = 0;
         $endPoint = count($words);
         $thresholdPoint = floor(($endPoint - $startPoint) * (1 - $threshold));
-        $thresholdPoint = $thresholdPoint > 0 ? $thresholdPoint : 1;
+        $thresholdPoint = $thresholdPoint >= 0 ? $thresholdPoint : 0;
         $fullMatches = [];
         foreach ($words as $key => $word) {
             foreach ($word as $meaning)

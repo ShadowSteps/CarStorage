@@ -21,6 +21,13 @@ class ComposerStaticInit026e14ecda65e9b59b8a836a77bb7a04
     );
 
     public static $prefixesPsr0 = array (
+        'U' => 
+        array (
+            'Unirest\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/mashape/unirest-php/src',
+            ),
+        ),
         'N' => 
         array (
             'NlpTools\\' => 

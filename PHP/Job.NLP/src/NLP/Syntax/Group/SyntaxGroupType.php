@@ -25,9 +25,12 @@ class SyntaxGroupType
     const PrepositionPhrase = "PP";
     const Sentence = "S";
 
+    private static $consts = [];
     public static function isSyntaxGroup(string $group): bool {
-        $oClass = new \ReflectionClass(__CLASS__);
-        $types = $oClass->getConstants();
-        return in_array($group, $types);
+        if (count(self::$consts) <= 0) {
+            $oClass = new \ReflectionClass(__CLASS__);
+            self::$consts = $oClass->getConstants();
+        }
+        return in_array($group, self::$consts);
     }
 }

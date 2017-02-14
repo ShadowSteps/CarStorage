@@ -63,16 +63,16 @@ class SyntaxGroup
         return $count;
     }
 
-    public function __toString(): string
+    public function toString($level = 0): string
     {
-        $string = "[{$this->getType()}";
+        $string = $level."[{$this->getType()}";
         foreach ($this->children as $child) {
             if ($child instanceof Word)
-                $string .= " [{$child->getWordType()} ".$child->getRawForm()."]";
+                $string .= " ".($level+1)."[{$child->getWordType()} ".$child->getRawForm()."]".($level+1);
             else if ($child instanceof SyntaxGroup)
-                $string .= " ".$child->__toString();
+                $string .= " ".$child->toString($level+1);
         }
-        $string .=  "]";
+        $string .=  "]".$level;
         return $string;
     }
 
