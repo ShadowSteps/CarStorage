@@ -10,6 +10,8 @@ namespace AppBundle\Controller\Api;
 
 
 use AppBundle\Controller\Api\Base\BaseAPIController;
+use AppBundle\Controller\Api\Base\IntegrationAPIController;
+use AppBundle\Utils\Logger;
 use AppBundle\Utils\RequestHelper;
 use Doctrine\ORM\EntityNotFoundException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -22,20 +24,51 @@ use Shadows\CarStorage\Core\Communication\JobStatus;
 use Shadows\CarStorage\Core\Utils\RequestDataMapper;
 use Shadows\CarStorage\Data\Postgres\Exceptions\NoJobsFoundException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class JobController extends BaseAPIController
+class JobController extends IntegrationAPIController
 {
     /**
-     * @Route("/api/job/register", name="RegisterJob")
+     * @Route("/job/index", name="IndexJob")
+     * @Method("POST")
+     */
+    public function indexAction(Request $request) {
+        $response = new JobStatus(false);
+        $code = 200;
+        try {
+            $this->init($request);
+            $std = RequestHelper::GetJsonStdFromRequest($request);
+            $requestData = RequestDataMapper::ConvertStdToJobExtractResult($std);
+            $this->getRepository()
+                ->FinishJob($requestData->getJobRegistration()->getId(), $this->getJobCrawlerId());
+            $this->getSolrClient()
+                ->AddFileToIndex($requestData->getJobIndexInformation());
+            $this->getContext()
+                ->SaveChanges();
+        }
+        catch (BadRequestHttpException $exp){
+            Logger::warning("Bad request IndexJob.", $exp);
+            $code = 400;
+        }
+        catch (\Exception $exp) {
+            Logger::error("Internal server error on request IndexJob.", $exp);
+            $code = 500;
+        }
+        return $this->response($response, $code);
+    }
+    /**
+     * @Route("/job/register", name="RegisterJob")
      * @Method("POST")
      */
     public function registerAction(Request $request) {
-        $response = new JobStatus(true);
+        $response = new JobStatus(false);
         $code = 200;
         try {
-            $this->init();
+            $this->init($request);
             $std = RequestHelper::GetJsonStdFromRequest($request);
             $requestData = RequestDataMapper::ConvertStdToJobRegistration($std);
+            $this->getRepository()
+                ->FinishJob($requestData->getId(), $this->getJobCrawlerId());
             foreach ($requestData->getNewJobs() as $newJob){
                 $hash = HashHelper::SHA256($newJob->getUrl());
                 try {
@@ -43,7 +76,7 @@ class JobController extends BaseAPIController
                         ->getJobSet()
                         ->GetByHash($hash);
                     $date = clone $existing->getDateAdded();
-                    $newDate = $date->add(new \DateInterval("P2D"));
+                    $newDate = $date->add(new \DateInterval("P7D"));
                     if ($newDate < new \DateTime() && $existing->isLocked()) {
                         $this->getContext()
                             ->getJobSet()
@@ -56,6 +89,8 @@ class JobController extends BaseAPIController
                     $data->setUrl($newJob->getUrl());
                     $data->setHash($hash);
                     $data->setLocked(false);
+                    $data->setAddedByCrawlerId($this->getJobCrawlerId());
+                    $data->setDateAdded(new \DateTime());
                     $this->getContext()
                         ->getJobSet()
                         ->Add($data);
@@ -64,22 +99,26 @@ class JobController extends BaseAPIController
             $this->getContext()
                 ->SaveChanges();
         }
+        catch (BadRequestHttpException $exp){
+            Logger::warning("Bad request RegisterJob.", $exp);
+            $code = 400;
+        }
         catch (\Exception $exp) {
-            $response = new ErrorInformation($exp->getMessage(), get_class($exp));
+            Logger::error("Internal server error on request RegisterJob.", $exp);
             $code = 500;
         }
         return $this->response($response, $code);
     }
 
     /**
-     * @Route("/api/job/next",name="GetNextJob")
+     * @Route("/job/next",name="GetNextJob")
      * @Method("GET")
      */
-    public function getNextAction() {
+    public function getNextAction(Request $request) {
         $response = null;
         $code = 200;
         try {
-            $this->init();
+            $this->init($request);
             $job = $this->getContext()
                 ->getJobSet()
                 ->GetNextFreeJob();
@@ -87,28 +126,35 @@ class JobController extends BaseAPIController
                 ->getJobSet()
                 ->LockJob($job->getId());
             $this->getContext()
+                ->getCrawlerSet()
+                ->RegisterCall($this->getJobCrawlerId());
+            $this->getContext()
                 ->SaveChanges();
             $response = new JobInformation($job->getId(), $job->getUrl(), $job->getJobType());
+        }
+        catch (BadRequestHttpException $exp){
+            Logger::warning("Bad request GetNextJob.", $exp);
+            $code = 400;
         }
         catch (NoJobsFoundException $exp) {
             $response = new JobStatus();
         }
         catch (\Exception $exp) {
-            $response = new ErrorInformation($exp->getMessage(), get_class($exp));
+            Logger::error("Internal server error on request GetNextJob.", $exp);
             $code = 500;
         }
         return $this->response($response, $code);
     }
 
     /**
-     * @Route("/api/job/remove/{id}",name="RemoveJob")
+     * @Route("/job/remove/{id}",name="RemoveJob")
      * @Method("POST")
      */
-    public function removeAction($id) {
+    public function removeAction(Request $request, $id) {
         $response = null;
         $code = 200;
         try {
-            $this->init();
+            $this->init($request);
             $this->getContext()
                 ->getJobSet()
                 ->Delete($id);
@@ -116,8 +162,12 @@ class JobController extends BaseAPIController
                 ->SaveChanges();
             $response = new JobStatus(true);
         }
+        catch (BadRequestHttpException $exp){
+            Logger::warning("Bad request RemoveJob.", $exp);
+            $code = 400;
+        }
         catch (\Exception $exp) {
-            $response = new ErrorInformation($exp->getMessage(), get_class($exp));
+            Logger::error("Internal server error on request RemoveJob.", $exp);
             $code = 500;
         }
         return $this->response($response, $code);

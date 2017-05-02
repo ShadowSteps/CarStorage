@@ -9,12 +9,12 @@
 namespace Shadows\CarStorage\Crawler\Plugin;
 
 
+use Shadows\CarStorage\Core\Communication\JobExtractResult;
 use Shadows\CarStorage\Core\Communication\JobInformation;
 use Shadows\CarStorage\Core\Communication\JobRegistration;
 use Shadows\CarStorage\Core\Enum\JobType;
+use Shadows\CarStorage\Core\Index\JobIndexInformation;
 use Shadows\CarStorage\Utils\Exception\XPathElementNotFoundException;
-use Shadows\CarStorage\Crawler\Index\JobExtractResult;
-use Shadows\CarStorage\Crawler\Index\JobIndexInformation;
 use Shadows\CarStorage\Utils\XPath\XPathHelper;
 
 class CarsCrawlerPlugin implements ICrawlerPlugin
@@ -131,7 +131,7 @@ class CarsCrawlerPlugin implements ICrawlerPlugin
         $keywords = array_map("mb_strtolower", $keywords);
         return new JobExtractResult(
             new JobRegistration($information->getId(), []),
-            new JobIndexInformation(str_replace("-", "", $information->getId()), $headerText, $description?:"", $information->getUrl(), floatval($price), mb_strtolower($currency), $date, $kilometers, $keywords)
+            new JobIndexInformation(str_replace("-", "", $information->getId()), $headerText, $description?:"", $information->getUrl(), floatval($price), mb_strtolower($currency), $date, $kilometers, implode(";",$keywords))
         );
     }
 }

@@ -13,7 +13,9 @@ use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Shadows\CarStorage\Data\Interfaces\IJobSchedulerContext;
+use Shadows\CarStorage\Data\Interfaces\Sets\ICrawlerSet;
 use Shadows\CarStorage\Data\Interfaces\Sets\IJobSet;
+use Shadows\CarStorage\Data\Postgres\Sets\CrawlerSet;
 use Shadows\CarStorage\Data\Postgres\Sets\JobSet;
 
 class JobSchedulerContext implements IJobSchedulerContext
@@ -26,6 +28,11 @@ class JobSchedulerContext implements IJobSchedulerContext
      * @var IJobSet
      */
     private $jobSet;
+
+    /**
+     * @var ICrawlerSet
+     */
+    private $crawlerSet;
 
     /**
      * JobSchedulerContext constructor.
@@ -49,6 +56,7 @@ class JobSchedulerContext implements IJobSchedulerContext
         $config->setProxyNamespace("Shadows\\CarStorage\\Data\\Postgres\\Proxies");
         $this->entityManager = EntityManager::create($connectionParams, $config);
         $this->jobSet = new JobSet($this->entityManager);
+        $this->crawlerSet = new CrawlerSet($this->entityManager);
     }
 
     public function getJobSet(): IJobSet
@@ -59,5 +67,10 @@ class JobSchedulerContext implements IJobSchedulerContext
     public function SaveChanges() {
         $this->entityManager
             ->flush();
+    }
+
+    public function getCrawlerSet(): ICrawlerSet
+    {
+        return $this->crawlerSet;
     }
 }

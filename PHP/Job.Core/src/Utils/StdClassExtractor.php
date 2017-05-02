@@ -64,13 +64,13 @@ class StdClassExtractor
         if (!isset($this->stdObject->{$paramName}))
             throw new InvalidArgumentException("paramName:$paramName");
         $var = $this->stdObject->{$paramName};
-        switch ($var) {
-            case $var == true:
-            case $var == 1:
-            case strtolower($var) == 'true':
-            case strtolower($var) == 'on':
-            case strtolower($var) == 'yes':
-            case strtolower($var) == 'y':
+        switch (true) {
+            case $var === true:
+            case $var === 1:
+            case strtolower($var) === 'true':
+            case strtolower($var) === 'on':
+            case strtolower($var) === 'yes':
+            case strtolower($var) === 'y':
                 $out = true;
                 break;
             default:

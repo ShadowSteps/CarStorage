@@ -12,7 +12,6 @@ namespace Shadows\CarStorage\Crawler\Core;
 use Shadows\CarStorage\Core\Communication\JobInformation;
 use Shadows\CarStorage\Core\Enum\JobType;
 use Shadows\CarStorage\Utils\Exception\XPathElementNotFoundException;
-use Shadows\CarStorage\Crawler\Index\SolrClient;
 use Shadows\CarStorage\Crawler\Plugin\ICrawlerPlugin;
 use Shadows\CarStorage\Crawler\Scheduler\Client;
 use Shadows\CarStorage\Crawler\Utils\Configuration;
@@ -24,19 +23,13 @@ class Crawler
      * @var Client
      */
     private $client;
-    /**
-     * @var SolrClient
-     */
-    private $solrClient;
 
     /**
      * Crawler constructor.
-     * @param $pluginsDirectory
      */
     public function __construct()
     {
         $this->client = new Client(Configuration::ControlApiUrl());
-        $this->solrClient = new SolrClient(Configuration::SolrApiUrl());
     }
 
     public function Run()
@@ -45,6 +38,8 @@ class Crawler
         if ($status->isStatus() && $status instanceof JobInformation) {
             echo "Job ({$status->getJobType()}): {$status->getUrl()}" . PHP_EOL;
             $this->doJob($status);
+        } else {
+            echo "No new jobs!".PHP_EOL;
         }
     }
 
@@ -77,10 +72,8 @@ class Crawler
                         break;
                     case JobType::Extract:
                         $extractResult = $plugin->doExtractJob($information, $document);
-                        $this->solrClient
-                            ->AddFileToIndex($extractResult->getJobIndexInformation());
                         $this->client
-                            ->Register($extractResult->getJobRegistration());
+                            ->Index($extractResult);
                         break;
                 }
             } catch (XPathElementNotFoundException $exp) {

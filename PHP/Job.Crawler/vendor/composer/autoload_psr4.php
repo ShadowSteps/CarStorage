@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Shadows\\CarStorage\\Utils\\' => array($vendorDir . '/john/job.utils/src'),
     'Shadows\\CarStorage\\Crawler\\' => array($baseDir . '/src'),
     'Shadows\\CarStorage\\Core\\' => array($vendorDir . '/john/job.core/src'),
 );

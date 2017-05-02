@@ -6,7 +6,7 @@
  * Time: 11:52
  */
 
-namespace Shadows\CarStorage\Crawler\Index;
+namespace Shadows\CarStorage\Core\Index;
 
 
 use Unirest\Request;

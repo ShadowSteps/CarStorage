@@ -31,7 +31,14 @@ class JobData
      * @var \DateTime
      */
     private $dateAdded;
-
+    /**
+     * @var string
+     */
+    private $addedByCrawlerId;
+    /**
+     * @var string|null
+     */
+    private $doneByCrawlerId = null;
 
     /**
      * @return int
@@ -111,6 +118,38 @@ class JobData
     public function setDateAdded(\DateTime $dateAdded)
     {
         $this->dateAdded = $dateAdded;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddedByCrawlerId(): string
+    {
+        return $this->addedByCrawlerId;
+    }
+
+    /**
+     * @param string $addedByCrawlerId
+     */
+    public function setAddedByCrawlerId(string $addedByCrawlerId)
+    {
+        $this->addedByCrawlerId = $addedByCrawlerId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDoneByCrawlerId()
+    {
+        return $this->doneByCrawlerId;
+    }
+
+    /**
+     * @param string $doneByCrawlerId
+     */
+    public function setDoneByCrawlerId(string $doneByCrawlerId)
+    {
+        $this->doneByCrawlerId = $doneByCrawlerId;
     }
 
 }

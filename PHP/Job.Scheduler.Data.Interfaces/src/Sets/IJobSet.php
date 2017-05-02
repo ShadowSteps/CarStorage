@@ -21,4 +21,5 @@ interface IJobSet
     public function GetNextFreeJob(): Job;
     public function LockJob(string $id);
     public function UnlockJob(string $id);
+    public function GetById(string $id): Job;
 }

@@ -9,9 +9,8 @@
 namespace Shadows\CarStorage\Core\Communication;
 
 
-use JsonSerializable;
 
-class JobRegistration extends JSONObject implements JsonSerializable
+class JobRegistration extends JSONObject
 {
     /**
      * @var string

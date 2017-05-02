@@ -8,14 +8,15 @@
     "packages": [
         {
             "name": "john/job.core",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "dist": {
                 "type": "path",
                 "url": "../Job.Core",
-                "reference": "fa3092b9d2bdd2ff0a1feced0eb39340afc3fbf5",
+                "reference": "560097ec5d9902c92cf3308c6fc695d699ae9609",
                 "shasum": null
             },
             "require": {
+                "mashape/unirest-php": "3.0.*",
                 "php": ">=7.0"
             },
             "type": "project",

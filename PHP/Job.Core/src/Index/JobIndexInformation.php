@@ -6,7 +6,7 @@
  * Time: 19:40
  */
 
-namespace Shadows\CarStorage\Crawler\Index;
+namespace Shadows\CarStorage\Core\Index;
 
 
 use JsonSerializable;
@@ -22,9 +22,9 @@ class JobIndexInformation implements JsonSerializable
      */
     private $title;
     /**
-     * @var string[]
+     * @var string
      */
-    private $keywords = [];
+    private $keywords;
     /**
      * @var string
      */
@@ -54,17 +54,16 @@ class JobIndexInformation implements JsonSerializable
      * JobIndexInformation constructor.
      * @param string $id
      * @param string $title
-     * @param \string[] $keywords
+     * @param \string $keywords
      * @param string $description
      */
-    public function __construct(string $id, string $title, string $description, string $url, float $price, string $currency, \DateTime $year, int $kilometers, array $keywords = [])
+    public function __construct(string $id, string $title, string $description, string $url, float $price, string $currency, \DateTime $year, int $kilometers, string $keywords = '')
     {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->url = $url;
-        foreach ($keywords as $word)
-            $this->addKeyword($word);
+        $this->keywords = $keywords;
         $this->price = $price;
         $this->currency = $currency;
         $this->date = $year;
@@ -92,9 +91,9 @@ class JobIndexInformation implements JsonSerializable
     }
 
     /**
-     * @return \string[]
+     * @return \string
      */
-    public function getKeywords(): array
+    public function getKeywords(): string
     {
         return $this->keywords;
     }

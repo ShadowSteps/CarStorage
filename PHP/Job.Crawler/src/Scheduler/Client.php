@@ -9,9 +9,11 @@
 namespace Shadows\CarStorage\Crawler\Scheduler;
 
 
+use Shadows\CarStorage\Core\Communication\JobExtractResult;
 use Shadows\CarStorage\Core\Communication\JobRegistration;
 use Shadows\CarStorage\Core\Communication\JobStatus;
 use Shadows\CarStorage\Core\Utils\RequestDataMapper;
+use Shadows\CarStorage\Crawler\Utils\Configuration;
 use Unirest\Request;
 use Unirest\Response;
 
@@ -53,7 +55,8 @@ class Client
 
     public function GetNextJob(): JobStatus {
         $response = Request::get(
-            $this->controlBaseApiUrl . "/job/next"
+            $this->controlBaseApiUrl . "/job/next",
+            ["AUTH_TOKEN" => Configuration::AuthenticationToken()]
         );
         $std = $this->ValidateResponse($response);
         $status = RequestDataMapper::ConvertStdToJobStatus($std);
@@ -65,8 +68,18 @@ class Client
     public function Register(JobRegistration $registration): JobStatus {
         $response = Request::post(
             $this->controlBaseApiUrl . "/job/register",
-            [],
+            ["AUTH_TOKEN" => Configuration::AuthenticationToken()],
             json_encode($registration)
+        );
+        $std = $this->ValidateResponse($response);
+        return RequestDataMapper::ConvertStdToJobStatus($std);
+    }
+
+    public function Index(JobExtractResult $information): JobStatus {
+        $response = Request::post(
+            $this->controlBaseApiUrl . "/job/index",
+            ["AUTH_TOKEN" => Configuration::AuthenticationToken()],
+            json_encode($information)
         );
         $std = $this->ValidateResponse($response);
         return RequestDataMapper::ConvertStdToJobStatus($std);
@@ -74,7 +87,8 @@ class Client
 
     public function Delete(string $id): JobStatus {
         $response = Request::post(
-            $this->controlBaseApiUrl . "/job/remove/".$id
+            $this->controlBaseApiUrl . "/job/remove/".$id,
+            ["AUTH_TOKEN" => Configuration::AuthenticationToken()]
         );
         $std = $this->ValidateResponse($response);
         return RequestDataMapper::ConvertStdToJobStatus($std);

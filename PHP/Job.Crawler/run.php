@@ -1,15 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: John
- * Date: 27.12.2016 г.
- * Time: 19:12
- */
-error_reporting(E_ALL ^E_WARNING ^E_NOTICE ^E_DEPRECATED);
+use Shadows\CarStorage\Crawler\Core\Crawler;
+
 require_once __DIR__ . "/vendor/autoload.php";
 require_once __DIR__ . "/config.php";
 
-$crawler = new \Shadows\CarStorage\Crawler\Core\Crawler();
+error_reporting(E_ALL ^E_NOTICE ^E_WARNING ^E_DEPRECATED);
+$crawler = new Crawler();
 while (true) {
     try {
         $crawler->Run();
@@ -17,5 +13,5 @@ while (true) {
     catch (Exception $exp) {
         echo "Exception while doing job: ".$exp->getMessage().PHP_EOL;
     }
-    usleep(500000+random_int(0,2000000));
+    usleep(50000 + random_int(0,350000));
 }

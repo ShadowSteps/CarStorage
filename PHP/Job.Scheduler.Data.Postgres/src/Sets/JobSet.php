@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityNotFoundException;
 use Shadows\CarStorage\Data\Interfaces\DTO\Data\JobData;
 use Shadows\CarStorage\Data\Interfaces\DTO\Job;
 use Shadows\CarStorage\Data\Interfaces\Sets\IJobSet;
+use Shadows\CarStorage\Data\Postgres\Entities\Crawlers;
 use Shadows\CarStorage\Data\Postgres\Entities\Jobs;
 use Shadows\CarStorage\Data\Postgres\Exceptions\NoJobsFoundException;
 use Shadows\CarStorage\Data\Postgres\Sets\Base\BaseSet;
@@ -30,6 +31,9 @@ class JobSet extends BaseSet implements IJobSet
         $job->setJobType($entity->getType());
         $job->setLocked($entity->getLocked());
         $job->setUrl($entity->getUrl());
+        $job->setAddedByCrawlerId($entity->getCrawlerId()->getId());
+        if (!is_null($entity->getDoneBy()))
+            $job->setDoneByCrawlerId($entity->getDoneBy()->getId());
         return $job;
     }
 
@@ -39,6 +43,18 @@ class JobSet extends BaseSet implements IJobSet
         $entity->setHash($data->getHash());
         $entity->setType($data->getJobType());
         $entity->setDateAdded($data->getDateAdded());
+        /**
+         * @var $addedCrawler Crawlers
+         */
+        $addedCrawler = $this->getManager()->find("Shadows\CarStorage\Data\Postgres\Entities\Crawlers", $data->getAddedByCrawlerId());
+        $entity->setCrawlerId($addedCrawler);
+        if (!is_null($data->getDoneByCrawlerId())) {
+            /**
+             * @var $doneByCrawler Crawlers
+             */
+            $doneByCrawler = $this->getManager()->find("Shadows\CarStorage\Data\Postgres\Entities\Crawlers", $data->getDoneByCrawlerId());
+            $entity->setDoneBy($doneByCrawler);
+        }
     }
 
 
@@ -107,7 +123,6 @@ class JobSet extends BaseSet implements IJobSet
         if (!($entity instanceof Jobs))
             throw new Exception("Entity is not of type Jobs!");
         $entity->setLocked(true);
-        $entity->setDateAdded(new \DateTime());
     }
 
     public function UnlockJob(string $id)
@@ -117,5 +132,15 @@ class JobSet extends BaseSet implements IJobSet
         if (!($entity instanceof Jobs))
             throw new Exception("Entity is not of type Jobs!");
         $entity->setLocked(false);
+        $entity->setDateAdded(new \DateTime());
+    }
+
+    public function GetById(string $id): Job
+    {
+        $entity = $this->getManager()
+            ->find('Shadows\CarStorage\Data\Postgres\Entities\Jobs', $id);
+        if (!($entity instanceof Jobs))
+            throw new EntityNotFoundException("Entity is not of type Jobs!");
+        return $this->ConvertEntityToDTO($entity);
     }
 }

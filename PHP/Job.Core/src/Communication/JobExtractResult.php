@@ -6,12 +6,12 @@
  * Time: 19:41
  */
 
-namespace Shadows\CarStorage\Crawler\Index;
+namespace Shadows\CarStorage\Core\Communication;
 
 
-use Shadows\CarStorage\Core\Communication\JobRegistration;
+use Shadows\CarStorage\Core\Index\JobIndexInformation;
 
-class JobExtractResult
+class JobExtractResult extends JSONObject
 {
     /**
      * @var JobRegistration
@@ -49,4 +49,18 @@ class JobExtractResult
         return $this->jobIndexInformation;
     }
 
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize()
+    {
+        return [
+            "jobRegistration" => $this->getJobRegistration()->jsonSerialize(),
+            "jobIndexInformation" => $this->getJobIndexInformation()->jsonSerialize()
+        ];
+    }
 }

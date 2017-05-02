@@ -22,4 +22,8 @@ class Configuration
     public static function AvailablePlugins() : array{
         return ConstConfigHelper::GetArrayParameter("AVAILABLE_PLUGINS");
     }
+
+    public static function AuthenticationToken() : string{
+        return ConstConfigHelper::GetStringParameter("AUTH_TOKEN");
+    }
 }

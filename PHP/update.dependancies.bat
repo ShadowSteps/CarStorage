@@ -1,17 +1,13 @@
 @echo off
-cd Job.Core
+cd Job.Scheduler.WebAPI
 php composer.phar self-update
 php composer.phar update
 
-cd ../Job.Scheduler.Data.Interfaces
+cd ..\search_project
 php composer.phar self-update
 php composer.phar update
 
-cd ../Job.Scheduler.Data.Postgres
-php composer.phar self-update
-php composer.phar update
-
-cd ../Job.Scheduler.WebAPI
+cd ..\Job.Crawler
 php composer.phar self-update
 php composer.phar update
 

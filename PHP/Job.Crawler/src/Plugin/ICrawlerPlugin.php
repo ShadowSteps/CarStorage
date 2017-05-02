@@ -9,9 +9,9 @@
 namespace Shadows\CarStorage\Crawler\Plugin;
 
 
+use Shadows\CarStorage\Core\Communication\JobExtractResult;
 use Shadows\CarStorage\Core\Communication\JobInformation;
 use Shadows\CarStorage\Core\Communication\JobRegistration;
-use Shadows\CarStorage\Crawler\Index\JobExtractResult;
 
 interface ICrawlerPlugin
 {

@@ -56,6 +56,18 @@ class Jobs
      */
     private $dateAdded;
 
+    /**
+     * @ManyToOne(targetEntity="Crawlers")
+     * @JoinColumn(name="crawler_id", referencedColumnName="id")
+     */
+    private $crawlerId;
+
+    /**
+     * @ManyToOne(targetEntity="Crawlers")
+     * @JoinColumn(name="done_by", referencedColumnName="id")
+     */
+    private $doneBy;
+
 
     /**
      * Get id
@@ -186,5 +198,39 @@ class Jobs
     {
         return $this->dateAdded;
     }
+
+    /**
+     * @return Crawlers
+     */
+    public function getCrawlerId(): Crawlers
+    {
+        return $this->crawlerId;
+    }
+
+    /**
+     * @param Crawlers $crawlerId
+     */
+    public function setCrawlerId(Crawlers $crawlerId)
+    {
+        $this->crawlerId = $crawlerId;
+    }
+
+    /**
+     * @return Crawlers|null
+     */
+    public function getDoneBy()
+    {
+        return $this->doneBy;
+    }
+
+    /**
+     * @param Crawlers $doneBy
+     */
+    public function setDoneBy(Crawlers $doneBy)
+    {
+        $this->doneBy = $doneBy;
+    }
+
+
 }
 
