@@ -1,0 +1,14 @@
+{
+    "name": "john/job.utils",
+    "version" : "1.0.0",
+    "license": "proprietary",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Shadows\\CarStorage\\Utils\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.0"
+    }
+}

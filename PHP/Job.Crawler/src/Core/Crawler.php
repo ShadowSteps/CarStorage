@@ -11,7 +11,7 @@ namespace Shadows\CarStorage\Crawler\Core;
 
 use Shadows\CarStorage\Core\Communication\JobInformation;
 use Shadows\CarStorage\Core\Enum\JobType;
-use Shadows\CarStorage\Crawler\Exception\XPathElementNotFoundException;
+use Shadows\CarStorage\Utils\Exception\XPathElementNotFoundException;
 use Shadows\CarStorage\Crawler\Index\SolrClient;
 use Shadows\CarStorage\Crawler\Plugin\ICrawlerPlugin;
 use Shadows\CarStorage\Crawler\Scheduler\Client;

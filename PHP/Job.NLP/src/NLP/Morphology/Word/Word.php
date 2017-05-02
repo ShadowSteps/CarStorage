@@ -59,4 +59,8 @@ class Word
     public function getWordTypeString(): string {
         return "{SE:".$this->getWordType()."}";
     }
+
+    public function toString(): string {
+        return "(" . $this->getWordType()." {$this->getRawForm()};{$this->getBasicForm()})";
+    }
 }

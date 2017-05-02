@@ -3,6 +3,12 @@
     "version" : "1.0.0",
     "license": "proprietary",
     "type": "project",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../Job.Utils"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Shadows\\CarStorage\\NLP\\": "src/"
@@ -14,6 +20,7 @@
         "vanderlee/php-sentence": "1.0.*"
     },
     "require-dev": {
-        "mashape/unirest-php": "3.0.*"
+        "mashape/unirest-php": "3.0.*",
+        "john/job.utils": "1.0.*"
     }
 }

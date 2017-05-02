@@ -12,11 +12,16 @@
         {
             "type": "path",
             "url": "../Job.Core"
+        },
+        {
+            "type": "path",
+            "url": "../Job.Utils"
         }
     ],
     "require": {
         "php": ">=7.0",
         "mashape/unirest-php": "3.0.*",
-        "john/job.core": "1.0.*"
+        "john/job.core": "1.0.*",
+        "john/job.utils": "1.0.*"
     }
 }

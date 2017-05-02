@@ -63,16 +63,29 @@ class SyntaxGroup
         return $count;
     }
 
-    public function toString($level = 0): string
+    public function toString(): string
     {
-        $string = $level."[{$this->getType()}";
+        $string ="[{$this->getType()}";
         foreach ($this->children as $child) {
             if ($child instanceof Word)
-                $string .= " ".($level+1)."[{$child->getWordType()} ".$child->getRawForm()."]".($level+1);
+                $string .= " [{$child->getWordType()} ".$child->getRawForm()."]";
             else if ($child instanceof SyntaxGroup)
-                $string .= " ".$child->toString($level+1);
+                $string .= " ".$child->toString();
         }
-        $string .=  "]".$level;
+        $string .=  "]";
+        return $string;
+    }
+
+    public function toXML(): string
+    {
+        $string ="<SG type='{$this->getType()}'>";
+        foreach ($this->children as $child) {
+            if ($child instanceof Word)
+                $string .= "<SE type='{$child->getWordType()}'>".$child->getRawForm()." </SE>";
+            else if ($child instanceof SyntaxGroup)
+                $string .= $child->toXML();
+        }
+        $string .=  "</SG>";
         return $string;
     }
 

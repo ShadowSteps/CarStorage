@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="PHARS">
+        <CLASSES>
+          <root url="phar://$MODULE_DIR$/Job.Scheduler.Data.Postgres/vendor/john/job.scheduler.data.interfaces/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Scheduler.Data.Postgres/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Crawler/vendor/john/job.utils/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Scheduler.Data.Interfaces/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Core/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.NLP/vendor/john/job.utils/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Utils/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Crawler/vendor/john/job.core/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Scheduler.WebAPI/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/search_project/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.NLP/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Crawler/composer.phar/" />
+        </CLASSES>
+        <SOURCES>
+          <root url="phar://$MODULE_DIR$/Job.Scheduler.Data.Postgres/vendor/john/job.scheduler.data.interfaces/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Scheduler.Data.Postgres/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Crawler/vendor/john/job.utils/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Scheduler.Data.Interfaces/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Core/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.NLP/vendor/john/job.utils/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Utils/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Crawler/vendor/john/job.core/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Scheduler.WebAPI/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/search_project/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.NLP/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/Job.Crawler/composer.phar/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>

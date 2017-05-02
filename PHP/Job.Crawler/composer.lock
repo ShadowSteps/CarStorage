@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0272d96bb24ea2b26b865b88c3360ed",
+    "content-hash": "cfcac5a1448e477e85d534d3f6b4460a",
     "packages": [
         {
             "name": "john/job.core",
@@ -22,6 +22,28 @@
             "autoload": {
                 "psr-4": {
                     "Shadows\\CarStorage\\Core\\": "src/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ]
+        },
+        {
+            "name": "john/job.utils",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../Job.Utils",
+                "reference": "5e85f2233fa7d148e7876834ac36d9ae6e2710be",
+                "shasum": null
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Shadows\\CarStorage\\Utils\\": "src/"
                 }
             },
             "license": [

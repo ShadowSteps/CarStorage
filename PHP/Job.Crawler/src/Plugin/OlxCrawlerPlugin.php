@@ -12,10 +12,10 @@ namespace Shadows\CarStorage\Crawler\Plugin;
 use Shadows\CarStorage\Core\Communication\JobInformation;
 use Shadows\CarStorage\Core\Communication\JobRegistration;
 use Shadows\CarStorage\Core\Enum\JobType;
-use Shadows\CarStorage\Crawler\Exception\XPathElementNotFoundException;
+use Shadows\CarStorage\Utils\Exception\XPathElementNotFoundException;
 use Shadows\CarStorage\Crawler\Index\JobExtractResult;
 use Shadows\CarStorage\Crawler\Index\JobIndexInformation;
-use Shadows\CarStorage\Crawler\Utils\XPathHelper;
+use Shadows\CarStorage\Utils\XPath\XPathHelper;
 
 class OlxCrawlerPlugin implements ICrawlerPlugin
 {

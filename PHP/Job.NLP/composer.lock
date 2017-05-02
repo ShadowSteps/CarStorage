@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d524d6746fbfa242d4a6a47f21f26fb",
+    "content-hash": "35be96477c4f0005da6df96fbfbf743d",
     "packages": [
         {
             "name": "nlp-tools/nlp-tools",
@@ -92,6 +92,28 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "john/job.utils",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../Job.Utils",
+                "reference": "5e85f2233fa7d148e7876834ac36d9ae6e2710be",
+                "shasum": null
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Shadows\\CarStorage\\Utils\\": "src/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ]
+        },
         {
             "name": "mashape/unirest-php",
             "version": "v3.0.4",

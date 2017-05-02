@@ -68,13 +68,18 @@ $rules = [
     new SyntaxRule("{SG:NP}", SyntaxGroupType::Sentence)
 ];
 $schemes = [
-    '0\[S 1\[VC 2\[V (има|притежава)]2]1 1\[(PP|NP) 2\[(?P<keyword>.*)\]2\]1\]0',
-    '0\[S 1\[NP (?P<keyword>.*?)\]1\]0',
-    '0\[S .*?[0-9]+\[[A-Z]+ (?P<level>[0-9]+)\[VC [0-9]+\[V (е|има|притежава)\][0-9]+\](\k<level>) (\k<level>)\[(PP|NP) (?P<keyword>.*)\](\k<level>).*\]0'
+    '/SG[@type="S"]/SG[@type="VC"]/SE[@type="V" and text()="има " or 
+        text()="притежава "]/../../SG[@type="PP" or @type="NP"]',
+    '/SG[@type="S" and count(*[self::*]) = 1]/SG[@type="NP"]',
+    '/SG[@type="S"]//SG[@type="VC"]/SE[@type="V" and text()="е " or text()="има " or 
+        text()="притежава "]/../../SG[@type="PP" or @type="NP"]'
+    //'0\[S 1\[VC 2\[V (има|притежава)]2]1 1\[(PP|NP) 2\[(?P<keyword>.*)\]2\]1\]0',
+    //'0\[S 1\[NP (?P<keyword>.*?)\]1\]0',
+   // '0\[S .*?[0-9]+\[[A-Z]+ (?P<level>[0-9]+)\[VC [0-9]+\[V (е|има|притежава)\][0-9]+\](\k<level>) (\k<level>)\[(PP|NP) (?P<keyword>.*)\](\k<level>).*\]0'
 ];
 $extractor = new \Shadows\CarStorage\NLP\NLP\Keywords\Extractor($rules);
 
-/*
+file_put_contents("output.txt", "");
 for ($i = 0; $i <= 10; $i ++) {
     $requestUrl = "http://localhost:8983/solr/car_storage_v3/select?indent=on&q=*:*&wt=json&rows=10&start=" . $i*10;
     $response = \Unirest\Request::get($requestUrl);
@@ -84,6 +89,6 @@ for ($i = 0; $i <= 10; $i ++) {
         echo $text . PHP_EOL;
         print_r($extractor->getKeywordsForString($text, $schemes));
     }
-}*/
+}
 
 print_r($extractor->getKeywordsForString($inputString, $schemes));
