@@ -1,6 +1,6 @@
 {
     "name": "john/job.core",
-    "version" : "1.0.2",
+    "version" : "1.0.3",
     "license": "proprietary",
     "type": "project",
     "autoload": {
@@ -10,6 +10,7 @@
     },
     "require": {
         "php": ">=7.0",
-        "mashape/unirest-php": "3.0.*"
+        "mashape/unirest-php": "3.0.*",
+        "php-ai/php-ml": "0.4.1"
     }
 }

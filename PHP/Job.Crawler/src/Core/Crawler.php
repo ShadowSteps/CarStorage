@@ -11,6 +11,7 @@ namespace Shadows\CarStorage\Crawler\Core;
 
 use Shadows\CarStorage\Core\Communication\JobInformation;
 use Shadows\CarStorage\Core\Enum\JobType;
+use Shadows\CarStorage\Crawler\Utils\NLPHelper;
 use Shadows\CarStorage\Utils\Exception\XPathElementNotFoundException;
 use Shadows\CarStorage\Crawler\Plugin\ICrawlerPlugin;
 use Shadows\CarStorage\Crawler\Scheduler\Client;
@@ -25,11 +26,17 @@ class Crawler
     private $client;
 
     /**
+     * @var NLPHelper
+     */
+    private $NLP;
+
+    /**
      * Crawler constructor.
      */
     public function __construct()
     {
         $this->client = new Client(Configuration::ControlApiUrl());
+        $this->NLP = new NLPHelper();
     }
 
     public function Run()
@@ -72,6 +79,9 @@ class Crawler
                         break;
                     case JobType::Extract:
                         $extractResult = $plugin->doExtractJob($information, $document);
+                        $additionalKeywords = $this->getNLP()->ExtractKeywordsFromDescription($extractResult->getJobIndexInformation()->getDescription());
+                        $extractResult->getJobIndexInformation()
+                            ->addKeywords($additionalKeywords);
                         $this->client
                             ->Index($extractResult);
                         break;
@@ -80,5 +90,13 @@ class Crawler
                 $this->client->Delete($information->getId());
             }
         }
+    }
+
+    /**
+     * @return NLPHelper
+     */
+    public function getNLP(): NLPHelper
+    {
+        return $this->NLP;
     }
 }

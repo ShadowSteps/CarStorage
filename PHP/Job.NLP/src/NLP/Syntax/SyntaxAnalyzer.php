@@ -112,6 +112,8 @@ class SyntaxAnalyzer
                 }
             }
         }
+        unset($possibilitiesCache);
+        $possibilitiesCache = null;
         $currentMinimum = 0;
         $results = [];
         foreach ($fullMatches as $match) {
@@ -135,6 +137,8 @@ class SyntaxAnalyzer
                 }
             }
         }
+        unset($fullMatches);
+        $fullMatches = null;
         return $results;
     }
 }

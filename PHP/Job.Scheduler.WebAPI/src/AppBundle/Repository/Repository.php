@@ -44,7 +44,7 @@ class Repository implements IRepository
         $data->setLocked($job->isLocked());
         $data->setAddedByCrawlerId($job->getAddedByCrawlerId());
         $data->setDoneByCrawlerId($crawlerId);
-        $data->setDateAdded($job->getDateAdded());
+        $data->setDateAdded(new \DateTime());
         $this->getContext()
             ->getJobSet()
             ->Edit($jobId, $data);
