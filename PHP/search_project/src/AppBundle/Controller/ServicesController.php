@@ -51,7 +51,7 @@ class ServicesController extends Controller
     }
 
     /**
-     * @Route("/services/getNearest", name="query")
+     * @Route("/services/getNearest", name="nearest")
      */
     public function nearestAction(Request $request)
     {

@@ -100,6 +100,7 @@ $.fn.searchUiBuilder = function (settings) {
             "<div class='result-year'><span><b>Година:</b> "+year+"</span></div>"+
             "<div class='result-distance'><span><b>Километри:</b> "+km+"</span></div>"+
             "<div class='result-visit'><a href='"+url+"'>Научи повече</a></div>"+
+            "<div class='nearest-holder' style='display: none'></div>"+
             "</div>" +
             "<div class='result-separator'></div>");
         result.find(".result-visit").prepend(findMore)
@@ -117,11 +118,10 @@ $.fn.searchUiBuilder = function (settings) {
             "<div class='result-visit'><a href='"+url+"'>Научи повече</a></div>"+
             "</div>" +
             "<div class='result-separator'></div>");
-        $(".search-results-holder .results-container").append(result);
+        holder.find(".nearest-holder").append(result);
     }
 
     function findNearest(){
-        console.log("asd");
         var that = $(this);
         var id = that.attr("href").replace("#", "");
         $.ajax({
@@ -130,12 +130,12 @@ $.fn.searchUiBuilder = function (settings) {
             data: {"id" : id},
             dataType: "json"
         }).done(function(result) {
-            var docsFound = result.response.numFound;
-            var docs = $(result.response.docs);
-            that.find(".nearest-holder").show();
-            that.find(".nearest-holder").find("*").remove();
+            var docs = $(result);
+            that.parent().parent().find(".nearest-holder").show();
+            that.parent().parent().find(".nearest-holder").find("*").remove();
+            console.log(that);
             if(docs.length == 0){
-                that.find(".nearest-holder").append("<div class='search-result-empty'>Няма намерени резултати.</div>");
+                that.parent().parent().find(".nearest-holder").append("<div class='search-result-empty'>Няма намерени резултати.</div>");
             }
             docs.each(function(key,val){
                 var id = val.id.toString();
@@ -146,7 +146,7 @@ $.fn.searchUiBuilder = function (settings) {
                 var price = val.price+" "+val.currency;
                 var km = val.km;
                 var year = val.year;
-                createNearestField(that, title,description,keywords,url,price,km,year);
+                createNearestField(that.parent().parent(), title,description,keywords,url,price,km,year);
             });
         });
     }

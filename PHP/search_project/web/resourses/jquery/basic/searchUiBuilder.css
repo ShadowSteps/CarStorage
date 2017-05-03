@@ -228,3 +228,8 @@ a + a {
 .body-content .content-holder .content .search-results-holder .search-result .result-visit a:hover{
     background-color:#bdc3c7;
 }
+
+.body-content .content-holder .content .search-results-holder .search-result .nearest-holder {
+    border: 1px solid #95a5a6;
+    padding: 10px;
+}
