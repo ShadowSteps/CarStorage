@@ -210,7 +210,6 @@
 .body-content .content-holder .content .search-results-holder .search-result .result-visit a{
     display:inline-block;
     font-size:12px;
-    width:100px;
     text-align:center;
     padding:5px;
     text-decoration: none;
@@ -220,6 +219,10 @@
     -moz-transition: background-color  ease-out 0.5s,color ease-out 0.5s;
     -o-transition: background-color ease-out 0.5s,color ease-out 0.5s;
     transition: background-color ease-out 0.5s,color ease-out 0.5s;
+}
+
+a + a {
+    margin-left: 5px;
 }
 
 .body-content .content-holder .content .search-results-holder .search-result .result-visit a:hover{

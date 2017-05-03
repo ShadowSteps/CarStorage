@@ -86,8 +86,8 @@ class SolrClient
         $this->ValidateResponse($response);
     }
 
-    public function GetDocumentsCount(): int {
-        $getURL = rtrim($this->solrApiUrl, "/") . "/select?indent=on&q=*:*&rows=0&wt=json";
+    public function GetDocumentsCount(string $query = "*:*"): int {
+        $getURL = rtrim($this->solrApiUrl, "/") . "/select?indent=on&q=$query&rows=0&wt=json";
         $response = Request::get($getURL);
         $this->ValidateResponse($response);
         $this->ValidateSelectResponse($response);

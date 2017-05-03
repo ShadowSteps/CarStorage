@@ -81,7 +81,7 @@ $.fn.searchUiBuilder = function (settings) {
         return jsonData;
     }
 
-    function createResultField(title,description,keywords,url,price,km,year,highlights){
+    function createResultField(id,title,description,keywords,url,price,km,year,highlights){
         $.each(highlights,function(key,val){
             if(key=="title")
                 title = val[0];
@@ -90,6 +90,23 @@ $.fn.searchUiBuilder = function (settings) {
             if(key=="description")
                 description = val[0];
         });
+        var findMore = $("<a class='find-more' href='#"+id+"'>Намери подобни</a>")
+            .click(findNearest);
+        var result = $("<div class='search-result'>" +
+            "<div class='result-title'><span>"+title+"</span></div>" +
+            "<div class='result-description'><b>Описание</b>: "+description+"</div>" +
+            "<div class='result-keywords'><span><b>Ключови думи:</b> "+keywords+"</span></div>"+
+            "<div class='result-price'><span><b>Цена:</b> "+price+"</span></div>"+
+            "<div class='result-year'><span><b>Година:</b> "+year+"</span></div>"+
+            "<div class='result-distance'><span><b>Километри:</b> "+km+"</span></div>"+
+            "<div class='result-visit'><a href='"+url+"'>Научи повече</a></div>"+
+            "</div>" +
+            "<div class='result-separator'></div>");
+        result.find(".result-visit").prepend(findMore)
+        $(".search-results-holder .results-container").append(result);
+    }
+
+    function createNearestField(holder, title,description,keywords,url,price,km,year){
         var result = $("<div class='search-result'>" +
             "<div class='result-title'><span>"+title+"</span></div>" +
             "<div class='result-description'><b>Описание</b>: "+description+"</div>" +
@@ -102,6 +119,38 @@ $.fn.searchUiBuilder = function (settings) {
             "<div class='result-separator'></div>");
         $(".search-results-holder .results-container").append(result);
     }
+
+    function findNearest(){
+        console.log("asd");
+        var that = $(this);
+        var id = that.attr("href").replace("#", "");
+        $.ajax({
+            url: "services/getNearest",
+            type:"GET",
+            data: {"id" : id},
+            dataType: "json"
+        }).done(function(result) {
+            var docsFound = result.response.numFound;
+            var docs = $(result.response.docs);
+            that.find(".nearest-holder").show();
+            that.find(".nearest-holder").find("*").remove();
+            if(docs.length == 0){
+                that.find(".nearest-holder").append("<div class='search-result-empty'>Няма намерени резултати.</div>");
+            }
+            docs.each(function(key,val){
+                var id = val.id.toString();
+                var title = val.title;
+                var description = val.description;
+                var keywords = val.keywords;
+                var url = val.url;
+                var price = val.price+" "+val.currency;
+                var km = val.km;
+                var year = val.year;
+                createNearestField(that, title,description,keywords,url,price,km,year);
+            });
+        });
+    }
+
     function performQuery(parameters){
         $.ajax({
             url: "services/getResults",
@@ -126,14 +175,14 @@ $.fn.searchUiBuilder = function (settings) {
                 var lights = {};
                 if(typeof (highlights[0]) != "undefined")
                     lights = highlights[0][id];
-                var title = val.title[0];
+                var title = val.title;
                 var description = val.description;
                 var keywords = val.keywords;
                 var url = val.url;
                 var price = val.price+" "+val.currency;
                 var km = val.km;
                 var year = val.year;
-                createResultField(title,description,keywords,url,price,km,year,lights);
+                createResultField(id, title,description,keywords,url,price,km,year,lights);
             });
         });
     }
@@ -162,6 +211,14 @@ $.fn.searchUiBuilder = function (settings) {
         });
         $(".advanced-search-button").click(function(){
             container.find(".advanced-search").slideToggle();
+        });
+        
+        $(".search-text").keyup(function(e){
+            var code = e.which;
+            if(code==13)e.preventDefault();
+            if(code==32||code==13||code==188||code==186){
+                $(".submit-button").click();
+            }
         });
     };
 

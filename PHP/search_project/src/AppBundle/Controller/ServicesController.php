@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Shadows\CarStorage\Core\ML\IndexKNNFinder;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,5 +48,16 @@ class ServicesController extends Controller
         $generator = new queryGenerator("http://81.161.246.26:8080/solr/car_storage_v3/select?",$options);
         $data = $generator->performQuery();
         return new Response($data->raw_body);
+    }
+
+    /**
+     * @Route("/services/getNearest", name="query")
+     */
+    public function nearestAction(Request $request)
+    {
+        $id = $request->get("id");
+        $indexKNNFinder = new IndexKNNFinder("http://localhost:8983/solr/carstorage/");
+        $data = $indexKNNFinder->FindNearest(5, $id);
+        return new Response(json_encode($data));
     }
 }
