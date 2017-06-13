@@ -9,6 +9,7 @@
 namespace Shadows\CarStorage\Core\Index;
 
 
+use Shadows\CarStorage\Core\ML\Feature\NumericFeatureNormalizationCharacteristics;
 use Shadows\CarStorage\Core\Utils\RequestDataMapper;
 use Unirest\Request;
 use Unirest\Request\Body;
@@ -111,5 +112,42 @@ class SolrClient
         $this->ValidateResponse($response);
         $this->ValidateSelectResponse($response);
         return $response->body->response->docs;
+    }
+
+    public function GetMaxOfNumericFeature(string $feature) {
+        $getURL = rtrim($this->solrApiUrl, "/") . "/select?indent=on&q=*:*&rows=1&wt=json&sort=$feature desc";
+        $response = Request::get($getURL);
+        $this->ValidateResponse($response);
+        $this->ValidateSelectResponse($response);
+        return $response->body->response->docs[0]->{$feature};
+    }
+
+    public function GetMinOfNumericFeature(string $feature) {
+        $getURL = rtrim($this->solrApiUrl, "/") . "/select?indent=on&q=*:*&rows=1&wt=json&sort=$feature asc";
+        $response = Request::get($getURL);
+        $this->ValidateResponse($response);
+        $this->ValidateSelectResponse($response);
+        return $response->body->response->docs[0]->{$feature};
+    }
+
+    public function GetAverageOfNumericFeature(string $feature) {
+        $getURL = rtrim($this->solrApiUrl, "/") . "/select?indent=on&q=*:*&rows=0&wt=json&json.facet={\"x\":\"avg($feature)\"}";
+        $response = Request::get($getURL);
+        $this->ValidateResponse($response);
+        $this->ValidateSelectResponse($response);
+        return $response->body->facets->x;
+    }
+
+    public function GetSigmaDispersionOfNumericFeature(string $feature) {
+        $average = $this->GetAverageOfNumericFeature($feature);
+        $step = 100;
+        $documentsCount = $this->GetDocumentsCount();
+        $sigmaSquared = 0;
+        for ($i = 0; $i < $documentsCount; $i += $step) {
+            $rawDocuments = $this->Select("*:*", $i, $step, "id asc");
+            foreach ($rawDocuments as $key => $doc)
+                $sigmaSquared += pow($doc->{$feature} - $average, 2) / $documentsCount;
+        }
+        return $sigmaSquared;
     }
 }

@@ -14,6 +14,9 @@ use Shadows\CarStorage\Core\Index\SolrClient;
 class IndexFeatureExtractor
 {
     private $solrClient;
+    private $staticFeatures = [
+        "km"
+    ];
 
     public function __construct(SolrClient $solrClient)
     {
@@ -28,10 +31,18 @@ class IndexFeatureExtractor
         return $this->solrClient;
     }
 
+    private function getNumericFeaturesCharacteristics(string $feature): NumericFeatureNormalizationCharacteristics {
+        $average = $this->getSolrClient()->GetAverageOfNumericFeature($feature);
+        $sigma = $this->getSolrClient()->GetSigmaDispersionOfNumericFeature($feature);
+        return new NumericFeatureNormalizationCharacteristics($sigma, $average);
+    }
+
     public function getFeatureVector(): array {
-        return [
-            new Feature("km", FeatureType::Number),
-            //new Feature("price", FeatureType::Number)
-        ];
+        $features = [];
+        foreach ($this->staticFeatures as $feature) {
+            $characteristics = $this->getNumericFeaturesCharacteristics($feature);
+            $features[] = new NumericFeature($feature, $characteristics);
+        }
+        return $features;
     }
 }

@@ -79,9 +79,9 @@ class Crawler
                         break;
                     case JobType::Extract:
                         $extractResult = $plugin->doExtractJob($information, $document);
-                        $additionalKeywords = $this->getNLP()->ExtractKeywordsFromDescription($extractResult->getJobIndexInformation()->getDescription());
-                        $extractResult->getJobIndexInformation()
-                            ->addKeywords($additionalKeywords);
+                        //$additionalKeywords = $this->getNLP()->ExtractKeywordsFromDescription($extractResult->getJobIndexInformation()->getDescription());
+                        //$extractResult->getJobIndexInformation()
+                        //    ->addKeywords($additionalKeywords);
                         $this->client
                             ->Index($extractResult);
                         break;

@@ -69,6 +69,7 @@ class JobController extends IntegrationAPIController
             $requestData = RequestDataMapper::ConvertStdToJobRegistration($std);
             $this->getRepository()
                 ->FinishJob($requestData->getId(), $this->getJobCrawlerId());
+            $alreadyAdded = [];
             foreach ($requestData->getNewJobs() as $newJob){
                 $hash = HashHelper::SHA256($newJob->getUrl());
                 try {
@@ -84,6 +85,8 @@ class JobController extends IntegrationAPIController
                     }
                 }
                 catch (EntityNotFoundException $exp) {
+                    if (isset($alreadyAdded[$hash]))
+                        continue;
                     $data = new JobData();
                     $data->setJobType($newJob->getJobType());
                     $data->setUrl($newJob->getUrl());
@@ -94,6 +97,7 @@ class JobController extends IntegrationAPIController
                     $this->getContext()
                         ->getJobSet()
                         ->Add($data);
+                    $alreadyAdded[$hash] = true;
                 }
             }
             $this->getContext()

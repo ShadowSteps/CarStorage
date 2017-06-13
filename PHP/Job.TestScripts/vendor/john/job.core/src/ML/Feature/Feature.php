@@ -9,26 +9,20 @@
 namespace Shadows\CarStorage\Core\ML\Feature;
 
 
-class Feature
+abstract class Feature
 {
     /**
      * @var string
      */
     private $name;
-    /**
-     * @var int
-     */
-    private $type;
 
     /**
      * Feature constructor.
      * @param string $name
-     * @param int $type
      */
-    public function __construct(string $name, int $type)
+    public function __construct(string $name)
     {
         $this->name = $name;
-        $this->type = $type;
     }
 
     /**
@@ -39,13 +33,5 @@ class Feature
         return $this->name;
     }
 
-    /**
-     * @return int
-     */
-    public function getType(): int
-    {
-        return $this->type;
-    }
-
-
+    public abstract function normalize($value): array;
 }
