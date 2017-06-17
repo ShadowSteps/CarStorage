@@ -12,8 +12,7 @@ namespace Shadows\CarStorage\Core\ML\Feature;
 class NumericFeature extends Feature
 {
     private $characteristics;
-
-    public function __construct($name, NumericFeatureNormalizationCharacteristics $characteristics)
+    public function __construct($name, NumericFeatureCharacteristics $characteristics)
     {
         parent::__construct($name);
         $this->characteristics = $characteristics;
@@ -23,7 +22,12 @@ class NumericFeature extends Feature
     public function normalize($value): array
     {
         return [
-            $this->getName() => ($value - $this->characteristics->getAverage()) / $this->characteristics->getSigma()
+            $this->getName() => (($value - $this->characteristics->getMinimum())/($this->characteristics->getMaximum() - $this->characteristics->getMinimum()))
         ];
+    }
+
+    public function checkValueForExtremes($value): bool
+    {
+        return ($value < $this->characteristics->getMinimum()) || ($value > $this->characteristics->getMaximum());
     }
 }

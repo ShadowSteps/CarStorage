@@ -34,4 +34,5 @@ abstract class Feature
     }
 
     public abstract function normalize($value): array;
+    public abstract function checkValueForExtremes($value): bool;
 }

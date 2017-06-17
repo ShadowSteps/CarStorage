@@ -58,7 +58,8 @@ class RequestDataMapper
             $extractor->GetString("currency"),
             $extractor->GetDateTime("year", "Y-m-d\\TH:i:s\\Z"),
             $extractor->GetInteger("km"),
-            $extractor->GetString("keywords")
+            $extractor->GetString("keywords"),
+            $extractor->GetInteger("cluster")
         );
         return $data;
     }

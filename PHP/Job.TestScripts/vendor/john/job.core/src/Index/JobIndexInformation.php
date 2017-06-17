@@ -69,7 +69,7 @@ class JobIndexInformation implements JsonSerializable
     }
 
     public function addKeywords(array $keyword) {
-        $this->keywords .= ";" . implode(";", $keyword);
+        $this->keywords .= ";" . implode(" ; ", $keyword);
     }
 
     /**

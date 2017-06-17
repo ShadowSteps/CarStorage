@@ -15,8 +15,9 @@ class IndexFeatureExtractor
 {
     private $solrClient;
     private $staticFeatures = [
-        "km"
+        "km", "year"
     ];
+    private $pointFeature =  "price";
 
     public function __construct(SolrClient $solrClient)
     {
@@ -31,18 +32,44 @@ class IndexFeatureExtractor
         return $this->solrClient;
     }
 
-    private function getNumericFeaturesCharacteristics(string $feature): NumericFeatureNormalizationCharacteristics {
-        $average = $this->getSolrClient()->GetAverageOfNumericFeature($feature);
-        $sigma = $this->getSolrClient()->GetSigmaDispersionOfNumericFeature($feature);
-        return new NumericFeatureNormalizationCharacteristics($sigma, $average);
+    private function getNumericFeaturesCharacteristics(string $feature): NumericFeatureCharacteristics {
+        $firstQuartile = $this->getSolrClient()->GetFirstQuartileOfNumericFeature($feature);
+        $thirdQuartile = $this->getSolrClient()->GetThirdQuartileOfNumericFeature($feature);
+        return new NumericFeatureCharacteristics($firstQuartile, $thirdQuartile);
     }
+
 
     public function getFeatureVector(): array {
         $features = [];
         foreach ($this->staticFeatures as $feature) {
             $characteristics = $this->getNumericFeaturesCharacteristics($feature);
-            $features[] = new NumericFeature($feature, $characteristics);
+            $features[$feature] = new NumericFeature($feature, $characteristics);
         }
-        return $features;
+        $additionalFeaturesPassed = [];
+        $additionalFeatures = [];
+        $step = 100;
+        $minSupportPercent = 12;
+        $documentsCount = $this->getSolrClient()->GetDocumentsCount();
+        $minSupportCount = $minSupportPercent / 100 * $documentsCount;
+        for ($i = 0; $i < $documentsCount; $i += $step) {
+            $rawDocuments = $this->getSolrClient()->Select("*:*", $i, $step, "id asc");
+            foreach ($rawDocuments as $key => $doc) {
+                foreach (explode(";", $doc->keywords) as $keyword) {
+                    $keyword = trim($keyword);
+                    if (is_numeric($keyword))
+                        continue;
+                    if (isset($additionalFeaturesPassed[$keyword]))
+                        continue;
+                    if (mb_strlen($this->getSolrClient()->NormalizeQuery($keyword)) <= 0)
+                        continue;
+                    $additionalFeaturesPassed[$keyword] = true;
+                    $keyWordCount = $this->getSolrClient()->GetDocumentsCount("keywords:\"$keyword\"");
+                    if ($keyWordCount <= $minSupportCount || ($documentsCount - $keyWordCount) <= $minSupportCount)
+                        continue;
+                    $additionalFeatures[$keyword] = new BooleanNumericFeature($keyword);
+                }
+            }
+        }
+        return array_merge($features, $additionalFeatures);
     }
 }

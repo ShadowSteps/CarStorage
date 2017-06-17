@@ -6,35 +6,41 @@ use Shadows\CarStorage\Core\ML\Feature\IndexFeatureExtractor;
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$client = new SolrClient("http://localhost:8983/solr/carstorage/");
-$step = 100;
-$featureExtractor = new IndexFeatureExtractor($client);
-$features = $featureExtractor->getFeatureVector();
-$documentsCount = $client->GetDocumentsCount();
-$points = [];
-for ($i = 0; $i < $documentsCount; $i += $step) {
-    $rawDocuments = $client->Select("*:*", $i, $step, "id asc");
-    foreach ($rawDocuments as $key => $doc) {
-        $convertedDoc = [];
-        foreach ($features as $feature) {
-            /**
-             * @var $feature Feature
-             */
-            $convertedDoc = array_merge($convertedDoc, $feature->normalize($doc->{$feature->getName()}));
-            $convertedDoc[$feature->getName()] *= 1000;
-            if ($convertedDoc[$feature->getName()]> 1)
-                continue 2;
-            /*if ($convertedDoc[$feature->getName()]< 0.001)
-                continue 2;*/
+try {
+    $client = new SolrClient("http://localhost:8983/solr/carstorage/");
+    $step = 100;
+    $featureExtractor = new IndexFeatureExtractor($client);
+    $start = microtime(true);
+    $features = $featureExtractor->getFeatureVector();
+    $time_elapsed_secs = microtime(true) - $start . PHP_EOL;
+    echo $time_elapsed_secs;
+    foreach ($features as $featureKey => $feature)
+        echo $featureKey . PHP_EOL;
+    exit;
+    $documentsCount = $client->GetDocumentsCount();
+    $points = [];
+    for ($i = 0; $i < 100; $i += $step) {
+        $rawDocuments = $client->Select("*:*", $i, $step, "id desc");
+        foreach ($rawDocuments as $key => $doc) {
+            $convertedDoc = [];
+            foreach ($features as $feature) {
+                /**
+                 * @var $feature Feature
+                 */
+               if ($feature->checkValueForExtremes($doc->{$feature->getName()}))
+                   continue 2;
+               $convertedDoc = array_merge($convertedDoc, $feature->normalize($doc->{$feature->getName()}));
+            }
+            //$x .= array_values($convertedDoc)[1] . ",";
+            //$y .= array_values($convertedDoc)[2] . ",";
         }
-        $points[] = [$convertedDoc[$feature->getName()], $doc->price];
-        $x .= $convertedDoc[$feature->getName()] . ",";
-        $y .= $doc->price. ",";
     }
+} catch (Exception $exception) {
+    echo($exception->getMessage() . PHP_EOL . $exception->getTraceAsString());
 }
-echo rtrim($x, ","). PHP_EOL;
-echo rtrim($y, ","). PHP_EOL;
-echo count (explode(",", $x));
+//echo rtrim($x, ","). PHP_EOL;
+//echo rtrim($y, ","). PHP_EOL;
+//echo count (explode(",", $x));
 /*$p = 20;
 $randSeed = array_rand($points, $p);
 $intersect = array_intersect_key($points, array_flip($randSeed));
