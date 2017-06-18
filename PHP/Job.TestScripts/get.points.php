@@ -14,12 +14,9 @@ try {
     $features = $featureExtractor->getFeatureVector();
     $time_elapsed_secs = microtime(true) - $start . PHP_EOL;
     echo $time_elapsed_secs;
-    foreach ($features as $featureKey => $feature)
-        echo $featureKey . PHP_EOL;
-    exit;
     $documentsCount = $client->GetDocumentsCount();
     $points = [];
-    for ($i = 0; $i < 100; $i += $step) {
+    for ($i = 0; $i < $documentsCount; $i += $step) {
         $rawDocuments = $client->Select("*:*", $i, $step, "id desc");
         foreach ($rawDocuments as $key => $doc) {
             $convertedDoc = [];

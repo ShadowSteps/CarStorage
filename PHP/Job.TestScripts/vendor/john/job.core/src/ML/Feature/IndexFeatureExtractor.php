@@ -14,10 +14,10 @@ use Shadows\CarStorage\Core\Index\SolrClient;
 class IndexFeatureExtractor
 {
     private $solrClient;
-    private $staticFeatures = [
+    public $staticFeatures = [
         "km", "year"
     ];
-    private $pointFeature =  "price";
+    public $pointFeature =  "price";
 
     public function __construct(SolrClient $solrClient)
     {
@@ -51,7 +51,7 @@ class IndexFeatureExtractor
         $minSupportPercent = 12;
         $documentsCount = $this->getSolrClient()->GetDocumentsCount();
         $minSupportCount = $minSupportPercent / 100 * $documentsCount;
-        for ($i = 0; $i < $documentsCount; $i += $step) {
+        for ($i = 0; $i < 2000; $i += $step) {
             $rawDocuments = $this->getSolrClient()->Select("*:*", $i, $step, "id asc");
             foreach ($rawDocuments as $key => $doc) {
                 foreach (explode(";", $doc->keywords) as $keyword) {
@@ -70,6 +70,6 @@ class IndexFeatureExtractor
                 }
             }
         }
-        return array_merge($features, $additionalFeatures);
+        return array_values(array_merge($features, $additionalFeatures));
     }
 }

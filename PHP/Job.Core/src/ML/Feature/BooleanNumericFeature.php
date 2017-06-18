@@ -14,11 +14,11 @@ class BooleanNumericFeature extends Feature
 
     public function normalize($value): array
     {
-        return $value;
+        return [$this->getName() => $value];
     }
 
     public function checkValueForExtremes($value): bool
     {
-        return $value >= 0 && $value <= 1;
+        return $value <= 0 && $value >= 1;
     }
 }
