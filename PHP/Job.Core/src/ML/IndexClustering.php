@@ -13,6 +13,7 @@ use Phpml\Classification\KNearestNeighbors;
 use Phpml\Clustering\KMeans;
 use Phpml\Math\Distance;
 use Phpml\Math\Distance\Euclidean;
+use Shadows\CarStorage\Core\Index\DocumentsQueue;
 use Shadows\CarStorage\Core\Index\SolrClient;
 use Shadows\CarStorage\Core\Math\ArrayMath;
 use Shadows\CarStorage\Core\ML\FacilityProblem\Facility;
@@ -27,8 +28,6 @@ class IndexClustering
      * @var Feature[]
      */
     private $features = [];
-    private $step = 300;
-    private $docCount;
 
     public function __construct(string $solrAddress)
     {
@@ -37,7 +36,6 @@ class IndexClustering
         $featureExtractor->pointFeature = "";
         $featureExtractor->staticFeatures[] = "price";
         $this->features = $featureExtractor->getFeatureVector();
-        $this->docCount = $this->getSolrClient()->GetDocumentsCount();
     }
 
     /**
@@ -69,157 +67,89 @@ class IndexClustering
         return $convertedDoc;
     }
 
-    private function findIntermediateCentroids(array $points, int $clusterCount): array {
-        $kMeans = new KMeans($clusterCount);
-        $clusters = $kMeans->cluster($points);
-        $centroids = [];
-        foreach ($clusters as $cluster) {
-            $centroid = [];
-            $count = count($cluster);
-            foreach ($this->features as $feature)
-                $centroid[$feature->getName()] = 0;
-            if ($count > 0) {
-                foreach ($cluster as $dot) {
-                    foreach ($this->features as $key => $feature)
-                        $centroid[$feature->getName()] += $dot[$key];
-                }
-                foreach ($this->features as $feature)
-                    $centroid[$feature->getName()] = $centroid[$feature->getName()] / $count;
-            }
-            $centroids[] = [$centroid, $count];
-        }
-        return $centroids;
-    }
-
     private function generateRandomNumbersArray() {
         $values = range(0, 1, 0.001);
         shuffle($values);
         return array_slice($values, 0, count($this->features));
     }
 
-    private function generateClusterCentroids(): array{
-        $progressSpeed = 10;
-        $clusterCount = round(/*sqrt($this->docCount)*/ $this->docCount / 1000);
-        $facilityCost = 1/($clusterCount * (1 + log($this->docCount)));
+    private function ApproximateNN(array $facilities, array $point, float $ANN_Point): array {
+        $distance = new Euclidean();
+        $min = PHP_INT_MAX;
+        $closestFaculty = null;
+        $facultyImportKey = 0;
+        foreach ($facilities as $key => $facility) {
+            $ANN_facility = $facility->getANNValue();
+            if ($ANN_facility > $ANN_Point) {
+                if ($key == 0) {
+                    $min = $distance->distance($facility->getPoint(), $point);
+                    $closestFaculty = $facility;
+                } else {
+                    $bottom = $distance->distance($facilities[$key - 1]->getPoint(), $point);
+                    $top = $distance->distance($facilities[$key]->getPoint(), $point);
+                    $min = min($bottom, $top);
+                    if ($bottom == $min)
+                        $closestFaculty = $facilities[$key - 1];
+                    else
+                        $closestFaculty = $facility;
+                }
+                $facultyImportKey = $key;
+                break;
+            } else if ($key == count($facilities)) {
+                $min = $distance->distance($facility->getPoint(), $point);
+                $closestFaculty = $facility;
+                $facultyImportKey = $key + 1;
+            }
+        }
+        return [$min, $closestFaculty, $facultyImportKey];
+    }
+
+    private function findBestFacilities(DocumentsQueue $queue, float $facilityCost, int $maxFacilities, float $progressSpeed = 3): array {
         /**
          * @var $facilities Facility[]
          */
         $facilities = [];
         $randomSeed = $this->generateRandomNumbersArray();
-        $i = 0;
-        $rawDocuments = $this->getSolrClient()->Select("*:*", $i * $this->step, $this->step, "id asc");
-        $read = count($rawDocuments);
-        $euclidean = new Euclidean();
-        $maxFacilities = ($clusterCount * log($this->docCount));
-        while ($read > 0) {
-            $start = microtime(true);
-            $processStart = microtime(true);
-            while (count($facilities) <= $maxFacilities && $read > 0) {
-                if (count($rawDocuments) == 0)
-                {
-                    echo "FINISHED $read documents for: ". (microtime(true) - $processStart) . PHP_EOL;
-                    $i++;
-                    $rawDocuments = $this->getSolrClient()->Select("*:*", $i * $this->step, $this->step, "id asc");
-                    $read = count($rawDocuments);
-                    $processStart = microtime(true);
-                    continue;
-                }
-                $doc = array_pop($rawDocuments);
-                $convertedDoc = $this->convertDocumentForClustering($doc);
+        while (!$queue->isStreamFinished()) {
+            while (count($facilities) <= $maxFacilities && !$queue->isStreamFinished()) {
+                $document = $queue->getNextDocument();
+                $convertedDoc = $this->convertDocumentForClustering($document);
                 if (count($convertedDoc) <= 0)
                     continue;
                 $ANN_Point = ArrayMath::innerProduct($convertedDoc, $randomSeed);
-                $min = PHP_INT_MAX;
-                $closestFaculty = null;
-                $facultyImportKey = 0;
-                foreach ($facilities as $key => $facility) {
-                    $ANN_facility = $facility->getANNValue();
-                    if ($ANN_facility > $ANN_Point) {
-                        if ($key == 0) {
-                            $min = $euclidean->distance($facility->getPoint(), $convertedDoc);
-                            $closestFaculty = $facility;
-                        } else {
-                            $bottom = $euclidean->distance($facilities[$key - 1]->getPoint(), $convertedDoc);
-                            $top = $euclidean->distance($facilities[$key]->getPoint(), $convertedDoc);
-                            $min = min($bottom, $top);
-                            if ($bottom == $min)
-                                $closestFaculty = $facilities[$key - 1];
-                            else
-                                $closestFaculty = $facility;
-                        }
-                        $facultyImportKey = $key;
-                        break;
-                    } else if ($key == count($facilities)) {
-                        $min = $euclidean->distance($facility->getPoint(), $convertedDoc);
-                        $closestFaculty = $facility;
-                        $facultyImportKey = $key + 1;
-                    }
-                }
-                if (min($min/$facilityCost, 1) == 1)
+                list($min, $closestFaculty, $facultyImportKey) = $this->ApproximateNN($facilities, $convertedDoc, $ANN_Point);
+                if (min($min/ $facilityCost, 1) == 1)
                     array_splice($facilities, $facultyImportKey, 0, [new Facility($convertedDoc, $randomSeed)]);
                 else
                     $closestFaculty->addInnerPoint($convertedDoc);
             }
-            echo "FACULTY MESUREMENTS: " . (microtime(true) - $start) . PHP_EOL;
-            if ($read > 0) {
-                $start = microtime(true);
+            if (!$queue->isStreamFinished()) {
                 while (count($facilities) > $maxFacilities) {
                     $facilityCost *= $progressSpeed;
-                    $weights = [];
-                    foreach ($facilities as $facility){
-                        $weights[] = $facility->getInnerPointsCount();
+                    foreach ($facilities as $facility)
                         $facility->recenterPoint();
-                    }
                     usort($facilities, function(Facility $a, Facility $b) {
                         if ($a->getANNValue() == $b->getANNValue())
                             return 0;
                         return $a->getANNValue() < $b->getANNValue() ? -1 : 1;
                     });
-                    $newFacilities = [$facilities[0]];
-                    foreach ($facilities as $key => $facility) {
-                        if ($key == 0)
-                            continue;
-                        $min = PHP_INT_MAX;
-                        $closestFaculty = null;
-                        $facultyImportKey = 0;
-                        foreach ($newFacilities as $fKey => $newFacility) {
-                            $ANN_facility = $newFacility->getANNValue();
-                            if ($ANN_facility > $facility->getANNValue()) {
-                                if ($fKey == 0) {
-                                    $min = $euclidean->distance($newFacility->getPoint(), $facility->getPoint());
-                                    $closestFaculty = $newFacility;
-                                } else {
-                                    $bottom = $euclidean->distance($newFacilities[$key - 1]->getPoint(), $facility->getPoint());
-                                    $top = $euclidean->distance($newFacilities[$key]->getPoint(), $facility->getPoint());
-                                    $min = min($bottom, $top);
-                                    if ($bottom == $min)
-                                        $closestFaculty = $newFacilities[$key - 1];
-                                    else
-                                        $closestFaculty = $newFacility;
-                                }
-                                $facultyImportKey = $key;
-                                break;
-                            } else if ($key == count($newFacilities)) {
-                                $min = $euclidean->distance($newFacility->getPoint(), $facility->getPoint());
-                                $closestFaculty = $newFacility;
-                                $facultyImportKey = $key + 1;
-                            }
-                        }
-                        if (min($weights[$key] * $min/$facilityCost, 1) == 1)
+                    $newFacilities = [array_pop($facilities)];
+                    foreach ($facilities as $facility) {
+                        list($min, $closestFaculty, $facultyImportKey) =
+                            $this->ApproximateNN($newFacilities, $facility->getPoint(), $facility->getANNValue());
+                        if (min($facility->getInnerPointsCount() * $min / $facilityCost, 1) == 1)
                             array_splice($newFacilities, $facultyImportKey, 0, [$facility]);
                         else
                             $closestFaculty->addInnerPoint($facility->getPoint());
                     }
                     $facilities = $newFacilities;
                 }
-                echo "FACULTY REMESUREMENTS: " . (microtime(true) - $start) . PHP_EOL;
             }
         }
-        $points = [];
-        foreach ($facilities as $facility)
-            $points[] = $facility->getPoint();
-        $kMeans = new KMeans($clusterCount);
-        $clusters = $kMeans->cluster($points);
+        return $facilities;
+    }
+
+    private function findClusterCentroids(array $clusters): array {
         $centroids = [];
         foreach ($clusters as $cluster) {
             $count = count($cluster);
@@ -235,6 +165,25 @@ class IndexClustering
                 $centroid[$feature->getName()] = $centroid[$feature->getName()] / $count;
             $centroids[] = $centroid;
         }
+        return $centroids;
+    }
+
+    private function generateClusterCentroids(): array{
+        $start = microtime(true);
+        $documentQueue = new DocumentsQueue($this->getSolrClient());
+        $documentQueue->setStep(300);
+        $clusterCount = round(sqrt($documentQueue->getDocCount()));
+        //$clusterCount = round($documentQueue->getDocCount() / 500);
+        $facilityCost = 1 / $clusterCount * (1 + log($documentQueue->getDocCount()));
+        $maxFacilities = ($clusterCount * log($documentQueue->getDocCount()));
+        $facilities = $this->findBestFacilities($documentQueue, $facilityCost, $maxFacilities);
+        $points = [];
+        foreach ($facilities as $facility)
+            $points[] = $facility->getPoint();
+        $kMeans = new KMeans($clusterCount);
+        $clusters = $kMeans->cluster($points);
+        $centroids = $this->findClusterCentroids($clusters);
+        echo "CLUSTERING TIME: " . (microtime(true) - $start) . PHP_EOL;
         return $centroids;
     }
 
@@ -277,7 +226,7 @@ class IndexClustering
 
     public function beginClustering() {
         $centroids = $this->generateClusterCentroids();
-        $this->assignCentroidsToIndex($centroids);
+        //$this->assignCentroidsToIndex($centroids);
     }
 
 

@@ -9,6 +9,7 @@
 namespace Shadows\CarStorage\Core\ML\Feature;
 
 
+use Shadows\CarStorage\Core\Index\DocumentsQueue;
 use Shadows\CarStorage\Core\Index\SolrClient;
 
 class IndexFeatureExtractor
@@ -39,7 +40,7 @@ class IndexFeatureExtractor
     }
 
 
-    public function getFeatureVector(): array {
+    public function getFeatureVector(int $minSupportPercent = 12): array {
         $features = [];
         foreach ($this->staticFeatures as $feature) {
             $characteristics = $this->getNumericFeaturesCharacteristics($feature);
@@ -47,27 +48,23 @@ class IndexFeatureExtractor
         }
         $additionalFeaturesPassed = [];
         $additionalFeatures = [];
-        $step = 100;
-        $minSupportPercent = 12;
-        $documentsCount = $this->getSolrClient()->GetDocumentsCount();
-        $minSupportCount = $minSupportPercent / 100 * $documentsCount;
-        for ($i = 0; $i < 2000; $i += $step) {
-            $rawDocuments = $this->getSolrClient()->Select("*:*", $i, $step, "id asc");
-            foreach ($rawDocuments as $key => $doc) {
-                foreach (explode(";", $doc->keywords) as $keyword) {
-                    $keyword = trim($keyword);
-                    if (is_numeric($keyword))
-                        continue;
-                    if (isset($additionalFeaturesPassed[$keyword]))
-                        continue;
-                    if (mb_strlen($this->getSolrClient()->NormalizeQuery($keyword)) <= 0)
-                        continue;
-                    $additionalFeaturesPassed[$keyword] = true;
-                    $keyWordCount = $this->getSolrClient()->GetDocumentsCount("keywords:\"$keyword\"");
-                    if ($keyWordCount <= $minSupportCount || ($documentsCount - $keyWordCount) <= $minSupportCount)
-                        continue;
-                    $additionalFeatures[$keyword] = new BooleanNumericFeature($keyword);
-                }
+        $queue = new DocumentsQueue($this->getSolrClient());
+        $minSupportCount = $minSupportPercent / 100 * $queue->getDocCount();
+        while (!$queue->isStreamFinished()) {
+            $document = $queue->getNextDocument();
+            foreach (explode(";", $document->keywords) as $keyword) {
+                $keyword = trim($keyword);
+                if (is_numeric($keyword))
+                    continue;
+                if (isset($additionalFeaturesPassed[$keyword]))
+                    continue;
+                if (mb_strlen($this->getSolrClient()->NormalizeQuery($keyword)) <= 0)
+                    continue;
+                $additionalFeaturesPassed[$keyword] = true;
+                $keyWordCount = $this->getSolrClient()->GetDocumentsCount("keywords:\"$keyword\"");
+                if ($keyWordCount <= $minSupportCount || ($queue->getDocCount() - $keyWordCount) <= $minSupportCount)
+                    continue;
+                $additionalFeatures[$keyword] = new BooleanNumericFeature($keyword);
             }
         }
         return array_values(array_merge($features, $additionalFeatures));
