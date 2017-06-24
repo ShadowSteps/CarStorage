@@ -187,7 +187,7 @@ class IndexClustering
         return $centroids;
     }
 
-    private function assignCentroidsToIndex(array $centroids): void {
+    private function assignCentroidsToIndex(array $centroids) {
         $documentsCount = $this->getSolrClient()->GetDocumentsCount();
         $trainingSet = [];
         $trainingResults = [];
@@ -220,13 +220,14 @@ class IndexClustering
                 echo "Document {$doc->url} into cluster: {$indexDoc->getCluster()}". PHP_EOL;
                 $indexDocuments[] = $indexDoc;
             }
-            $this->getSolrClient()->UpdateDocumentArray($indexDocuments);
+            //$this->getSolrClient()->UpdateDocumentArray($indexDocuments);
         }
     }
 
     public function beginClustering() {
         $centroids = $this->generateClusterCentroids();
-        //$this->assignCentroidsToIndex($centroids);
+        $this->assignCentroidsToIndex($centroids);
+
     }
 
 

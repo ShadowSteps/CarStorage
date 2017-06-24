@@ -187,8 +187,8 @@ class IndexClustering
         return $centroids;
     }
 
-    private function assignCentroidsToIndex(array $centroids): void {
-        $documentsCount = $this->getSolrClient()->GetDocumentsCount();
+    private function defineSets(array $centroids){
+        $result = [];
         $trainingSet = [];
         $trainingResults = [];
         foreach ($centroids as $key => $centroid) {
@@ -202,31 +202,39 @@ class IndexClustering
             $trainingSet[] = $trainingElement;
             $trainingResults[] = $key;
         }
+        return [$trainingSet, $trainingResults];
+    }
+
+    private function assignCentroidsToIndex(array $centroids) {
+        list($trainingSet, $trainingResults) = $this->defineSets($centroids);
         $classifier = new KNearestNeighbors(1);
         $classifier->train($trainingSet, $trainingResults);
-        for ($i = 0; $i < $documentsCount; $i += $this->step) {
-            $indexDocuments = [];
-            $rawDocuments = $this->getSolrClient()->Select("*:*", $i, $this->step, "id asc");
-            foreach ($rawDocuments as $key => $doc) {
-                $indexDoc = RequestDataMapper::ConvertStdToJobIndexInformation($doc);
-                $convertedDoc = [];
-                foreach ($this->features as $feature) {
-                    /**
-                     * @var $feature Feature
-                     */
-                    $convertedDoc[] = $doc->{$feature->getName()}/2000000;
-                }
+        $documentQueue = new DocumentsQueue($this->getSolrClient());
+        $step = 400;
+        $documentQueue->setStep($step);
+        $indexDocuments = [];
+        while(!$documentQueue->isStreamFinished()){
+            $doc = $documentQueue->getNextDocument();
+            $indexDoc = RequestDataMapper::ConvertStdToJobIndexInformation($doc);
+            $convertedDoc = $this->convertDocumentForClustering($doc);
+            if(count($convertedDoc) > 0){
                 $indexDoc->setCluster($classifier->predict($convertedDoc));
                 echo "Document {$doc->url} into cluster: {$indexDoc->getCluster()}". PHP_EOL;
                 $indexDocuments[] = $indexDoc;
+                if(count($indexDocuments) == $step) {
+                    $this->getSolrClient()->UpdateDocumentArray($indexDocuments);
+                    $indexDocuments = [];
+                }
+            }else{
+                echo "Document {$doc->url} is extreme.". PHP_EOL;
             }
-            $this->getSolrClient()->UpdateDocumentArray($indexDocuments);
         }
+
     }
 
     public function beginClustering() {
         $centroids = $this->generateClusterCentroids();
-        //$this->assignCentroidsToIndex($centroids);
+        $this->assignCentroidsToIndex($centroids);
     }
 
 
