@@ -100,12 +100,12 @@
     },
     {
         "name": "john/job.core",
-        "version": "1.0.3",
-        "version_normalized": "1.0.3.0",
+        "version": "1.0.4",
+        "version_normalized": "1.0.4.0",
         "dist": {
             "type": "path",
             "url": "../Job.Core",
-            "reference": "210af64670da6327e827ce78059d0a78cc8b887a",
+            "reference": "a8e4d58ff4b2411c5997e98ff8975d92d095a842",
             "shasum": null
         },
         "require": {

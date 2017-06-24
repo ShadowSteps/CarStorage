@@ -56,7 +56,7 @@ class ServicesController extends Controller
     public function nearestAction(Request $request)
     {
         $id = $request->get("id");
-        $indexKNNFinder = new IndexKNNFinder("http://localhost:8983/solr/carstorage/");
+        $indexKNNFinder = new IndexKNNFinder("http://192.168.50.26:8983/solr/carstorage/");
         $data = $indexKNNFinder->FindNearest(5, $id);
         return new Response(json_encode($data));
     }

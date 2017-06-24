@@ -20,6 +20,7 @@ use Shadows\CarStorage\Core\ML\FacilityProblem\Facility;
 use Shadows\CarStorage\Core\ML\Feature\Feature;
 use Shadows\CarStorage\Core\ML\Feature\IndexFeatureExtractor;
 use Shadows\CarStorage\Core\Utils\RequestDataMapper;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class IndexClustering
 {
@@ -188,7 +189,6 @@ class IndexClustering
     }
 
     private function defineSets(array $centroids){
-        $result = [];
         $trainingSet = [];
         $trainingResults = [];
         foreach ($centroids as $key => $centroid) {
@@ -229,13 +229,17 @@ class IndexClustering
                 echo "Document {$doc->url} is extreme.". PHP_EOL;
             }
         }
-
     }
 
-    public function beginClustering() {
+    public function beginClustering(string $serializeDir) {
+        if(!is_dir($serializeDir)){
+            throw new \Exception("Serialize directory does not exists");
+        }
         $centroids = $this->generateClusterCentroids();
         $this->assignCentroidsToIndex($centroids);
+        $serializedCentroids = serialize($centroids);
+        $serializedFeatures = serialize($this->features);
+        file_put_contents($serializeDir."/centroids", $serializedCentroids);
+        file_put_contents($serializeDir."/features", $serializedFeatures);
     }
-
-
 }

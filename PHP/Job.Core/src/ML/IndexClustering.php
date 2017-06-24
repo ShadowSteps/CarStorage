@@ -20,6 +20,7 @@ use Shadows\CarStorage\Core\ML\FacilityProblem\Facility;
 use Shadows\CarStorage\Core\ML\Feature\Feature;
 use Shadows\CarStorage\Core\ML\Feature\IndexFeatureExtractor;
 use Shadows\CarStorage\Core\Utils\RequestDataMapper;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class IndexClustering
 {
@@ -187,8 +188,7 @@ class IndexClustering
         return $centroids;
     }
 
-    private function assignCentroidsToIndex(array $centroids) {
-        $documentsCount = $this->getSolrClient()->GetDocumentsCount();
+    private function defineSets(array $centroids){
         $trainingSet = [];
         $trainingResults = [];
         foreach ($centroids as $key => $centroid) {
@@ -202,33 +202,44 @@ class IndexClustering
             $trainingSet[] = $trainingElement;
             $trainingResults[] = $key;
         }
+        return [$trainingSet, $trainingResults];
+    }
+
+    private function assignCentroidsToIndex(array $centroids) {
+        list($trainingSet, $trainingResults) = $this->defineSets($centroids);
         $classifier = new KNearestNeighbors(1);
         $classifier->train($trainingSet, $trainingResults);
-        for ($i = 0; $i < $documentsCount; $i += $this->step) {
-            $indexDocuments = [];
-            $rawDocuments = $this->getSolrClient()->Select("*:*", $i, $this->step, "id asc");
-            foreach ($rawDocuments as $key => $doc) {
-                $indexDoc = RequestDataMapper::ConvertStdToJobIndexInformation($doc);
-                $convertedDoc = [];
-                foreach ($this->features as $feature) {
-                    /**
-                     * @var $feature Feature
-                     */
-                    $convertedDoc[] = $doc->{$feature->getName()}/2000000;
-                }
+        $documentQueue = new DocumentsQueue($this->getSolrClient());
+        $step = 400;
+        $documentQueue->setStep($step);
+        $indexDocuments = [];
+        while(!$documentQueue->isStreamFinished()){
+            $doc = $documentQueue->getNextDocument();
+            $indexDoc = RequestDataMapper::ConvertStdToJobIndexInformation($doc);
+            $convertedDoc = $this->convertDocumentForClustering($doc);
+            if(count($convertedDoc) > 0){
                 $indexDoc->setCluster($classifier->predict($convertedDoc));
                 echo "Document {$doc->url} into cluster: {$indexDoc->getCluster()}". PHP_EOL;
                 $indexDocuments[] = $indexDoc;
+                if(count($indexDocuments) == $step) {
+                    $this->getSolrClient()->UpdateDocumentArray($indexDocuments);
+                    $indexDocuments = [];
+                }
+            }else{
+                echo "Document {$doc->url} is extreme.". PHP_EOL;
             }
-            //$this->getSolrClient()->UpdateDocumentArray($indexDocuments);
         }
     }
 
-    public function beginClustering() {
+    public function beginClustering(string $serializeDir) {
+        if(!is_dir($serializeDir)){
+            throw new \Exception("Serialize directory does not exists");
+        }
         $centroids = $this->generateClusterCentroids();
         $this->assignCentroidsToIndex($centroids);
-
+        $serializedCentroids = serialize($centroids);
+        $serializedFeatures = serialize($this->features);
+        file_put_contents($serializeDir."/centroids", $serializedCentroids);
+        file_put_contents($serializeDir."/features", $serializedFeatures);
     }
-
-
 }

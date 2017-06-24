@@ -193,7 +193,7 @@ class queryGenerator
             );
         $body = \Unirest\Request\Body::json($data);
         $highlight = $this->generateHighlightQuery();
-        $response = \Unirest\Request::post("http://localhost:8983/solr/carstorage/select?wt=json".$highlight, $headers, $body);
+        $response = \Unirest\Request::post("http://192.168.50.26:8983/solr/carstorage/select?wt=json".$highlight, $headers, $body);
         return $response;
     }
 

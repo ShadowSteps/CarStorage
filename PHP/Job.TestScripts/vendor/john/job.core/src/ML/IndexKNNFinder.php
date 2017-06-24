@@ -10,6 +10,7 @@ namespace Shadows\CarStorage\Core\ML;
 
 
 use Phpml\Math\Distance\Euclidean;
+use Shadows\CarStorage\Core\Index\DocumentsQueue;
 use Shadows\CarStorage\Core\Index\SolrClient;
 use Shadows\CarStorage\Core\ML\Feature\Feature;
 use Shadows\CarStorage\Core\ML\Feature\IndexFeatureExtractor;
@@ -26,57 +27,59 @@ class IndexKNNFinder
         $this->featureExtractor = new IndexFeatureExtractor($this->solrClient);
     }
 
+    private function convertDocumentForClustering(\stdClass $document,$features):array {
+        $convertedDoc = [];
+        foreach ($features as $feature) {
+            /**
+             * @var $feature Feature
+             */
+            $value = null;
+            if (property_exists($document, $feature->getName()))
+                $value = $document->{$feature->getName()};
+            else {
+                $keywords = explode(";", $document->keywords);
+                $keywords = array_map(function($value){ return trim($value); }, $keywords);
+                $value = (in_array($feature->getName(), $keywords) ? 1 : 0);
+            }
+            if ($feature->checkValueForExtremes($value))
+                return [];
+            $convertedDoc = array_merge($convertedDoc, array_values($feature->normalize($value)));
+        }
+        return $convertedDoc;
+    }
+
     public function FindNearest(int $k, string $id): array {
         $document = $this->solrClient->Select("id:".$id, 0, 1);
         $document = $document[0];
+
         if (!isset($document->cluster))
             return [];
         $cluster = $document->cluster;
-        $count = $this->solrClient->GetDocumentsCount("cluster:".$cluster);
-        if ($count <= $k) {
-            $docs = $this->solrClient->Select("cluster:".$id, 0, 1);
-            return $docs;
-        } else {
-            $features = $this->featureExtractor->getFeatureVector();
-            $convertedMainDoc = [];
-            foreach ($features as $feature) {
-                /**
-                 * @var $feature Feature
-                 */
-                $convertedMainDoc[] = $document->{$feature->getName()}/2000000;
-            }
-            $nearest = [];
-            $maxDistance = PHP_INT_MAX;
-            $euclidian = new Euclidean();
-            for ($i = 0; $i < $count; $i += $this->step) {
-                $rawDocuments = $this->solrClient->Select("cluster:".$cluster, $i, $this->step, "id asc");
-                foreach ($rawDocuments as $key => $doc) {
-                    if ($doc->id == $id)
-                        continue;
-                    $convertedDoc = [];
-                    foreach ($features as $feature) {
-                        /**
-                         * @var $feature Feature
-                         */
-                        $convertedDoc[] = $doc->{$feature->getName()}/2000000;
-                    }
-                    $distance = $euclidian->distance($convertedMainDoc, $convertedDoc);
-                    if (count($nearest) >= $k && $maxDistance <= $distance)
-                        continue;
-                    if (count($nearest) >= $k)
-                        array_pop($nearest);
-                    array_push($nearest, ["doc"=>$doc, "distance" => $distance]);
-                    usort($nearest, function ($a, $b){
-                        if ($a["distance"] == $b["distance"])
-                            return 0;
-                        return ($a["distance"] < $b["distance"]) ? -1 : 1;
-                    });
-                    $maxDistance = $nearest[count($nearest) - 1]["distance"];
-                }
-            }
-            foreach ($nearest as $key => $near)
-                $nearest[$key] = $near["doc"];
-            return $nearest;
+        $documentQueue = new DocumentsQueue($this->solrClient,"cluster:$cluster");
+        $documentQueue->setStep(400);
+        $euclidian = new Euclidean();
+        //$nearest = [];
+        //$maxDistance = PHP_INT_MAX;
+        $features = unserialize(file_get_contents(__DIR__."/../../../tmp/features"));
+        $convertedFirstDocument = $this->convertDocumentForClustering($document,$features);
+        $distanceDocs = [];
+        $count = 0;
+        while(!$documentQueue->isStreamFinished()){
+            $doc = $documentQueue->getNextDocument();
+            $convertedDoc = $this->convertDocumentForClustering($doc,$features);
+            $distance = $euclidian->distance($convertedFirstDocument, $convertedDoc);
+            $distanceDocs[$count]["doc"] = $doc;
+            $distanceDocs[$count]["distance"] = $distance;
+            $count++;
         }
+        usort($distanceDocs, function($a, $b) {
+            return $a['distance'] <=> $b['distance'];
+        });
+        $nearest = array_slice($distanceDocs, 0, 5);
+        $result = [];
+        foreach($nearest as $num => $document){
+            $result[] = $document["doc"];
+        }
+        return $result;
     }
 }
