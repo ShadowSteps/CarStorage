@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="resourses/jquery/pagination/simplePagination.css"/>
         <link rel="stylesheet" href="resourses/jquery/basic/searchUiBuilder.css"/>
         <link  href="resourses/jquery/datepicker-master/dist/datepicker.css" rel="stylesheet">
-        <link rel="stylesheet"  href="resourses/css/font-awesome-4.7.0/css/font-awesome.css">
+        <link rel="stylesheet"  href="{{ asset('resourses/css/font-awesome-4.7.0/css/font-awesome.css')}}">
         <link href="{{ asset('resourses/css/base-body.css')}}" rel="stylesheet">
         <script src = "{{ asset('resourses/jquery/jquery/jquery.js')}}"></script>
         <script src = "{{ asset('resourses/jquery/pagination/jquery.simplePagination.js')}}"></script>
@@ -21,5 +21,36 @@
         {% block javascripts %}
 
         {% endblock %}
+        <div class="footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <i class="fa fa-car" aria-hidden="true"></i>
+                    </div><div class="footer-text">
+                        Приложение за търсене на автомобили
+                        <div class="footer-sub-text">
+                            Потърсете новия си автомобил сега!
+                        </div>
+                    </div>
+                </div><div class="footer-right">
+                    <div class="footer-col">
+                        <i class="fa fa-users"></i><div class="text">Екип:</div><br>
+                        <i class="fa fa-address-book-o"></i><div class="text">Кирил Руменов Лазаров <br>|&nbsp;Ф.Н:-----&nbsp;</div><br>
+                        <i class="fa fa-address-book-o"></i><div class="text">Михаил Иванов Петров  <br>|&nbsp;Ф.Н:25407&nbsp;</div><br>
+                    </div><div class="footer-col">
+
+                    </div><div class="footer-col">
+                        <i class="fa"></i><div class="text">Денонощен телефон:</div><br>
+                        <i class="fa fa-phone"></i><div class="text">Т.: -------------</div><br>
+                        <i class="fa"></i><div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-------------</div><br>
+                        <i class="fa"></i><div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-------------</div><br>
+                    </div><div class="footer-col">
+                        <i class="fa"></i><div class="text">Полезни връзки:</div><br>
+                        <i class="fa fa-question-circle"></i><div class="text"><a src="https://symfony.com/">Symfony Framework</a></div><br>
+                        <i class="fa fa-question-circle"></i><div class="text"><a src="http://lucene.apache.org/solr/">Apache Solr</a></div><br>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

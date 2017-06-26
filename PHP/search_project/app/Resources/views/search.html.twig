@@ -1,17 +1,37 @@
 {% extends 'base.html.twig' %}
 {% block javascripts %}
-<script>
-    $(document).ready(function(){
-        $(".search-container").searchUiBuilder();
-    });
-</script>
+    <script>
+        $(document).ready(function () {
+            $(".search-container").searchUiBuilder();
+        });
+    </script>
 {% endblock %}
 {% block body %}
     <div class="body-content">
-        <div class="header-holder">
-            <div class="header">
-                Търсачка на обяви за автомобили
+        <div class="header">
+            <div class="header-content">
+                <div class="header-content-left">
+                    <a href="">
+                        <div class="header-logo">
+                            <img/>
+                        </div>
+                        <div class="header-text no-select">
+                            <i class="fa fa-car" aria-hidden="true"></i>
+                            Търсачка на автомобили
+                            <div class="header-sub-text no-select">
+                                Потърсете новия си автомобил сега!
+                            </div>
+
+                        </div>
+                    </a>
+                </div><div class="header-content-right ">
+                    <div class="header-right-buttons">
+
+                    </div>
+                </div>
             </div>
+        </div>
+        <div class="navigation-title">
         </div>
         <div class="content-holder">
             <div class="content-title">

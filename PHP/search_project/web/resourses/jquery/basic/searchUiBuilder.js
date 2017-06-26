@@ -103,7 +103,7 @@ $.fn.searchUiBuilder = function (settings) {
             "<div class='nearest-holder' style='display: none'></div>"+
             "</div>" +
             "<div class='result-separator'></div>");
-        result.find(".result-visit").prepend(findMore)
+        result.find(".result-visit").prepend(findMore);
         $(".search-results-holder .results-container").append(result);
     }
 
@@ -123,6 +123,14 @@ $.fn.searchUiBuilder = function (settings) {
 
     function findNearest(){
         var that = $(this);
+        if(that.hasClass("clicked")){
+            if (that.parent().parent().find(".nearest-holder:visible").length <= 0)
+                that.text("Скриване на подобни");
+            else
+                that.text("Покажи подобни");
+            that.parent().parent().find(".nearest-holder").slideToggle();
+            return;
+        }
         var id = that.attr("href").replace("#", "");
         $.ajax({
             url: "services/getNearest",
@@ -131,9 +139,9 @@ $.fn.searchUiBuilder = function (settings) {
             dataType: "json"
         }).done(function(result) {
             var docs = $(result);
-            that.parent().parent().find(".nearest-holder").show();
+            that.parent().parent().find(".nearest-holder").hide();
+
             that.parent().parent().find(".nearest-holder").find("*").remove();
-            console.log(that);
             if(docs.length == 0){
                 that.parent().parent().find(".nearest-holder").append("<div class='search-result-empty'>Няма намерени резултати.</div>");
             }
@@ -148,6 +156,9 @@ $.fn.searchUiBuilder = function (settings) {
                 var year = val.year;
                 createNearestField(that.parent().parent(), title,description,keywords,url,price,km,year);
             });
+            that.parent().parent().find(".nearest-holder").slideDown();
+            that.addClass("clicked");
+            that.text("Скриване на подобни");
         });
     }
 
@@ -212,7 +223,7 @@ $.fn.searchUiBuilder = function (settings) {
         $(".advanced-search-button").click(function(){
             container.find(".advanced-search").slideToggle();
         });
-        
+
         $(".search-text").keyup(function(e){
             var code = e.which;
             if(code==13)e.preventDefault();
