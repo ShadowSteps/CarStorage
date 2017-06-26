@@ -1,0 +1,1035 @@
+
+----------------------TEXT----------------------
+6,5 газ на 100км . Верига мотор .Обслужена . Сядаш и караш! Цената не се се коментира !!! Две леки външни забележки по боята..
+
+----------------------FORMATED TEXT----------------------
+6. 5 газ на 100км. Верига мотор. Обслужена. Сядаш и караш! Цената не се се коментира! Две леки външни забележки по боята.
+
+----------------------SENTANCES----------------------
+0 => 6. 5 газ на 100км.
+1 => Верига мотор. Обслужена.
+2 => Сядаш и караш!
+3 => Цената не се се коментира!
+4 => Две леки външни забележки по боята.
+
+----------------------TOKENIZATION----------------------
+0 => (6; 5; газ; на; 100км)
+1 => (Верига; мотор; Обслужена)
+2 => (Сядаш; и; караш)
+3 => (Цената; не; се; се; коментира)
+4 => (Две; леки; външни; забележки; по; боята)
+
+----------------------MORPHOLOGY----------------------
+0 => [(NU 6;6)] [(NU 5;5)] [(N газ;газ)] [(PREP на;на)] [(U 100км;100км)] 
+1 => [(N верига;верига)] [(N мотор;мотор)] [(U обслужена;обслужена)] 
+2 => [(V сядаш;сядам)] [(CONJ и;и)] [(V караш;карам)] 
+3 => [(N цената;цена)] [(PC не;не)] [(PC се;се)] [(PC се;се)] [(V коментира;коментирам)] 
+4 => [(U две;две)] [(A леки;лек)] [(A външни;външен)] [(N забележки;забележка)] [(PC по;по);(PREP по;по)] [(N боята;боя)] 
+
+----------------------SYNTAX----------------------
+2 => [S [VC [VC [V сядаш]] [CONJ и] [VC [V караш]]]]
+3 => [S [NP [NP [NP [NP [N цената]] [PARTICLE [PC не]]] [PARTICLE [PC се]]] [PARTICLE [PC се]]] [VC [V коментира]]]
+     [S [NP [NP [NP [N цената]] [PARTICLE [PARTICLE [PC не]] [PARTICLE [PC се]]]] [PARTICLE [PC се]]] [VC [V коментира]]]
+     [S [NP [NP [NP [N цената]] [PARTICLE [PC не]]] [PARTICLE [PARTICLE [PC се]] [PARTICLE [PC се]]]] [VC [V коментира]]]
+     [S [NP [NP [N цената]] [PARTICLE [PARTICLE [PARTICLE [PC не]] [PARTICLE [PC се]]] [PARTICLE [PC се]]]] [VC [V коментира]]]
+     [S [NP [NP [N цената]] [PARTICLE [PARTICLE [PC не]] [PARTICLE [PARTICLE [PC се]] [PARTICLE [PC се]]]]] [VC [V коментира]]]
+
+----------------------SYNTAX XML----------------------
+2 => <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>сядаш </SE></SG><SE type='CONJ'>и </SE><SG type='VC'><SE type='V'>караш </SE></SG></SG></SG>
+3 => <SG type='S'><SG type='NP'><SG type='NP'><SG type='NP'><SG type='NP'><SE type='N'>цената </SE></SG><SG type='PARTICLE'><SE type='PC'>не </SE></SG></SG><SG type='PARTICLE'><SE type='PC'>се </SE></SG></SG><SG type='PARTICLE'><SE type='PC'>се </SE></SG></SG><SG type='VC'><SE type='V'>коментира </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='NP'><SE type='N'>цената </SE></SG><SG type='PARTICLE'><SG type='PARTICLE'><SE type='PC'>не </SE></SG><SG type='PARTICLE'><SE type='PC'>се </SE></SG></SG></SG><SG type='PARTICLE'><SE type='PC'>се </SE></SG></SG><SG type='VC'><SE type='V'>коментира </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='NP'><SE type='N'>цената </SE></SG><SG type='PARTICLE'><SE type='PC'>не </SE></SG></SG><SG type='PARTICLE'><SG type='PARTICLE'><SE type='PC'>се </SE></SG><SG type='PARTICLE'><SE type='PC'>се </SE></SG></SG></SG><SG type='VC'><SE type='V'>коментира </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SE type='N'>цената </SE></SG><SG type='PARTICLE'><SG type='PARTICLE'><SG type='PARTICLE'><SE type='PC'>не </SE></SG><SG type='PARTICLE'><SE type='PC'>се </SE></SG></SG><SG type='PARTICLE'><SE type='PC'>се </SE></SG></SG></SG><SG type='VC'><SE type='V'>коментира </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SE type='N'>цената </SE></SG><SG type='PARTICLE'><SG type='PARTICLE'><SE type='PC'>не </SE></SG><SG type='PARTICLE'><SG type='PARTICLE'><SE type='PC'>се </SE></SG><SG type='PARTICLE'><SE type='PC'>се </SE></SG></SG></SG></SG><SG type='VC'><SE type='V'>коментира </SE></SG></SG>
+
+----------------------TEXT----------------------
+1978!!!Без акумулатор .Лош външен вид. Запазен кожен салон .Не е карана 3 години . Добри зимни гуми . Има документи , може да се прехвърли , може и без номерата да я дам.Цената не се коментира . Ако решите да я вземата трябва да се дърпа или с платформа . Колата е в Бургас . Работи само на газ !Моля да звънят само сериозно заинтересовани ! Гражданска до Март. Няма преглед.Теглич.
+
+----------------------FORMATED TEXT----------------------
+1978!Без акумулатор. Лош външен вид. Запазен кожен салон. Не е карана 3 години. Добри зимни гуми. Има документи. може да се прехвърли. може и без номерата да я дам.Цената не се коментира. Ако решите да я вземата трябва да се дърпа или с платформа. Колата е в Бургас. Работи само на газ!Моля да звънят само сериозно заинтересовани! Гражданска до Март. Няма преглед. Теглич.
+
+----------------------SENTANCES----------------------
+0 => 1978!
+1 => 
+2 => Без акумулатор.
+3 => Лош външен вид.
+4 => Запазен кожен салон.
+5 => Не е карана 3 години.
+6 => Добри зимни гуми.
+7 => Има документи.
+8 => може да се прехвърли.
+9 => може и без номерата да я дам.
+10 => Цената не се коментира.
+11 => Ако решите да я вземата трябва да се дърпа или с платформа.
+12 => Колата е в Бургас.
+13 => Работи само на газ!
+14 => 
+15 => Моля да звънят само сериозно заинтересовани!
+16 => 
+17 => Гражданска до Март.
+18 => Няма преглед. Теглич.
+
+----------------------TOKENIZATION----------------------
+0 => (1978)
+1 => ()
+2 => (Без; акумулатор)
+3 => (Лош; външен; вид)
+4 => (Запазен; кожен; салон)
+5 => (Не; е; карана; 3; години)
+6 => (Добри; зимни; гуми)
+7 => (Има; документи)
+8 => (може; да; се; прехвърли)
+9 => (може; и; без; номерата; да; я; дам)
+10 => (Цената; не; се; коментира)
+11 => (Ако; решите; да; я; вземата; трябва; да; се; дърпа; или; с; платформа)
+12 => (Колата; е; в; Бургас)
+13 => (Работи; само; на; газ)
+14 => ()
+15 => (Моля; да; звънят; само; сериозно; заинтересовани)
+16 => ()
+17 => (Гражданска; до; Март)
+18 => (Няма; преглед; Теглич)
+
+----------------------MORPHOLOGY----------------------
+0 => [(NU 1978;1978)] 
+2 => [(PREP без;без)] [(N акумулатор;акумулатор)] 
+3 => [(A лош;лош)] [(A външен;външен)] [(N вид;вид)] 
+4 => [(A запазен;запазен);(V запазен;запазя)] [(A кожен;кожен)] [(N салон;салон)] 
+5 => [(PC не;не)] [(PC е;е);(V е;съм)] [(V карана;карам)] [(NU 3;3)] [(N години;година)] 
+6 => [(A добри;добър)] [(A зимни;зимен)] [(N гуми;гума)] 
+7 => [(V има;имам)] [(N документи;документ)] 
+8 => [(V може;мога)] [(CONJ да;да);(PC да;да)] [(PC се;се)] [(V прехвърли;прехвърля)] 
+9 => [(V може;мога)] [(CONJ и;и)] [(PREP без;без)] [(U номерата;номерата)] [(CONJ да;да);(PC да;да)] [(PRO я;тя);(CONJ я;я)] [(V дам;дам)] 
+10 => [(N цената;цена)] [(PC не;не)] [(PC се;се)] [(V коментира;коментирам)] 
+12 => [(N колата;кола)] [(PC е;е);(V е;съм)] [(PREP в;в)] [(A бургаския;бургаски)] 
+13 => [(N работи;работа);(V работи;работя)] [(A само;сам)] [(PREP на;на)] [(N газ;газ)] 
+15 => [(V моля;моля)] [(CONJ да;да);(PC да;да)] [(V звънят;звъня)] [(A само;сам)] [(A сериозно;сериозен);(ADV сериозно;сериозно)] [(U заинтересовани;заинтересовани)] 
+17 => [(A гражданска;граждански)] [(PREP до;до)] [(N март;март)] 
+18 => [(A няма;ням);(V няма;нямам)] [(N преглед;преглед)] [(U теглич;теглич)] 
+
+----------------------SYNTAX----------------------
+3 => [S [NP [ADJ [ADJ [A лош]] [ADJ [A външен]]] [NP [N вид]]]]
+     [S [NP [ADJ [A лош]] [NP [ADJ [A външен]] [NP [N вид]]]]]
+4 => [S [VC [V запазен]] [NP [ADJ [A кожен]] [NP [N салон]]]]
+     [S [NP [ADJ [ADJ [A запазен]] [ADJ [A кожен]]] [NP [N салон]]]]
+     [S [NP [ADJ [A запазен]] [NP [ADJ [A кожен]] [NP [N салон]]]]]
+     [S [NP [VC [V запазен]] [NP [ADJ [A кожен]] [NP [N салон]]]]]
+5 => [S [VC [PARTICLE [PARTICLE [PC не]] [PARTICLE [PC е]]] [VC [V карана]]] [NP [M [NU 3]] [NP [N години]]]]
+     [S [VC [PARTICLE [PC не]] [VC [PARTICLE [PC е]] [VC [V карана]]]] [NP [M [NU 3]] [NP [N години]]]]
+     [S [VC [PARTICLE [PC не]] [VC [V е]]] [NP [VC [V карана]] [NP [M [NU 3]] [NP [N години]]]]]
+     [S [NP [VC [PARTICLE [PARTICLE [PC не]] [PARTICLE [PC е]]] [VC [V карана]]] [NP [M [NU 3]] [NP [N години]]]]]
+     [S [NP [VC [PARTICLE [PC не]] [VC [PARTICLE [PC е]] [VC [V карана]]]] [NP [M [NU 3]] [NP [N години]]]]]
+6 => [S [NP [ADJ [ADJ [A добри]] [ADJ [A зимни]]] [NP [N гуми]]]]
+     [S [NP [ADJ [A добри]] [NP [ADJ [A зимни]] [NP [N гуми]]]]]
+7 => [S [VC [V има]] [NP [N документи]]]
+     [S [NP [VC [V има]] [NP [N документи]]]]
+8 => [S [VC [VC [V може]] [CONJ да] [VC [PARTICLE [PC се]] [VC [V прехвърли]]]]]
+10 => [S [NP [NP [NP [N цената]] [PARTICLE [PC не]]] [PARTICLE [PC се]]] [VC [V коментира]]]
+     [S [NP [NP [N цената]] [PARTICLE [PARTICLE [PC не]] [PARTICLE [PC се]]]] [VC [V коментира]]]
+     [S [NP [NP [N цената]] [PARTICLE [PC не]]] [VC [PARTICLE [PC се]] [VC [V коментира]]]]
+     [S [NP [N цената]] [VC [PARTICLE [PARTICLE [PC не]] [PARTICLE [PC се]]] [VC [V коментира]]]]
+     [S [NP [N цената]] [VC [PARTICLE [PC не]] [VC [PARTICLE [PC се]] [VC [V коментира]]]]]
+12 => [S [NP [N колата]] [VC [VC [V е]] [PP [PP [PREP в]] [ADJ [A бургаския]]]]]
+15 => [S [VC [VC [V моля]] [CONJ да] [VC [V звънят]]] [NP [ADJ [ADJ [A само]] [ADJ [A сериозно]]] [NP [U заинтересовани]]]]
+     [S [VC [VC [V моля]] [CONJ да] [VC [V звънят]]] [NP [ADJ [A само]] [NP [ADJ [A сериозно]] [NP [U заинтересовани]]]]]
+     [S [VC [VC [V моля]] [PARTICLE [PC да]]] [NP [VC [V звънят]] [NP [ADJ [ADJ [A само]] [ADJ [A сериозно]]] [NP [U заинтересовани]]]]]
+     [S [NP [VC [VC [V моля]] [CONJ да] [VC [V звънят]]] [NP [ADJ [ADJ [A само]] [ADJ [A сериозно]]] [NP [U заинтересовани]]]]]
+     [S [VC [V моля]] [NP [VC [PARTICLE [PC да]] [VC [V звънят]]] [NP [ADJ [ADJ [A само]] [ADJ [A сериозно]]] [NP [U заинтересовани]]]]]
+18 => [S [NP [ADJ [A няма]] [NP [N преглед]]] [VC [U теглич]]]
+     [S [NP [VC [V няма]] [NP [N преглед]]] [VC [U теглич]]]
+     [S [VC [V няма]] [NP [NP [N преглед]] [PRON [U теглич]]]]
+     [S [NP [NP [ADJ [A няма]] [NP [N преглед]]] [PRON [U теглич]]]]
+     [S [NP [NP [VC [V няма]] [NP [N преглед]]] [PRON [U теглич]]]]
+
+----------------------SYNTAX XML----------------------
+3 => <SG type='S'><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>лош </SE></SG><SG type='ADJ'><SE type='A'>външен </SE></SG></SG><SG type='NP'><SE type='N'>вид </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>лош </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>външен </SE></SG><SG type='NP'><SE type='N'>вид </SE></SG></SG></SG></SG>
+4 => <SG type='S'><SG type='VC'><SE type='V'>запазен </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>кожен </SE></SG><SG type='NP'><SE type='N'>салон </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>запазен </SE></SG><SG type='ADJ'><SE type='A'>кожен </SE></SG></SG><SG type='NP'><SE type='N'>салон </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>запазен </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>кожен </SE></SG><SG type='NP'><SE type='N'>салон </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SE type='V'>запазен </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>кожен </SE></SG><SG type='NP'><SE type='N'>салон </SE></SG></SG></SG></SG>
+5 => <SG type='S'><SG type='VC'><SG type='PARTICLE'><SG type='PARTICLE'><SE type='PC'>не </SE></SG><SG type='PARTICLE'><SE type='PC'>е </SE></SG></SG><SG type='VC'><SE type='V'>карана </SE></SG></SG><SG type='NP'><SG type='M'><SE type='NU'>3 </SE></SG><SG type='NP'><SE type='N'>години </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='PARTICLE'><SE type='PC'>не </SE></SG><SG type='VC'><SG type='PARTICLE'><SE type='PC'>е </SE></SG><SG type='VC'><SE type='V'>карана </SE></SG></SG></SG><SG type='NP'><SG type='M'><SE type='NU'>3 </SE></SG><SG type='NP'><SE type='N'>години </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='PARTICLE'><SE type='PC'>не </SE></SG><SG type='VC'><SE type='V'>е </SE></SG></SG><SG type='NP'><SG type='VC'><SE type='V'>карана </SE></SG><SG type='NP'><SG type='M'><SE type='NU'>3 </SE></SG><SG type='NP'><SE type='N'>години </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SG type='PARTICLE'><SG type='PARTICLE'><SE type='PC'>не </SE></SG><SG type='PARTICLE'><SE type='PC'>е </SE></SG></SG><SG type='VC'><SE type='V'>карана </SE></SG></SG><SG type='NP'><SG type='M'><SE type='NU'>3 </SE></SG><SG type='NP'><SE type='N'>години </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SG type='PARTICLE'><SE type='PC'>не </SE></SG><SG type='VC'><SG type='PARTICLE'><SE type='PC'>е </SE></SG><SG type='VC'><SE type='V'>карана </SE></SG></SG></SG><SG type='NP'><SG type='M'><SE type='NU'>3 </SE></SG><SG type='NP'><SE type='N'>години </SE></SG></SG></SG></SG>
+6 => <SG type='S'><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>добри </SE></SG><SG type='ADJ'><SE type='A'>зимни </SE></SG></SG><SG type='NP'><SE type='N'>гуми </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>добри </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>зимни </SE></SG><SG type='NP'><SE type='N'>гуми </SE></SG></SG></SG></SG>
+7 => <SG type='S'><SG type='VC'><SE type='V'>има </SE></SG><SG type='NP'><SE type='N'>документи </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SE type='V'>има </SE></SG><SG type='NP'><SE type='N'>документи </SE></SG></SG></SG>
+8 => <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>може </SE></SG><SE type='CONJ'>да </SE><SG type='VC'><SG type='PARTICLE'><SE type='PC'>се </SE></SG><SG type='VC'><SE type='V'>прехвърли </SE></SG></SG></SG></SG>
+10 => <SG type='S'><SG type='NP'><SG type='NP'><SG type='NP'><SE type='N'>цената </SE></SG><SG type='PARTICLE'><SE type='PC'>не </SE></SG></SG><SG type='PARTICLE'><SE type='PC'>се </SE></SG></SG><SG type='VC'><SE type='V'>коментира </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SE type='N'>цената </SE></SG><SG type='PARTICLE'><SG type='PARTICLE'><SE type='PC'>не </SE></SG><SG type='PARTICLE'><SE type='PC'>се </SE></SG></SG></SG><SG type='VC'><SE type='V'>коментира </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SE type='N'>цената </SE></SG><SG type='PARTICLE'><SE type='PC'>не </SE></SG></SG><SG type='VC'><SG type='PARTICLE'><SE type='PC'>се </SE></SG><SG type='VC'><SE type='V'>коментира </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SE type='N'>цената </SE></SG><SG type='VC'><SG type='PARTICLE'><SG type='PARTICLE'><SE type='PC'>не </SE></SG><SG type='PARTICLE'><SE type='PC'>се </SE></SG></SG><SG type='VC'><SE type='V'>коментира </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SE type='N'>цената </SE></SG><SG type='VC'><SG type='PARTICLE'><SE type='PC'>не </SE></SG><SG type='VC'><SG type='PARTICLE'><SE type='PC'>се </SE></SG><SG type='VC'><SE type='V'>коментира </SE></SG></SG></SG></SG>
+12 => <SG type='S'><SG type='NP'><SE type='N'>колата </SE></SG><SG type='VC'><SG type='VC'><SE type='V'>е </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>в </SE></SG><SG type='ADJ'><SE type='A'>бургаския </SE></SG></SG></SG></SG>
+15 => <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>моля </SE></SG><SE type='CONJ'>да </SE><SG type='VC'><SE type='V'>звънят </SE></SG></SG><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>само </SE></SG><SG type='ADJ'><SE type='A'>сериозно </SE></SG></SG><SG type='NP'><SE type='U'>заинтересовани </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>моля </SE></SG><SE type='CONJ'>да </SE><SG type='VC'><SE type='V'>звънят </SE></SG></SG><SG type='NP'><SG type='ADJ'><SE type='A'>само </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>сериозно </SE></SG><SG type='NP'><SE type='U'>заинтересовани </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>моля </SE></SG><SG type='PARTICLE'><SE type='PC'>да </SE></SG></SG><SG type='NP'><SG type='VC'><SE type='V'>звънят </SE></SG><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>само </SE></SG><SG type='ADJ'><SE type='A'>сериозно </SE></SG></SG><SG type='NP'><SE type='U'>заинтересовани </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SG type='VC'><SE type='V'>моля </SE></SG><SE type='CONJ'>да </SE><SG type='VC'><SE type='V'>звънят </SE></SG></SG><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>само </SE></SG><SG type='ADJ'><SE type='A'>сериозно </SE></SG></SG><SG type='NP'><SE type='U'>заинтересовани </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SE type='V'>моля </SE></SG><SG type='NP'><SG type='VC'><SG type='PARTICLE'><SE type='PC'>да </SE></SG><SG type='VC'><SE type='V'>звънят </SE></SG></SG><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>само </SE></SG><SG type='ADJ'><SE type='A'>сериозно </SE></SG></SG><SG type='NP'><SE type='U'>заинтересовани </SE></SG></SG></SG></SG>
+18 => <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>няма </SE></SG><SG type='NP'><SE type='N'>преглед </SE></SG></SG><SG type='VC'><SE type='U'>теглич </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SE type='V'>няма </SE></SG><SG type='NP'><SE type='N'>преглед </SE></SG></SG><SG type='VC'><SE type='U'>теглич </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SE type='V'>няма </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>преглед </SE></SG><SG type='PRON'><SE type='U'>теглич </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='ADJ'><SE type='A'>няма </SE></SG><SG type='NP'><SE type='N'>преглед </SE></SG></SG><SG type='PRON'><SE type='U'>теглич </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='VC'><SE type='V'>няма </SE></SG><SG type='NP'><SE type='N'>преглед </SE></SG></SG><SG type='PRON'><SE type='U'>теглич </SE></SG></SG></SG>
+
+----------------------TEXT----------------------
+Нов внос отлично състояние, 4x4, много запазен салон, хубави зимни гуми,сменени ремъци и ролки!!забележки по задната врата снимана е. Възможен бартер за по евтин автомобил! Коментар на цената на място при оглед! !
+
+----------------------FORMATED TEXT----------------------
+Нов внос отлично състояние. 4x4. много запазен салон. хубави зимни гуми. сменени ремъци и ролки! забележки по задната врата снимана е. Възможен бартер за по евтин автомобил! Коментар на цената на място при оглед!
+
+----------------------SENTANCES----------------------
+0 => Нов внос отлично състояние. 4x4.
+1 => много запазен салон.
+2 => хубави зимни гуми.
+3 => сменени ремъци и ролки!
+4 => забележки по задната врата снимана е.
+5 => Възможен бартер за по евтин автомобил!
+6 => Коментар на цената на място при оглед!
+
+----------------------TOKENIZATION----------------------
+0 => (Нов; внос; отлично; състояние; 4x4)
+1 => (много; запазен; салон)
+2 => (хубави; зимни; гуми)
+3 => (сменени; ремъци; и; ролки)
+4 => (забележки; по; задната; врата; снимана; е)
+5 => (Възможен; бартер; за; по; евтин; автомобил)
+6 => (Коментар; на; цената; на; място; при; оглед)
+
+----------------------MORPHOLOGY----------------------
+0 => [(A нов;нов)] [(N внос;внос)] [(A отлично;отличен)] [(N състояние;състояние)] [(U 4x4;4x4)] 
+1 => [(ADV много;много)] [(A запазен;запазен);(V запазен;запазя)] [(N салон;салон)] 
+2 => [(A хубави;хубав)] [(A зимни;зимен)] [(N гуми;гума)] 
+3 => [(V сменени;сменя)] [(U ремъци;ремъци)] [(CONJ и;и)] [(N геоложките;геоложка);(A геоложките;геоложки)] 
+4 => [(N забележки;забележка)] [(PC по;по);(PREP по;по)] [(A задната;заден)] [(N врата;врат);(N врата;врата)] [(V снимана;снимам)] [(PC е;е);(V е;съм)] 
+5 => [(A възможен;възможен)] [(U бартер;бартер)] [(PREP за;за)] [(PC по;по);(PREP по;по)] [(A евтин;евтин)] [(N автомобил;автомобил)] 
+6 => [(N коментар;коментар)] [(PREP на;на)] [(N цената;цена)] [(PREP на;на)] [(N място;място)] [(PREP при;при)] [(N оглед;оглед)] 
+
+----------------------SYNTAX----------------------
+1 => [S [VC [ADVERB [ADV много]] [VC [V запазен]]] [NP [N салон]]]
+     [S [NP [VC [ADVERB [ADV много]] [VC [V запазен]]] [NP [N салон]]]]
+2 => [S [NP [ADJ [ADJ [A хубави]] [ADJ [A зимни]]] [NP [N гуми]]]]
+     [S [NP [ADJ [A хубави]] [NP [ADJ [A зимни]] [NP [N гуми]]]]]
+3 => [S [VC [V сменени]] [NP [NP [U ремъци]] [CONJ и] [NP [N геоложките]]]]
+     [S [NP [NP [VC [V сменени]] [NP [U ремъци]]] [CONJ и] [NP [N геоложките]]]]
+     [S [NP [VC [V сменени]] [NP [NP [U ремъци]] [CONJ и] [NP [N геоложките]]]]]
+5 => [S [NP [ADJ [A възможен]] [NP [VC [VC [VC [U бартер]] [PP [PREP за]]] [PP [PP [PREP по]] [ADJ [A евтин]]]] [NP [N автомобил]]]]]
+     [S [NP [ADJ [A възможен]] [NP [VC [VC [U бартер]] [PP [PP [PP [PREP за]] [PP [PREP по]]] [ADJ [A евтин]]]] [NP [N автомобил]]]]]
+     [S [NP [ADJ [A възможен]] [NP [VC [VC [U бартер]] [PP [PP [PREP за]] [ADJ [PARTICLE [PC по]] [ADJ [A евтин]]]]] [NP [N автомобил]]]]]
+     [S [NP [ADJ [A възможен]] [NP [VC [VC [U бартер]] [PP [PP [PREP за]] [PP [PP [PREP по]] [ADJ [A евтин]]]]] [NP [N автомобил]]]]]
+     [S [NP [ADJ [A възможен]] [NP [VC [VC [VC [U бартер]] [PP [PREP за]]] [PARTICLE [PC по]]] [NP [ADJ [A евтин]] [NP [N автомобил]]]]]]
+
+----------------------SYNTAX XML----------------------
+1 => <SG type='S'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>много </SE></SG><SG type='VC'><SE type='V'>запазен </SE></SG></SG><SG type='NP'><SE type='N'>салон </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>много </SE></SG><SG type='VC'><SE type='V'>запазен </SE></SG></SG><SG type='NP'><SE type='N'>салон </SE></SG></SG></SG>
+2 => <SG type='S'><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>хубави </SE></SG><SG type='ADJ'><SE type='A'>зимни </SE></SG></SG><SG type='NP'><SE type='N'>гуми </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>хубави </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>зимни </SE></SG><SG type='NP'><SE type='N'>гуми </SE></SG></SG></SG></SG>
+3 => <SG type='S'><SG type='VC'><SE type='V'>сменени </SE></SG><SG type='NP'><SG type='NP'><SE type='U'>ремъци </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SE type='N'>геоложките </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='VC'><SE type='V'>сменени </SE></SG><SG type='NP'><SE type='U'>ремъци </SE></SG></SG><SE type='CONJ'>и </SE><SG type='NP'><SE type='N'>геоложките </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SE type='V'>сменени </SE></SG><SG type='NP'><SG type='NP'><SE type='U'>ремъци </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SE type='N'>геоложките </SE></SG></SG></SG></SG>
+5 => <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>възможен </SE></SG><SG type='NP'><SG type='VC'><SG type='VC'><SG type='VC'><SE type='U'>бартер </SE></SG><SG type='PP'><SE type='PREP'>за </SE></SG></SG><SG type='PP'><SG type='PP'><SE type='PREP'>по </SE></SG><SG type='ADJ'><SE type='A'>евтин </SE></SG></SG></SG><SG type='NP'><SE type='N'>автомобил </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>възможен </SE></SG><SG type='NP'><SG type='VC'><SG type='VC'><SE type='U'>бартер </SE></SG><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>за </SE></SG><SG type='PP'><SE type='PREP'>по </SE></SG></SG><SG type='ADJ'><SE type='A'>евтин </SE></SG></SG></SG><SG type='NP'><SE type='N'>автомобил </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>възможен </SE></SG><SG type='NP'><SG type='VC'><SG type='VC'><SE type='U'>бартер </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>за </SE></SG><SG type='ADJ'><SG type='PARTICLE'><SE type='PC'>по </SE></SG><SG type='ADJ'><SE type='A'>евтин </SE></SG></SG></SG></SG><SG type='NP'><SE type='N'>автомобил </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>възможен </SE></SG><SG type='NP'><SG type='VC'><SG type='VC'><SE type='U'>бартер </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>за </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>по </SE></SG><SG type='ADJ'><SE type='A'>евтин </SE></SG></SG></SG></SG><SG type='NP'><SE type='N'>автомобил </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>възможен </SE></SG><SG type='NP'><SG type='VC'><SG type='VC'><SG type='VC'><SE type='U'>бартер </SE></SG><SG type='PP'><SE type='PREP'>за </SE></SG></SG><SG type='PARTICLE'><SE type='PC'>по </SE></SG></SG><SG type='NP'><SG type='ADJ'><SE type='A'>евтин </SE></SG><SG type='NP'><SE type='N'>автомобил </SE></SG></SG></SG></SG></SG>
+
+----------------------TEXT----------------------
+Без прехвърляне
+
+----------------------FORMATED TEXT----------------------
+Без прехвърляне
+
+----------------------SENTANCES----------------------
+0 => Без прехвърляне
+
+----------------------TOKENIZATION----------------------
+0 => (Без; прехвърляне)
+
+----------------------MORPHOLOGY----------------------
+0 => [(PREP без;без)] [(V прехвърляне;прехвърлям);(N прехвърляне;прехвърляне)] 
+
+----------------------SYNTAX----------------------
+0 => [S [PP [PREP без]] [VC [V прехвърляне]]]
+
+----------------------SYNTAX XML----------------------
+0 => <SG type='S'><SG type='PP'><SE type='PREP'>без </SE></SG><SG type='VC'><SE type='V'>прехвърляне </SE></SG></SG>
+
+----------------------TEXT----------------------
+Колата е във перфектно състояние,Напълно Обслужена за Зимата,Нови зимни гуми,Нов акумулатор,Сменено масло и Филтър Кастрол Магнат.Всички такси платени.Уникален Двигател със Верига не с ангренажен ремък наи здравият мотор на Опел.Изключително икономична 4,5на100км.Перфектно Окачване,Голям малък талон. само за Ценители.Качваш се И само Караш.
+
+----------------------FORMATED TEXT----------------------
+Колата е във перфектно състояние. Напълно Обслужена за Зимата. Нови зимни гуми. Нов акумулатор. Сменено масло и Филтър Кастрол Магнат. Всички такси платени. Уникален Двигател със Верига не с ангренажен ремък наи здравият мотор на Опел. Изключително икономична 4. 5на100км. Перфектно Окачване. Голям малък талон. само за Ценители. Качваш се И само Караш.
+
+----------------------SENTANCES----------------------
+0 => Колата е във перфектно състояние.
+1 => Напълно Обслужена за Зимата.
+2 => Нови зимни гуми.
+3 => Нов акумулатор.
+4 => Сменено масло и Филтър Кастрол Магнат.
+5 => Всички такси платени.
+6 => Уникален Двигател със Верига не с ангренажен ремък наи здравият мотор на Опел.
+7 => Изключително икономична 4. 5на100км.
+8 => Перфектно Окачване.
+9 => Голям малък талон.
+10 => само за Ценители.
+11 => Качваш се И само Караш.
+
+----------------------TOKENIZATION----------------------
+0 => (Колата; е; във; перфектно; състояние)
+1 => (Напълно; Обслужена; за; Зимата)
+2 => (Нови; зимни; гуми)
+3 => (Нов; акумулатор)
+4 => (Сменено; масло; и; Филтър; Кастрол; Магнат)
+5 => (Всички; такси; платени)
+6 => (Уникален; Двигател; със; Верига; не; с; ангренажен; ремък; наи; здравият; мотор; на; Опел)
+7 => (Изключително; икономична; 4; 5на100км)
+8 => (Перфектно; Окачване)
+9 => (Голям; малък; талон)
+10 => (само; за; Ценители)
+11 => (Качваш; се; И; само; Караш)
+
+----------------------MORPHOLOGY----------------------
+0 => [(N колата;кола)] [(PC е;е);(V е;съм)] [(PREP във;във)] [(A перфектно;перфектен);(ADV перфектно;перфектно)] [(N състояние;състояние)] 
+1 => [(ADV напълно;напълно)] [(U обслужена;обслужена)] [(PREP за;за)] [(N зимата;зима)] 
+2 => [(A нови;нов)] [(A зимни;зимен)] [(N гуми;гума)] 
+3 => [(A нов;нов)] [(N акумулатор;акумулатор)] 
+4 => [(V сменено;сменя)] [(N масло;масло)] [(CONJ и;и)] [(CONJ било;било);(N било;било);(V било;бия);(V било;бъда);(V било;съм)] [(U кастрол;кастрол)] [(N магнат;магнат)] 
+5 => [(U всички;всички)] [(N такси;такса);(N такси;такси)] [(A платени;платен);(V платени;платя)] 
+7 => [(A изключително;изключителен);(ADV изключително;изключително)] [(U икономична;икономична)] [(NU 4;4)] [(U 5на100км;5на100км)] 
+8 => [(A перфектно;перфектен);(ADV перфектно;перфектно)] [(N окачване;окачване)] 
+9 => [(A голям;голям)] [(A малък;малък)] [(N талон;талон)] 
+10 => [(A само;сам)] [(PREP за;за)] [(N ценители;ценител)] 
+11 => [(V качваш;качвам)] [(PC се;се)] [(CONJ и;и)] [(A само;сам)] [(V караш;карам)] 
+
+----------------------SYNTAX----------------------
+0 => [S [NP [N колата]] [VC [VC [V е]] [PP [PP [PP [PREP във]] [ADJ [A перфектно]]] [NP [N състояние]]]]]
+     [S [NP [N колата]] [VC [VC [V е]] [PP [PP [PP [PREP във]] [ADVERB [ADV перфектно]]] [NP [N състояние]]]]]
+     [S [NP [N колата]] [VC [VC [V е]] [PP [PP [PREP във]] [NP [ADJ [A перфектно]] [NP [N състояние]]]]]]
+1 => [S [VC [VC [ADVERB [ADV напълно]] [VC [U обслужена]]] [PP [PREP за]]] [NP [N зимата]]]
+     [S [VC [ADVERB [ADV напълно]] [VC [VC [U обслужена]] [PP [PREP за]]]] [NP [N зимата]]]
+     [S [VC [ADVERB [ADV напълно]] [VC [U обслужена]]] [PP [PP [PREP за]] [NP [N зимата]]]]
+     [S [NP [VC [VC [ADVERB [ADV напълно]] [VC [U обслужена]]] [PP [PREP за]]] [NP [N зимата]]]]
+     [S [NP [VC [ADVERB [ADV напълно]] [VC [VC [U обслужена]] [PP [PREP за]]]] [NP [N зимата]]]]
+2 => [S [NP [ADJ [ADJ [A нови]] [ADJ [A зимни]]] [NP [N гуми]]]]
+     [S [NP [ADJ [A нови]] [NP [ADJ [A зимни]] [NP [N гуми]]]]]
+3 => [S [NP [ADJ [A нов]] [NP [N акумулатор]]]]
+4 => [S [VC [V сменено]] [NP [NP [N масло]] [CONJ и] [NP [VC [V било] [PRON [U кастрол]]] [NP [N магнат]]]]]
+     [S [NP [NP [VC [V сменено]] [NP [N масло]]] [CONJ и] [NP [VC [V било] [PRON [U кастрол]]] [NP [N магнат]]]]]
+     [S [VC [V сменено]] [NP [NP [N масло]] [CONJ и] [NP [VC [V било] [PRON [U кастрол]]] [NP [N магнат]]]]]
+     [S [NP [NP [VC [V сменено]] [NP [N масло]]] [CONJ и] [NP [VC [V било] [PRON [U кастрол]]] [NP [N магнат]]]]]
+     [S [VC [V сменено]] [NP [NP [N масло]] [CONJ и] [NP [VC [V било] [PRON [U кастрол]]] [NP [N магнат]]]]]
+5 => [S [VC [U всички]] [NP [NP [N такси]] [ADJ [A платени]]]]
+     [S [NP [NP [PRON [U всички]] [NP [N такси]]] [ADJ [A платени]]]]
+     [S [NP [NP [PARTICLE [U всички]] [NP [N такси]]] [ADJ [A платени]]]]
+     [S [NP [NP [VC [U всички]] [NP [N такси]]] [ADJ [A платени]]]]
+     [S [NP [NP [ADJ [U всички]] [NP [N такси]]] [ADJ [A платени]]]]
+7 => [S [VC [ADVERB [ADV изключително]] [VC [U икономична]]] [NP [M [NU 4]] [NP [U 5на100км]]]]
+     [S [NP [ADJ [ADJ [A изключително]] [PARTICLE [U икономична]]] [NP [M [NU 4]] [NP [U 5на100км]]]]]
+     [S [NP [VC [ADVERB [ADV изключително]] [VC [U икономична]]] [NP [M [NU 4]] [NP [U 5на100км]]]]]
+     [S [NP [ADJ [ADJ [A изключително]] [ADJ [U икономична]]] [NP [M [NU 4]] [NP [U 5на100км]]]]]
+     [S [NP [ADJ [A изключително]] [NP [M [PARTICLE [U икономична]] [M [NU 4]]] [NP [U 5на100км]]]]]
+8 => [S [NP [ADJ [A перфектно]] [NP [N окачване]]]]
+9 => [S [NP [ADJ [ADJ [A голям]] [ADJ [A малък]]] [NP [N талон]]]]
+     [S [NP [ADJ [A голям]] [NP [ADJ [A малък]] [NP [N талон]]]]]
+
+----------------------SYNTAX XML----------------------
+0 => <SG type='S'><SG type='NP'><SE type='N'>колата </SE></SG><SG type='VC'><SG type='VC'><SE type='V'>е </SE></SG><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>във </SE></SG><SG type='ADJ'><SE type='A'>перфектно </SE></SG></SG><SG type='NP'><SE type='N'>състояние </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SE type='N'>колата </SE></SG><SG type='VC'><SG type='VC'><SE type='V'>е </SE></SG><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>във </SE></SG><SG type='ADVERB'><SE type='ADV'>перфектно </SE></SG></SG><SG type='NP'><SE type='N'>състояние </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SE type='N'>колата </SE></SG><SG type='VC'><SG type='VC'><SE type='V'>е </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>във </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>перфектно </SE></SG><SG type='NP'><SE type='N'>състояние </SE></SG></SG></SG></SG></SG>
+1 => <SG type='S'><SG type='VC'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>напълно </SE></SG><SG type='VC'><SE type='U'>обслужена </SE></SG></SG><SG type='PP'><SE type='PREP'>за </SE></SG></SG><SG type='NP'><SE type='N'>зимата </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>напълно </SE></SG><SG type='VC'><SG type='VC'><SE type='U'>обслужена </SE></SG><SG type='PP'><SE type='PREP'>за </SE></SG></SG></SG><SG type='NP'><SE type='N'>зимата </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>напълно </SE></SG><SG type='VC'><SE type='U'>обслужена </SE></SG></SG><SG type='PP'><SG type='PP'><SE type='PREP'>за </SE></SG><SG type='NP'><SE type='N'>зимата </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>напълно </SE></SG><SG type='VC'><SE type='U'>обслужена </SE></SG></SG><SG type='PP'><SE type='PREP'>за </SE></SG></SG><SG type='NP'><SE type='N'>зимата </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>напълно </SE></SG><SG type='VC'><SG type='VC'><SE type='U'>обслужена </SE></SG><SG type='PP'><SE type='PREP'>за </SE></SG></SG></SG><SG type='NP'><SE type='N'>зимата </SE></SG></SG></SG>
+2 => <SG type='S'><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>нови </SE></SG><SG type='ADJ'><SE type='A'>зимни </SE></SG></SG><SG type='NP'><SE type='N'>гуми </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>нови </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>зимни </SE></SG><SG type='NP'><SE type='N'>гуми </SE></SG></SG></SG></SG>
+3 => <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>нов </SE></SG><SG type='NP'><SE type='N'>акумулатор </SE></SG></SG></SG>
+4 => <SG type='S'><SG type='VC'><SE type='V'>сменено </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>масло </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='VC'><SE type='V'>било </SE><SG type='PRON'><SE type='U'>кастрол </SE></SG></SG><SG type='NP'><SE type='N'>магнат </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='VC'><SE type='V'>сменено </SE></SG><SG type='NP'><SE type='N'>масло </SE></SG></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='VC'><SE type='V'>било </SE><SG type='PRON'><SE type='U'>кастрол </SE></SG></SG><SG type='NP'><SE type='N'>магнат </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SE type='V'>сменено </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>масло </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='VC'><SE type='V'>било </SE><SG type='PRON'><SE type='U'>кастрол </SE></SG></SG><SG type='NP'><SE type='N'>магнат </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='VC'><SE type='V'>сменено </SE></SG><SG type='NP'><SE type='N'>масло </SE></SG></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='VC'><SE type='V'>било </SE><SG type='PRON'><SE type='U'>кастрол </SE></SG></SG><SG type='NP'><SE type='N'>магнат </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SE type='V'>сменено </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>масло </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='VC'><SE type='V'>било </SE><SG type='PRON'><SE type='U'>кастрол </SE></SG></SG><SG type='NP'><SE type='N'>магнат </SE></SG></SG></SG></SG>
+5 => <SG type='S'><SG type='VC'><SE type='U'>всички </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>такси </SE></SG><SG type='ADJ'><SE type='A'>платени </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='PRON'><SE type='U'>всички </SE></SG><SG type='NP'><SE type='N'>такси </SE></SG></SG><SG type='ADJ'><SE type='A'>платени </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='PARTICLE'><SE type='U'>всички </SE></SG><SG type='NP'><SE type='N'>такси </SE></SG></SG><SG type='ADJ'><SE type='A'>платени </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='VC'><SE type='U'>всички </SE></SG><SG type='NP'><SE type='N'>такси </SE></SG></SG><SG type='ADJ'><SE type='A'>платени </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='ADJ'><SE type='U'>всички </SE></SG><SG type='NP'><SE type='N'>такси </SE></SG></SG><SG type='ADJ'><SE type='A'>платени </SE></SG></SG></SG>
+7 => <SG type='S'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>изключително </SE></SG><SG type='VC'><SE type='U'>икономична </SE></SG></SG><SG type='NP'><SG type='M'><SE type='NU'>4 </SE></SG><SG type='NP'><SE type='U'>5на100км </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>изключително </SE></SG><SG type='PARTICLE'><SE type='U'>икономична </SE></SG></SG><SG type='NP'><SG type='M'><SE type='NU'>4 </SE></SG><SG type='NP'><SE type='U'>5на100км </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>изключително </SE></SG><SG type='VC'><SE type='U'>икономична </SE></SG></SG><SG type='NP'><SG type='M'><SE type='NU'>4 </SE></SG><SG type='NP'><SE type='U'>5на100км </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>изключително </SE></SG><SG type='ADJ'><SE type='U'>икономична </SE></SG></SG><SG type='NP'><SG type='M'><SE type='NU'>4 </SE></SG><SG type='NP'><SE type='U'>5на100км </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>изключително </SE></SG><SG type='NP'><SG type='M'><SG type='PARTICLE'><SE type='U'>икономична </SE></SG><SG type='M'><SE type='NU'>4 </SE></SG></SG><SG type='NP'><SE type='U'>5на100км </SE></SG></SG></SG></SG>
+8 => <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>перфектно </SE></SG><SG type='NP'><SE type='N'>окачване </SE></SG></SG></SG>
+9 => <SG type='S'><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>голям </SE></SG><SG type='ADJ'><SE type='A'>малък </SE></SG></SG><SG type='NP'><SE type='N'>талон </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>голям </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>малък </SE></SG><SG type='NP'><SE type='N'>талон </SE></SG></SG></SG></SG>
+
+----------------------TEXT----------------------
+Нов внос от Германия. Всичко по нея е в безупречно състояние и работи !
+
+----------------------FORMATED TEXT----------------------
+Нов внос от Германия. Всичко по нея е в безупречно състояние и работи!
+
+----------------------SENTANCES----------------------
+0 => Нов внос от Германия.
+1 => Всичко по нея е в безупречно състояние и работи!
+
+----------------------TOKENIZATION----------------------
+0 => (Нов; внос; от; Германия)
+1 => (Всичко; по; нея; е; в; безупречно; състояние; и; работи)
+
+----------------------MORPHOLOGY----------------------
+0 => [(A нов;нов)] [(N внос;внос)] [(PREP от;от)] [(U германия;германия)] 
+1 => [(U всичко;всичко)] [(PC по;по);(PREP по;по)] [(PRO нея;тя)] [(PC е;е);(V е;съм)] [(PREP в;в)] [(A безупречно;безупречен);(ADV безупречно;безупречно)] [(N състояние;състояние)] [(CONJ и;и)] [(N работи;работа);(V работи;работя)] 
+
+----------------------SYNTAX----------------------
+1 => [S [VC [VC [VC [VC [U всичко]] [PP [PP [PREP по]] [PRON [PRO нея]]]] [PARTICLE [PC е]]] [PP [PP [PREP в]] [ADJ [A безупречно]]]] [NP [NP [N състояние]] [CONJ и] [NP [N работи]]]]
+     [S [VC [VC [PARTICLE [PARTICLE [U всичко]] [PARTICLE [PC по]]] [VC [PRON [PRO нея]] [VC [V е]]]] [PP [PP [PREP в]] [ADJ [A безупречно]]]] [NP [NP [N състояние]] [CONJ и] [NP [N работи]]]]
+     [S [VC [VC [ADVERB [ADVERB [U всичко]] [PARTICLE [PC по]]] [VC [PRON [PRO нея]] [VC [V е]]]] [PP [PP [PREP в]] [ADJ [A безупречно]]]] [NP [NP [N състояние]] [CONJ и] [NP [N работи]]]]
+     [S [VC [VC [PRON [U всичко]] [VC [PARTICLE [PC по]] [VC [PRON [PRO нея]] [VC [V е]]]]] [PP [PP [PREP в]] [ADJ [A безупречно]]]] [NP [NP [N състояние]] [CONJ и] [NP [N работи]]]]
+     [S [VC [VC [PARTICLE [U всичко]] [VC [PARTICLE [PC по]] [VC [PRON [PRO нея]] [VC [V е]]]]] [PP [PP [PREP в]] [ADJ [A безупречно]]]] [NP [NP [N състояние]] [CONJ и] [NP [N работи]]]]
+
+----------------------SYNTAX XML----------------------
+1 => <SG type='S'><SG type='VC'><SG type='VC'><SG type='VC'><SG type='VC'><SE type='U'>всичко </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>по </SE></SG><SG type='PRON'><SE type='PRO'>нея </SE></SG></SG></SG><SG type='PARTICLE'><SE type='PC'>е </SE></SG></SG><SG type='PP'><SG type='PP'><SE type='PREP'>в </SE></SG><SG type='ADJ'><SE type='A'>безупречно </SE></SG></SG></SG><SG type='NP'><SG type='NP'><SE type='N'>състояние </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SE type='N'>работи </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SG type='PARTICLE'><SG type='PARTICLE'><SE type='U'>всичко </SE></SG><SG type='PARTICLE'><SE type='PC'>по </SE></SG></SG><SG type='VC'><SG type='PRON'><SE type='PRO'>нея </SE></SG><SG type='VC'><SE type='V'>е </SE></SG></SG></SG><SG type='PP'><SG type='PP'><SE type='PREP'>в </SE></SG><SG type='ADJ'><SE type='A'>безупречно </SE></SG></SG></SG><SG type='NP'><SG type='NP'><SE type='N'>състояние </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SE type='N'>работи </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SG type='ADVERB'><SG type='ADVERB'><SE type='U'>всичко </SE></SG><SG type='PARTICLE'><SE type='PC'>по </SE></SG></SG><SG type='VC'><SG type='PRON'><SE type='PRO'>нея </SE></SG><SG type='VC'><SE type='V'>е </SE></SG></SG></SG><SG type='PP'><SG type='PP'><SE type='PREP'>в </SE></SG><SG type='ADJ'><SE type='A'>безупречно </SE></SG></SG></SG><SG type='NP'><SG type='NP'><SE type='N'>състояние </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SE type='N'>работи </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SG type='PRON'><SE type='U'>всичко </SE></SG><SG type='VC'><SG type='PARTICLE'><SE type='PC'>по </SE></SG><SG type='VC'><SG type='PRON'><SE type='PRO'>нея </SE></SG><SG type='VC'><SE type='V'>е </SE></SG></SG></SG></SG><SG type='PP'><SG type='PP'><SE type='PREP'>в </SE></SG><SG type='ADJ'><SE type='A'>безупречно </SE></SG></SG></SG><SG type='NP'><SG type='NP'><SE type='N'>състояние </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SE type='N'>работи </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SG type='PARTICLE'><SE type='U'>всичко </SE></SG><SG type='VC'><SG type='PARTICLE'><SE type='PC'>по </SE></SG><SG type='VC'><SG type='PRON'><SE type='PRO'>нея </SE></SG><SG type='VC'><SE type='V'>е </SE></SG></SG></SG></SG><SG type='PP'><SG type='PP'><SE type='PREP'>в </SE></SG><SG type='ADJ'><SE type='A'>безупречно </SE></SG></SG></SG><SG type='NP'><SG type='NP'><SE type='N'>състояние </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SE type='N'>работи </SE></SG></SG></SG>
+
+----------------------TEXT----------------------
+Нов внос северна Италия,отлично състояние,реални километри,няма удари и пребоядисвани детайли,катализатора е на мястото си.
+
+----------------------FORMATED TEXT----------------------
+Нов внос северна Италия. отлично състояние. реални километри. няма удари и пребоядисвани детайли. катализатора е на мястото си.
+
+----------------------SENTANCES----------------------
+0 => Нов внос северна Италия.
+1 => отлично състояние.
+2 => реални километри.
+3 => няма удари и пребоядисвани детайли.
+4 => катализатора е на мястото си.
+
+----------------------TOKENIZATION----------------------
+0 => (Нов; внос; северна; Италия)
+1 => (отлично; състояние)
+2 => (реални; километри)
+3 => (няма; удари; и; пребоядисвани; детайли)
+4 => (катализатора; е; на; мястото; си)
+
+----------------------MORPHOLOGY----------------------
+0 => [(A нов;нов)] [(N внос;внос)] [(A северна;северен)] [(U италия;италия)] 
+1 => [(A отлично;отличен)] [(N състояние;състояние)] 
+2 => [(A реални;реален)] [(N километри;километър)] 
+3 => [(A няма;ням);(V няма;нямам)] [(N удари;удар);(V удари;ударя)] [(CONJ и;и)] [(V пребиваването;пребивавам);(N пребиваването;пребиваване)] [(N детайли;детайл)] 
+4 => [(U катализатора;катализатора)] [(PC е;е);(V е;съм)] [(PREP на;на)] [(N мястото;място)] [(PC си;си);(V си;съм)] 
+
+----------------------SYNTAX----------------------
+0 => [S [NP [NP [ADJ [A нов]] [NP [N внос]]] [ADJ [A северна]]] [VC [U италия]]]
+     [S [NP [ADJ [A нов]] [NP [NP [N внос]] [ADJ [A северна]]]] [VC [U италия]]]
+     [S [NP [NP [NP [ADJ [A нов]] [NP [N внос]]] [ADJ [A северна]]] [PRON [U италия]]]]
+     [S [NP [NP [ADJ [A нов]] [NP [NP [N внос]] [ADJ [A северна]]]] [PRON [U италия]]]]
+     [S [NP [NP [NP [ADJ [A нов]] [NP [N внос]]] [ADJ [A северна]]] [PARTICLE [U италия]]]]
+1 => [S [NP [ADJ [A отлично]] [NP [N състояние]]]]
+2 => [S [NP [ADJ [A реални]] [NP [N километри]]]]
+3 => [S [VC [V няма]] [NP [VC [VC [V удари]] [CONJ и] [VC [V пребиваването]]] [NP [N детайли]]]]
+     [S [VC [V няма]] [NP [NP [N удари]] [CONJ и] [NP [VC [V пребиваването]] [NP [N детайли]]]]]
+     [S [NP [NP [ADJ [A няма]] [NP [N удари]]] [CONJ и] [NP [VC [V пребиваването]] [NP [N детайли]]]]]
+     [S [NP [NP [VC [V няма]] [NP [N удари]]] [CONJ и] [NP [VC [V пребиваването]] [NP [N детайли]]]]]
+     [S [NP [ADJ [A няма]] [NP [VC [VC [V удари]] [CONJ и] [VC [V пребиваването]]] [NP [N детайли]]]]]
+4 => [S [VC [VC [VC [U катализатора]] [PARTICLE [PC е]]] [PP [PREP на]]] [NP [NP [N мястото]] [PARTICLE [PC си]]]]
+     [S [VC [VC [PRON [U катализатора]] [VC [V е]]] [PP [PREP на]]] [NP [NP [N мястото]] [PARTICLE [PC си]]]]
+     [S [VC [VC [PARTICLE [U катализатора]] [VC [V е]]] [PP [PREP на]]] [NP [NP [N мястото]] [PARTICLE [PC си]]]]
+     [S [VC [VC [ADVERB [U катализатора]] [VC [V е]]] [PP [PREP на]]] [NP [NP [N мястото]] [PARTICLE [PC си]]]]
+     [S [VC [PRON [U катализатора]] [VC [VC [V е]] [PP [PREP на]]]] [NP [NP [N мястото]] [PARTICLE [PC си]]]]
+
+----------------------SYNTAX XML----------------------
+0 => <SG type='S'><SG type='NP'><SG type='NP'><SG type='ADJ'><SE type='A'>нов </SE></SG><SG type='NP'><SE type='N'>внос </SE></SG></SG><SG type='ADJ'><SE type='A'>северна </SE></SG></SG><SG type='VC'><SE type='U'>италия </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>нов </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>внос </SE></SG><SG type='ADJ'><SE type='A'>северна </SE></SG></SG></SG><SG type='VC'><SE type='U'>италия </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='NP'><SG type='ADJ'><SE type='A'>нов </SE></SG><SG type='NP'><SE type='N'>внос </SE></SG></SG><SG type='ADJ'><SE type='A'>северна </SE></SG></SG><SG type='PRON'><SE type='U'>италия </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='ADJ'><SE type='A'>нов </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>внос </SE></SG><SG type='ADJ'><SE type='A'>северна </SE></SG></SG></SG><SG type='PRON'><SE type='U'>италия </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='NP'><SG type='ADJ'><SE type='A'>нов </SE></SG><SG type='NP'><SE type='N'>внос </SE></SG></SG><SG type='ADJ'><SE type='A'>северна </SE></SG></SG><SG type='PARTICLE'><SE type='U'>италия </SE></SG></SG></SG>
+1 => <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>отлично </SE></SG><SG type='NP'><SE type='N'>състояние </SE></SG></SG></SG>
+2 => <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>реални </SE></SG><SG type='NP'><SE type='N'>километри </SE></SG></SG></SG>
+3 => <SG type='S'><SG type='VC'><SE type='V'>няма </SE></SG><SG type='NP'><SG type='VC'><SG type='VC'><SE type='V'>удари </SE></SG><SE type='CONJ'>и </SE><SG type='VC'><SE type='V'>пребиваването </SE></SG></SG><SG type='NP'><SE type='N'>детайли </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SE type='V'>няма </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>удари </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='VC'><SE type='V'>пребиваването </SE></SG><SG type='NP'><SE type='N'>детайли </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='ADJ'><SE type='A'>няма </SE></SG><SG type='NP'><SE type='N'>удари </SE></SG></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='VC'><SE type='V'>пребиваването </SE></SG><SG type='NP'><SE type='N'>детайли </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='VC'><SE type='V'>няма </SE></SG><SG type='NP'><SE type='N'>удари </SE></SG></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='VC'><SE type='V'>пребиваването </SE></SG><SG type='NP'><SE type='N'>детайли </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>няма </SE></SG><SG type='NP'><SG type='VC'><SG type='VC'><SE type='V'>удари </SE></SG><SE type='CONJ'>и </SE><SG type='VC'><SE type='V'>пребиваването </SE></SG></SG><SG type='NP'><SE type='N'>детайли </SE></SG></SG></SG></SG>
+4 => <SG type='S'><SG type='VC'><SG type='VC'><SG type='VC'><SE type='U'>катализатора </SE></SG><SG type='PARTICLE'><SE type='PC'>е </SE></SG></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='NP'><SG type='NP'><SE type='N'>мястото </SE></SG><SG type='PARTICLE'><SE type='PC'>си </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SG type='PRON'><SE type='U'>катализатора </SE></SG><SG type='VC'><SE type='V'>е </SE></SG></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='NP'><SG type='NP'><SE type='N'>мястото </SE></SG><SG type='PARTICLE'><SE type='PC'>си </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SG type='PARTICLE'><SE type='U'>катализатора </SE></SG><SG type='VC'><SE type='V'>е </SE></SG></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='NP'><SG type='NP'><SE type='N'>мястото </SE></SG><SG type='PARTICLE'><SE type='PC'>си </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SG type='ADVERB'><SE type='U'>катализатора </SE></SG><SG type='VC'><SE type='V'>е </SE></SG></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='NP'><SG type='NP'><SE type='N'>мястото </SE></SG><SG type='PARTICLE'><SE type='PC'>си </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='PRON'><SE type='U'>катализатора </SE></SG><SG type='VC'><SG type='VC'><SE type='V'>е </SE></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG></SG><SG type='NP'><SG type='NP'><SE type='N'>мястото </SE></SG><SG type='PARTICLE'><SE type='PC'>си </SE></SG></SG></SG>
+
+----------------------TEXT----------------------
+Mercedes C 220 CDI FaceLift (170 Hp) - Нов внос! Екологична норма: EURO 5A. Дата на първа регистрация: 30 април 2010 година. 1-Собственик. 2-Ключа. Перфектен външен вид, без забележки! Състояние: салон, ходова част, мотор - перфектно! GPS система за проследяване. Автоматичен контрол на стабилността. Електронна програма за стабилизиране. Ел. разпределяне на спирачното усилие. Система за динамична устойчивост. Система за защита от пробуксуване. Система за подпомагане на спирането. Блокаж на диференциала. Датчик за светлина. Регулиране на волана. Сензор за дъжд. Разходът на гориво извън града е 4,7 л/100 км, смесеният разход е 6 л/100 км, а в градски условия: 8,2 л/100 км.Цена се коментира само и единствено на паркинга на автокъщата при сериозен интерес и готовност за покупка (капаро).Адрес: гр.София, ул.Околовръстен път до/от страната на магазин ИКЕА, под моста посока ж.к.Младост 4 и Бизнес Парк София. Работно време: 10.00-18.00 часа, без почивен ден!
+
+----------------------FORMATED TEXT----------------------
+Mercedes C 220 CDI FaceLift (170 Hp). Нов внос! Екологична норма: EURO 5A. Дата на първа регистрация: 30 април 2010 година. 1. Собственик. 2. Ключа. Перфектен външен вид. без забележки! Състояние: салон. ходова част. мотор. перфектно! GPS система за проследяване. Автоматичен контрол на стабилността. Електронна програма за стабилизиране. Ел. разпределяне на спирачното усилие. Система за динамична устойчивост. Система за защита от пробуксуване. Система за подпомагане на спирането. Блокаж на диференциала. Датчик за светлина. Регулиране на волана. Сензор за дъжд. Разходът на гориво извън града е 4. 7 л/100 км. смесеният разход е 6 л/100 км. а в градски условия: 8. 2 л/100 км.Цена се коментира само и единствено на паркинга на автокъщата при сериозен интерес и готовност за покупка (капаро).Адрес: гр. София. ул. Околовръстен път до/от страната на магазин ИКЕА. под моста посока ж. к. Младост 4 и Бизнес Парк София. Работно време: 10. 00. 18. 00 часа. без почивен ден!
+
+----------------------SENTANCES----------------------
+0 => Mercedes C 220 CDI FaceLift (170 Hp).
+1 => Нов внос!
+2 => Екологична норма: EURO 5A.
+3 => Дата на първа регистрация: 30 април 2010 година.
+4 => 1. Собственик. 2. Ключа.
+5 => Перфектен външен вид.
+6 => без забележки!
+7 => Състояние: салон.
+8 => ходова част.
+9 => мотор. перфектно!
+10 => GPS система за проследяване.
+11 => Автоматичен контрол на стабилността.
+12 => Електронна програма за стабилизиране. Ел.
+13 => разпределяне на спирачното усилие.
+14 => Система за динамична устойчивост.
+15 => Система за защита от пробуксуване.
+16 => Система за подпомагане на спирането.
+17 => Блокаж на диференциала.
+18 => Датчик за светлина.
+19 => Регулиране на волана.
+20 => Сензор за дъжд.
+21 => Разходът на гориво извън града е 4.
+22 => 7 л/100 км.
+23 => смесеният разход е 6 л/100 км.
+24 => а в градски условия: 8.
+25 => 2 л/100 км.
+26 => Цена се коментира само и единствено на паркинга на автокъщата при сериозен интерес и готовност за покупка (капаро).
+27 => Адрес: гр.
+28 => София. ул.
+29 => Околовръстен път до/от страната на магазин ИКЕА.
+30 => под моста посока ж. к.
+31 => Младост 4 и Бизнес Парк София.
+32 => Работно време: 10.
+33 => 00. 18.
+34 => 00 часа.
+35 => без почивен ден!
+
+----------------------TOKENIZATION----------------------
+0 => (Mercedes; C; 220; CDI; FaceLift; (; 170; Hp; ))
+1 => (Нов; внос)
+2 => (Екологична; норма; EURO; 5A)
+3 => (Дата; на; първа; регистрация; 30; април; 2010; година)
+4 => (1; Собственик; 2; Ключа)
+5 => (Перфектен; външен; вид)
+6 => (без; забележки)
+7 => (Състояние; салон)
+8 => (ходова; част)
+9 => (мотор; перфектно)
+10 => (GPS; система; за; проследяване)
+11 => (Автоматичен; контрол; на; стабилността)
+12 => (Електронна; програма; за; стабилизиране; Ел)
+13 => (разпределяне; на; спирачното; усилие)
+14 => (Система; за; динамична; устойчивост)
+15 => (Система; за; защита; от; пробуксуване)
+16 => (Система; за; подпомагане; на; спирането)
+17 => (Блокаж; на; диференциала)
+18 => (Датчик; за; светлина)
+19 => (Регулиране; на; волана)
+20 => (Сензор; за; дъжд)
+21 => (Разходът; на; гориво; извън; града; е; 4)
+22 => (7; л; 100; км)
+23 => (смесеният; разход; е; 6; л; 100; км)
+24 => (а; в; градски; условия; 8)
+25 => (2; л; 100; км)
+26 => (Цена; се; коментира; само; и; единствено; на; паркинга; на; автокъщата; при; сериозен; интерес; и; готовност; за; покупка; (; капаро; ))
+27 => (Адрес; гр)
+28 => (София; ул)
+29 => (Околовръстен; път; до; от; страната; на; магазин; ИКЕА)
+30 => (под; моста; посока; ж; к)
+31 => (Младост; 4; и; Бизнес; Парк; София)
+32 => (Работно; време; 10)
+33 => (00; 18)
+34 => (00; часа)
+35 => (без; почивен; ден)
+
+----------------------MORPHOLOGY----------------------
+0 => [(U mercedes;mercedes)] [(U c;c)] [(NU 220;220)] [(U cdi;cdi)] [(U facelift;facelift)] [(U (;()] [(NU 170;170)] [(U hp;hp)] [(U );))] 
+1 => [(A нов;нов)] [(N внос;внос)] 
+2 => [(A екологична;екологичен)] [(N норма;норма)] [(U euro;euro)] [(U 5a;5a)] 
+3 => [(N дата;дата)] [(PREP на;на)] [(U първа;първа)] [(N регистрация;регистрация)] [(NU 30;30)] [(N април;април)] [(NU 2010;2010)] [(N година;година)] 
+4 => [(NU 1;1)] [(N собственик;собственик)] [(NU 2;2)] [(N ключа;ключ)] 
+5 => [(A перфектен;перфектен)] [(A външен;външен)] [(N вид;вид)] 
+6 => [(PREP без;без)] [(N забележки;забележка)] 
+7 => [(N състояние;състояние)] [(N салон;салон)] 
+8 => [(U ходова;ходова)] [(N част;част)] 
+9 => [(N мотор;мотор)] [(A перфектно;перфектен);(ADV перфектно;перфектно)] 
+10 => [(U gps;gps)] [(N система;система)] [(PREP за;за)] [(V проследяване;проследявам)] 
+11 => [(A автоматичен;автоматичен)] [(N контрол;контрол)] [(PREP на;на)] [(N стабилността;стабилност)] 
+12 => [(A електронна;електронен)] [(N програма;програма)] [(PREP за;за)] [(V стабилизиране;стабилизирам);(N стабилизиране;стабилизиране)] [(U ел;ел)] 
+13 => [(V разпределяне;разпределям);(N разпределяне;разпределяне)] [(PREP на;на)] [(U спирачното;спирачното)] [(N усилие;усилие)] 
+14 => [(N система;система)] [(PREP за;за)] [(A най-академично;най-академичен);(ADV най-академично;най-академично)] [(V противопоставянето;противопоставям);(N противопоставянето;противопоставяне)] 
+15 => [(N система;система)] [(PREP за;за)] [(N защита;защита)] [(PREP от;от)] [(U пробуксуване;пробуксуване)] 
+16 => [(N система;система)] [(PREP за;за)] [(V подпомагане;подпомагам);(N подпомагане;подпомагане)] [(PREP на;на)] [(V спирането;спирам);(N спирането;спиране)] 
+17 => [(CONJ било;било);(N било;било);(V било;бия);(V било;бъда);(V било;съм)] [(PREP на;на)] [(U диференциала;диференциала)] 
+18 => [(U датчик;датчик)] [(PREP за;за)] [(N светлина;светлина)] 
+19 => [(V регулиране;регулирам);(N регулиране;регулиране)] [(PREP на;на)] [(N волана;волан)] 
+20 => [(U сензор;сензор)] [(PREP за;за)] [(N дъжд;дъжд)] 
+21 => [(N разходът;разход)] [(PREP на;на)] [(N гориво;гориво)] [(ADV извън;извън);(PREP извън;извън)] [(N града;град)] [(PC е;е);(V е;съм)] [(NU 4;4)] 
+22 => [(NU 7;7)] [(U л;л)] [(NU 100;100)] [(N кмет;кмет)] 
+23 => [(A смесеният;смесен);(V смесеният;смеся)] [(N разход;разход)] [(PC е;е);(V е;съм)] [(NU 6;6)] [(U л;л)] [(NU 100;100)] [(N кмет;кмет)] 
+24 => [(CONJ а;а)] [(PREP в;в)] [(A градски;градски)] [(N условия;условие)] [(NU 8;8)] 
+25 => [(NU 2;2)] [(U л;л)] [(NU 100;100)] [(N кмет;кмет)] 
+27 => [(N адрес;адрес)] [(U гр;гр)] 
+28 => [(N софиянка;софиянка)] [(U ул;ул)] 
+29 => [(U околовръстен;околовръстен)] [(N път;път)] [(PREP до;до)] [(PREP от;от)] [(N страната;страна)] [(PREP на;на)] [(N магазин;магазин)] [(U икеа;икеа)] 
+30 => [(N под;под);(PREP под;под)] [(N моста;мост)] [(N посока;посока)] [(U ж;ж)] [(U к;к)] 
+31 => [(N младост;младост)] [(NU 4;4)] [(CONJ и;и)] [(N бизнес;бизнес)] [(N парк;парк)] [(N софиянка;софиянка)] 
+32 => [(A работно;работен)] [(N време;време)] [(NU 10;10)] 
+33 => [(NU 00;00)] [(NU 18;18)] 
+34 => [(NU 00;00)] [(N часа;час)] 
+35 => [(PREP без;без)] [(A почивен;почивен)] [(N ден;ден)] 
+
+----------------------SYNTAX----------------------
+1 => [S [NP [ADJ [A нов]] [NP [N внос]]]]
+2 => [S [NP [NP [ADJ [A екологична]] [NP [N норма]]] [PRON [U euro]]] [VC [U 5a]]]
+     [S [NP [NP [ADJ [A екологична]] [NP [N норма]]] [PARTICLE [U euro]]] [VC [U 5a]]]
+     [S [NP [NP [ADJ [A екологична]] [NP [N норма]]] [ADJ [U euro]]] [VC [U 5a]]]
+     [S [NP [ADJ [A екологична]] [NP [NP [N норма]] [PRON [U euro]]]] [VC [U 5a]]]
+     [S [NP [ADJ [A екологична]] [NP [NP [N норма]] [PARTICLE [U euro]]]] [VC [U 5a]]]
+5 => [S [NP [ADJ [ADJ [A перфектен]] [ADJ [A външен]]] [NP [N вид]]]]
+     [S [NP [ADJ [A перфектен]] [NP [ADJ [A външен]] [NP [N вид]]]]]
+8 => [S [VC [U ходова]] [NP [N част]]]
+     [S [NP [PRON [U ходова]] [NP [N част]]]]
+     [S [NP [PARTICLE [U ходова]] [NP [N част]]]]
+     [S [NP [VC [U ходова]] [NP [N част]]]]
+     [S [NP [ADJ [U ходова]] [NP [N част]]]]
+9 => [S [NP [NP [N мотор]] [ADJ [A перфектно]]]]
+10 => [S [PP [PP [PP [U gps]] [NP [N система]]] [PP [PREP за]]] [VC [V проследяване]]]
+13 => [S [VC [VC [VC [V разпределяне]] [PP [PREP на]]] [PARTICLE [U спирачното]]] [NP [N усилие]]]
+     [S [VC [VC [VC [V разпределяне]] [PP [PREP на]]] [PP [U спирачното]]] [NP [N усилие]]]
+     [S [VC [VC [V разпределяне]] [PP [PP [PREP на]] [PRON [U спирачното]]]] [NP [N усилие]]]
+     [S [VC [VC [V разпределяне]] [PP [PP [PREP на]] [NP [U спирачното]]]] [NP [N усилие]]]
+     [S [VC [VC [V разпределяне]] [PP [PP [PREP на]] [ADJ [U спирачното]]]] [NP [N усилие]]]
+17 => [S [VC [VC [V било]] [PP [PREP на]]] [NP [U диференциала]]]
+     [S [VC [VC [V било]] [PP [PREP на]]] [NP [U диференциала]]]
+     [S [VC [VC [V било]] [PP [PREP на]]] [NP [U диференциала]]]
+     [S [VC [VC [V било]] [PP [PREP на]]] [PP [U диференциала]]]
+     [S [VC [VC [V било]] [PP [PREP на]]] [PP [U диференциала]]]
+18 => [S [VC [VC [U датчик]] [PP [PREP за]]] [NP [N светлина]]]
+     [S [VC [U датчик]] [PP [PP [PREP за]] [NP [N светлина]]]]
+     [S [NP [VC [VC [U датчик]] [PP [PREP за]]] [NP [N светлина]]]]
+     [S [VC [VC [U датчик]] [PP [PP [PREP за]] [NP [N светлина]]]]]
+19 => [S [VC [VC [V регулиране]] [PP [PREP на]]] [NP [N волана]]]
+     [S [VC [V регулиране]] [PP [PP [PREP на]] [NP [N волана]]]]
+     [S [NP [VC [VC [V регулиране]] [PP [PREP на]]] [NP [N волана]]]]
+     [S [VC [VC [V регулиране]] [PP [PP [PREP на]] [NP [N волана]]]]]
+20 => [S [VC [VC [U сензор]] [PP [PREP за]]] [NP [N дъжд]]]
+     [S [VC [U сензор]] [PP [PP [PREP за]] [NP [N дъжд]]]]
+     [S [NP [VC [VC [U сензор]] [PP [PREP за]]] [NP [N дъжд]]]]
+     [S [VC [VC [U сензор]] [PP [PP [PREP за]] [NP [N дъжд]]]]]
+22 => [S [NP [M [M [M [NU 7]] [PARTICLE [U л]]] [M [NU 100]]] [NP [N кмет]]]]
+     [S [NP [M [M [M [NU 7]] [M [U л]]] [M [NU 100]]] [NP [N кмет]]]]
+     [S [NP [M [M [NU 7]] [M [PARTICLE [U л]] [M [NU 100]]]] [NP [N кмет]]]]
+     [S [NP [M [M [NU 7]] [M [M [U л]] [M [NU 100]]]] [NP [N кмет]]]]
+     [S [NP [M [M [NU 7]] [PARTICLE [U л]]] [NP [M [NU 100]] [NP [N кмет]]]]]
+25 => [S [NP [M [M [M [NU 2]] [PARTICLE [U л]]] [M [NU 100]]] [NP [N кмет]]]]
+     [S [NP [M [M [M [NU 2]] [M [U л]]] [M [NU 100]]] [NP [N кмет]]]]
+     [S [NP [M [M [NU 2]] [M [PARTICLE [U л]] [M [NU 100]]]] [NP [N кмет]]]]
+     [S [NP [M [M [NU 2]] [M [M [U л]] [M [NU 100]]]] [NP [N кмет]]]]
+     [S [NP [M [M [NU 2]] [PARTICLE [U л]]] [NP [M [NU 100]] [NP [N кмет]]]]]
+27 => [S [NP [N адрес]] [VC [U гр]]]
+     [S [NP [NP [N адрес]] [PRON [U гр]]]]
+     [S [NP [NP [N адрес]] [PARTICLE [U гр]]]]
+     [S [NP [NP [N адрес]] [ADJ [U гр]]]]
+28 => [S [NP [N софиянка]] [VC [U ул]]]
+     [S [NP [NP [N софиянка]] [PRON [U ул]]]]
+     [S [NP [NP [N софиянка]] [PARTICLE [U ул]]]]
+     [S [NP [NP [N софиянка]] [ADJ [U ул]]]]
+29 => [S [PP [PP [PP [PP [PP [PP [PP [U околовръстен]] [NP [N път]]] [PP [PREP до]]] [PP [PREP от]]] [NP [N страната]]] [PP [PREP на]]] [NP [N магазин]]] [VC [U икеа]]]
+     [S [PP [PP [PP [PP [PP [PP [U околовръстен]] [NP [N път]]] [PP [PP [PREP до]] [PP [PREP от]]]] [NP [N страната]]] [PP [PREP на]]] [NP [N магазин]]] [VC [U икеа]]]
+     [S [PP [PP [PP [PP [PP [PP [U околовръстен]] [NP [N път]]] [PP [PREP до]]] [PP [PP [PREP от]] [NP [N страната]]]] [PP [PREP на]]] [NP [N магазин]]] [VC [U икеа]]]
+     [S [PP [PP [PP [PP [PP [U околовръстен]] [NP [N път]]] [PP [PP [PP [PREP до]] [PP [PREP от]]] [NP [N страната]]]] [PP [PREP на]]] [NP [N магазин]]] [VC [U икеа]]]
+     [S [PP [PP [PP [PP [PP [U околовръстен]] [NP [N път]]] [PP [PP [PREP до]] [PP [PP [PREP от]] [NP [N страната]]]]] [PP [PREP на]]] [NP [N магазин]]] [VC [U икеа]]]
+30 => [S [PP [PP [PP [PP [PREP под]] [NP [N моста]]] [NP [N посока]]] [PRON [U ж]]] [VC [U к]]]
+     [S [PP [PP [PP [PP [PREP под]] [NP [N моста]]] [NP [N посока]]] [NP [U ж]]] [VC [U к]]]
+     [S [PP [PP [PP [PP [PREP под]] [NP [N моста]]] [NP [N посока]]] [ADJ [U ж]]] [VC [U к]]]
+     [S [PP [PP [PP [PP [PREP под]] [NP [N моста]]] [NP [N посока]]] [ADVERB [U ж]]] [VC [U к]]]
+     [S [PP [PP [PP [PP [PREP под]] [NP [N моста]]] [NP [N посока]]] [PP [U ж]]] [VC [U к]]]
+34 => [S [NP [M [NU 00]] [NP [N часа]]]]
+
+----------------------SYNTAX XML----------------------
+1 => <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>нов </SE></SG><SG type='NP'><SE type='N'>внос </SE></SG></SG></SG>
+2 => <SG type='S'><SG type='NP'><SG type='NP'><SG type='ADJ'><SE type='A'>екологична </SE></SG><SG type='NP'><SE type='N'>норма </SE></SG></SG><SG type='PRON'><SE type='U'>euro </SE></SG></SG><SG type='VC'><SE type='U'>5a </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='ADJ'><SE type='A'>екологична </SE></SG><SG type='NP'><SE type='N'>норма </SE></SG></SG><SG type='PARTICLE'><SE type='U'>euro </SE></SG></SG><SG type='VC'><SE type='U'>5a </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='ADJ'><SE type='A'>екологична </SE></SG><SG type='NP'><SE type='N'>норма </SE></SG></SG><SG type='ADJ'><SE type='U'>euro </SE></SG></SG><SG type='VC'><SE type='U'>5a </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>екологична </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>норма </SE></SG><SG type='PRON'><SE type='U'>euro </SE></SG></SG></SG><SG type='VC'><SE type='U'>5a </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>екологична </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>норма </SE></SG><SG type='PARTICLE'><SE type='U'>euro </SE></SG></SG></SG><SG type='VC'><SE type='U'>5a </SE></SG></SG>
+5 => <SG type='S'><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>перфектен </SE></SG><SG type='ADJ'><SE type='A'>външен </SE></SG></SG><SG type='NP'><SE type='N'>вид </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>перфектен </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>външен </SE></SG><SG type='NP'><SE type='N'>вид </SE></SG></SG></SG></SG>
+8 => <SG type='S'><SG type='VC'><SE type='U'>ходова </SE></SG><SG type='NP'><SE type='N'>част </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='PRON'><SE type='U'>ходова </SE></SG><SG type='NP'><SE type='N'>част </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='PARTICLE'><SE type='U'>ходова </SE></SG><SG type='NP'><SE type='N'>част </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SE type='U'>ходова </SE></SG><SG type='NP'><SE type='N'>част </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='U'>ходова </SE></SG><SG type='NP'><SE type='N'>част </SE></SG></SG></SG>
+9 => <SG type='S'><SG type='NP'><SG type='NP'><SE type='N'>мотор </SE></SG><SG type='ADJ'><SE type='A'>перфектно </SE></SG></SG></SG>
+10 => <SG type='S'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='U'>gps </SE></SG><SG type='NP'><SE type='N'>система </SE></SG></SG><SG type='PP'><SE type='PREP'>за </SE></SG></SG><SG type='VC'><SE type='V'>проследяване </SE></SG></SG>
+13 => <SG type='S'><SG type='VC'><SG type='VC'><SG type='VC'><SE type='V'>разпределяне </SE></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='PARTICLE'><SE type='U'>спирачното </SE></SG></SG><SG type='NP'><SE type='N'>усилие </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SG type='VC'><SE type='V'>разпределяне </SE></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='PP'><SE type='U'>спирачното </SE></SG></SG><SG type='NP'><SE type='N'>усилие </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>разпределяне </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>на </SE></SG><SG type='PRON'><SE type='U'>спирачното </SE></SG></SG></SG><SG type='NP'><SE type='N'>усилие </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>разпределяне </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>на </SE></SG><SG type='NP'><SE type='U'>спирачното </SE></SG></SG></SG><SG type='NP'><SE type='N'>усилие </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>разпределяне </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>на </SE></SG><SG type='ADJ'><SE type='U'>спирачното </SE></SG></SG></SG><SG type='NP'><SE type='N'>усилие </SE></SG></SG>
+17 => <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>било </SE></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='NP'><SE type='U'>диференциала </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>било </SE></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='NP'><SE type='U'>диференциала </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>било </SE></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='NP'><SE type='U'>диференциала </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>било </SE></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='PP'><SE type='U'>диференциала </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>било </SE></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='PP'><SE type='U'>диференциала </SE></SG></SG>
+18 => <SG type='S'><SG type='VC'><SG type='VC'><SE type='U'>датчик </SE></SG><SG type='PP'><SE type='PREP'>за </SE></SG></SG><SG type='NP'><SE type='N'>светлина </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SE type='U'>датчик </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>за </SE></SG><SG type='NP'><SE type='N'>светлина </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SG type='VC'><SE type='U'>датчик </SE></SG><SG type='PP'><SE type='PREP'>за </SE></SG></SG><SG type='NP'><SE type='N'>светлина </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SE type='U'>датчик </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>за </SE></SG><SG type='NP'><SE type='N'>светлина </SE></SG></SG></SG></SG>
+19 => <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>регулиране </SE></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='NP'><SE type='N'>волана </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SE type='V'>регулиране </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>на </SE></SG><SG type='NP'><SE type='N'>волана </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SG type='VC'><SE type='V'>регулиране </SE></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='NP'><SE type='N'>волана </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>регулиране </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>на </SE></SG><SG type='NP'><SE type='N'>волана </SE></SG></SG></SG></SG>
+20 => <SG type='S'><SG type='VC'><SG type='VC'><SE type='U'>сензор </SE></SG><SG type='PP'><SE type='PREP'>за </SE></SG></SG><SG type='NP'><SE type='N'>дъжд </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SE type='U'>сензор </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>за </SE></SG><SG type='NP'><SE type='N'>дъжд </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SG type='VC'><SE type='U'>сензор </SE></SG><SG type='PP'><SE type='PREP'>за </SE></SG></SG><SG type='NP'><SE type='N'>дъжд </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SE type='U'>сензор </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>за </SE></SG><SG type='NP'><SE type='N'>дъжд </SE></SG></SG></SG></SG>
+22 => <SG type='S'><SG type='NP'><SG type='M'><SG type='M'><SG type='M'><SE type='NU'>7 </SE></SG><SG type='PARTICLE'><SE type='U'>л </SE></SG></SG><SG type='M'><SE type='NU'>100 </SE></SG></SG><SG type='NP'><SE type='N'>кмет </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='M'><SG type='M'><SG type='M'><SE type='NU'>7 </SE></SG><SG type='M'><SE type='U'>л </SE></SG></SG><SG type='M'><SE type='NU'>100 </SE></SG></SG><SG type='NP'><SE type='N'>кмет </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='M'><SG type='M'><SE type='NU'>7 </SE></SG><SG type='M'><SG type='PARTICLE'><SE type='U'>л </SE></SG><SG type='M'><SE type='NU'>100 </SE></SG></SG></SG><SG type='NP'><SE type='N'>кмет </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='M'><SG type='M'><SE type='NU'>7 </SE></SG><SG type='M'><SG type='M'><SE type='U'>л </SE></SG><SG type='M'><SE type='NU'>100 </SE></SG></SG></SG><SG type='NP'><SE type='N'>кмет </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='M'><SG type='M'><SE type='NU'>7 </SE></SG><SG type='PARTICLE'><SE type='U'>л </SE></SG></SG><SG type='NP'><SG type='M'><SE type='NU'>100 </SE></SG><SG type='NP'><SE type='N'>кмет </SE></SG></SG></SG></SG>
+25 => <SG type='S'><SG type='NP'><SG type='M'><SG type='M'><SG type='M'><SE type='NU'>2 </SE></SG><SG type='PARTICLE'><SE type='U'>л </SE></SG></SG><SG type='M'><SE type='NU'>100 </SE></SG></SG><SG type='NP'><SE type='N'>кмет </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='M'><SG type='M'><SG type='M'><SE type='NU'>2 </SE></SG><SG type='M'><SE type='U'>л </SE></SG></SG><SG type='M'><SE type='NU'>100 </SE></SG></SG><SG type='NP'><SE type='N'>кмет </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='M'><SG type='M'><SE type='NU'>2 </SE></SG><SG type='M'><SG type='PARTICLE'><SE type='U'>л </SE></SG><SG type='M'><SE type='NU'>100 </SE></SG></SG></SG><SG type='NP'><SE type='N'>кмет </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='M'><SG type='M'><SE type='NU'>2 </SE></SG><SG type='M'><SG type='M'><SE type='U'>л </SE></SG><SG type='M'><SE type='NU'>100 </SE></SG></SG></SG><SG type='NP'><SE type='N'>кмет </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='M'><SG type='M'><SE type='NU'>2 </SE></SG><SG type='PARTICLE'><SE type='U'>л </SE></SG></SG><SG type='NP'><SG type='M'><SE type='NU'>100 </SE></SG><SG type='NP'><SE type='N'>кмет </SE></SG></SG></SG></SG>
+27 => <SG type='S'><SG type='NP'><SE type='N'>адрес </SE></SG><SG type='VC'><SE type='U'>гр </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SE type='N'>адрес </SE></SG><SG type='PRON'><SE type='U'>гр </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SE type='N'>адрес </SE></SG><SG type='PARTICLE'><SE type='U'>гр </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SE type='N'>адрес </SE></SG><SG type='ADJ'><SE type='U'>гр </SE></SG></SG></SG>
+28 => <SG type='S'><SG type='NP'><SE type='N'>софиянка </SE></SG><SG type='VC'><SE type='U'>ул </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SE type='N'>софиянка </SE></SG><SG type='PRON'><SE type='U'>ул </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SE type='N'>софиянка </SE></SG><SG type='PARTICLE'><SE type='U'>ул </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SE type='N'>софиянка </SE></SG><SG type='ADJ'><SE type='U'>ул </SE></SG></SG></SG>
+29 => <SG type='S'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='U'>околовръстен </SE></SG><SG type='NP'><SE type='N'>път </SE></SG></SG><SG type='PP'><SE type='PREP'>до </SE></SG></SG><SG type='PP'><SE type='PREP'>от </SE></SG></SG><SG type='NP'><SE type='N'>страната </SE></SG></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='NP'><SE type='N'>магазин </SE></SG></SG><SG type='VC'><SE type='U'>икеа </SE></SG></SG>
+     <SG type='S'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='U'>околовръстен </SE></SG><SG type='NP'><SE type='N'>път </SE></SG></SG><SG type='PP'><SG type='PP'><SE type='PREP'>до </SE></SG><SG type='PP'><SE type='PREP'>от </SE></SG></SG></SG><SG type='NP'><SE type='N'>страната </SE></SG></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='NP'><SE type='N'>магазин </SE></SG></SG><SG type='VC'><SE type='U'>икеа </SE></SG></SG>
+     <SG type='S'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='U'>околовръстен </SE></SG><SG type='NP'><SE type='N'>път </SE></SG></SG><SG type='PP'><SE type='PREP'>до </SE></SG></SG><SG type='PP'><SG type='PP'><SE type='PREP'>от </SE></SG><SG type='NP'><SE type='N'>страната </SE></SG></SG></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='NP'><SE type='N'>магазин </SE></SG></SG><SG type='VC'><SE type='U'>икеа </SE></SG></SG>
+     <SG type='S'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='U'>околовръстен </SE></SG><SG type='NP'><SE type='N'>път </SE></SG></SG><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>до </SE></SG><SG type='PP'><SE type='PREP'>от </SE></SG></SG><SG type='NP'><SE type='N'>страната </SE></SG></SG></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='NP'><SE type='N'>магазин </SE></SG></SG><SG type='VC'><SE type='U'>икеа </SE></SG></SG>
+     <SG type='S'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='U'>околовръстен </SE></SG><SG type='NP'><SE type='N'>път </SE></SG></SG><SG type='PP'><SG type='PP'><SE type='PREP'>до </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>от </SE></SG><SG type='NP'><SE type='N'>страната </SE></SG></SG></SG></SG><SG type='PP'><SE type='PREP'>на </SE></SG></SG><SG type='NP'><SE type='N'>магазин </SE></SG></SG><SG type='VC'><SE type='U'>икеа </SE></SG></SG>
+30 => <SG type='S'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>под </SE></SG><SG type='NP'><SE type='N'>моста </SE></SG></SG><SG type='NP'><SE type='N'>посока </SE></SG></SG><SG type='PRON'><SE type='U'>ж </SE></SG></SG><SG type='VC'><SE type='U'>к </SE></SG></SG>
+     <SG type='S'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>под </SE></SG><SG type='NP'><SE type='N'>моста </SE></SG></SG><SG type='NP'><SE type='N'>посока </SE></SG></SG><SG type='NP'><SE type='U'>ж </SE></SG></SG><SG type='VC'><SE type='U'>к </SE></SG></SG>
+     <SG type='S'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>под </SE></SG><SG type='NP'><SE type='N'>моста </SE></SG></SG><SG type='NP'><SE type='N'>посока </SE></SG></SG><SG type='ADJ'><SE type='U'>ж </SE></SG></SG><SG type='VC'><SE type='U'>к </SE></SG></SG>
+     <SG type='S'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>под </SE></SG><SG type='NP'><SE type='N'>моста </SE></SG></SG><SG type='NP'><SE type='N'>посока </SE></SG></SG><SG type='ADVERB'><SE type='U'>ж </SE></SG></SG><SG type='VC'><SE type='U'>к </SE></SG></SG>
+     <SG type='S'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>под </SE></SG><SG type='NP'><SE type='N'>моста </SE></SG></SG><SG type='NP'><SE type='N'>посока </SE></SG></SG><SG type='PP'><SE type='U'>ж </SE></SG></SG><SG type='VC'><SE type='U'>к </SE></SG></SG>
+34 => <SG type='S'><SG type='NP'><SG type='M'><SE type='NU'>00 </SE></SG><SG type='NP'><SE type='N'>часа </SE></SG></SG></SG>
+
+----------------------TEXT----------------------
+Колата е в добро състояние
+
+----------------------FORMATED TEXT----------------------
+Колата е в добро състояние
+
+----------------------SENTANCES----------------------
+0 => Колата е в добро състояние
+
+----------------------TOKENIZATION----------------------
+0 => (Колата; е; в; добро; състояние)
+
+----------------------MORPHOLOGY----------------------
+0 => [(N колата;кола)] [(PC е;е);(V е;съм)] [(PREP в;в)] [(A добро;добър)] [(N състояние;състояние)] 
+
+----------------------SYNTAX----------------------
+0 => [S [NP [N колата]] [VC [VC [V е]] [PP [PP [PP [PREP в]] [ADJ [A добро]]] [NP [N състояние]]]]]
+     [S [NP [N колата]] [VC [VC [V е]] [PP [PP [PREP в]] [NP [ADJ [A добро]] [NP [N състояние]]]]]]
+
+----------------------SYNTAX XML----------------------
+0 => <SG type='S'><SG type='NP'><SE type='N'>колата </SE></SG><SG type='VC'><SG type='VC'><SE type='V'>е </SE></SG><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>в </SE></SG><SG type='ADJ'><SE type='A'>добро </SE></SG></SG><SG type='NP'><SE type='N'>състояние </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SE type='N'>колата </SE></SG><SG type='VC'><SG type='VC'><SE type='V'>е </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>в </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>добро </SE></SG><SG type='NP'><SE type='N'>състояние </SE></SG></SG></SG></SG></SG>
+
+----------------------TEXT----------------------
+нов внос ! отли4ен двигател и здрава ходова 4аст,леки козмети4ни забележки.
+
+----------------------FORMATED TEXT----------------------
+нов внос! отли4ен двигател и здрава ходова 4аст. леки козмети4ни забележки.
+
+----------------------SENTANCES----------------------
+0 => нов внос!
+1 => отли4ен двигател и здрава ходова 4аст.
+2 => леки козмети4ни забележки.
+
+----------------------TOKENIZATION----------------------
+0 => (нов; внос)
+1 => (отли4ен; двигател; и; здрава; ходова; 4аст)
+2 => (леки; козмети4ни; забележки)
+
+----------------------MORPHOLOGY----------------------
+0 => [(A нов;нов)] [(N внос;внос)] 
+1 => [(U отли4ен;отли4ен)] [(N двигател;двигател)] [(CONJ и;и)] [(A здрава;здрав)] [(U ходова;ходова)] [(U 4аст;4аст)] 
+2 => [(A леки;лек)] [(U козмети4ни;козмети4ни)] [(N забележки;забележка)] 
+
+----------------------SYNTAX----------------------
+0 => [S [NP [ADJ [A нов]] [NP [N внос]]]]
+1 => [S [NP [NP [PRON [U отли4ен]] [NP [N двигател]]] [CONJ и] [NP [ADJ [A здрава]] [NP [U ходова]]]] [VC [U 4аст]]]
+     [S [NP [NP [PARTICLE [U отли4ен]] [NP [N двигател]]] [CONJ и] [NP [ADJ [A здрава]] [NP [U ходова]]]] [VC [U 4аст]]]
+     [S [NP [NP [VC [U отли4ен]] [NP [N двигател]]] [CONJ и] [NP [ADJ [A здрава]] [NP [U ходова]]]] [VC [U 4аст]]]
+     [S [NP [NP [ADJ [U отли4ен]] [NP [N двигател]]] [CONJ и] [NP [ADJ [A здрава]] [NP [U ходова]]]] [VC [U 4аст]]]
+     [S [NP [NP [M [U отли4ен]] [NP [N двигател]]] [CONJ и] [NP [ADJ [A здрава]] [NP [U ходова]]]] [VC [U 4аст]]]
+2 => [S [NP [ADJ [ADJ [A леки]] [PARTICLE [U козмети4ни]]] [NP [N забележки]]]]
+     [S [NP [ADJ [ADJ [A леки]] [ADJ [U козмети4ни]]] [NP [N забележки]]]]
+     [S [NP [ADJ [A леки]] [NP [PRON [U козмети4ни]] [NP [N забележки]]]]]
+     [S [NP [ADJ [A леки]] [NP [PARTICLE [U козмети4ни]] [NP [N забележки]]]]]
+     [S [NP [ADJ [A леки]] [NP [VC [U козмети4ни]] [NP [N забележки]]]]]
+
+----------------------SYNTAX XML----------------------
+0 => <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>нов </SE></SG><SG type='NP'><SE type='N'>внос </SE></SG></SG></SG>
+1 => <SG type='S'><SG type='NP'><SG type='NP'><SG type='PRON'><SE type='U'>отли4ен </SE></SG><SG type='NP'><SE type='N'>двигател </SE></SG></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='ADJ'><SE type='A'>здрава </SE></SG><SG type='NP'><SE type='U'>ходова </SE></SG></SG></SG><SG type='VC'><SE type='U'>4аст </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='PARTICLE'><SE type='U'>отли4ен </SE></SG><SG type='NP'><SE type='N'>двигател </SE></SG></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='ADJ'><SE type='A'>здрава </SE></SG><SG type='NP'><SE type='U'>ходова </SE></SG></SG></SG><SG type='VC'><SE type='U'>4аст </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='VC'><SE type='U'>отли4ен </SE></SG><SG type='NP'><SE type='N'>двигател </SE></SG></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='ADJ'><SE type='A'>здрава </SE></SG><SG type='NP'><SE type='U'>ходова </SE></SG></SG></SG><SG type='VC'><SE type='U'>4аст </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='ADJ'><SE type='U'>отли4ен </SE></SG><SG type='NP'><SE type='N'>двигател </SE></SG></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='ADJ'><SE type='A'>здрава </SE></SG><SG type='NP'><SE type='U'>ходова </SE></SG></SG></SG><SG type='VC'><SE type='U'>4аст </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SG type='M'><SE type='U'>отли4ен </SE></SG><SG type='NP'><SE type='N'>двигател </SE></SG></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='ADJ'><SE type='A'>здрава </SE></SG><SG type='NP'><SE type='U'>ходова </SE></SG></SG></SG><SG type='VC'><SE type='U'>4аст </SE></SG></SG>
+2 => <SG type='S'><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>леки </SE></SG><SG type='PARTICLE'><SE type='U'>козмети4ни </SE></SG></SG><SG type='NP'><SE type='N'>забележки </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>леки </SE></SG><SG type='ADJ'><SE type='U'>козмети4ни </SE></SG></SG><SG type='NP'><SE type='N'>забележки </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>леки </SE></SG><SG type='NP'><SG type='PRON'><SE type='U'>козмети4ни </SE></SG><SG type='NP'><SE type='N'>забележки </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>леки </SE></SG><SG type='NP'><SG type='PARTICLE'><SE type='U'>козмети4ни </SE></SG><SG type='NP'><SE type='N'>забележки </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>леки </SE></SG><SG type='NP'><SG type='VC'><SE type='U'>козмети4ни </SE></SG><SG type='NP'><SE type='N'>забележки </SE></SG></SG></SG></SG>
+
+----------------------TEXT----------------------
+има и газ
+
+----------------------FORMATED TEXT----------------------
+има и газ
+
+----------------------SENTANCES----------------------
+0 => има и газ
+
+----------------------TOKENIZATION----------------------
+0 => (има; и; газ)
+
+----------------------MORPHOLOGY----------------------
+0 => [(V има;имам)] [(CONJ и;и)] [(N газ;газ)] 
+
+----------------------SYNTAX----------------------
+
+----------------------SYNTAX XML----------------------
+
+----------------------TEXT----------------------
+Добро състояние. Напълно обслужен автомобил. Газов инжекцион Lovato. 4 зимни гуми. Годишен технически преглед до ноември 2017. Застраховка гражданска отговорност до април 2017
+
+----------------------FORMATED TEXT----------------------
+Добро състояние. Напълно обслужен автомобил. Газов инжекцион Lovato. 4 зимни гуми. Годишен технически преглед до ноември 2017. Застраховка гражданска отговорност до април 2017
+
+----------------------SENTANCES----------------------
+0 => Добро състояние.
+1 => Напълно обслужен автомобил.
+2 => Газов инжекцион Lovato.
+3 => 4 зимни гуми.
+4 => Годишен технически преглед до ноември 2017.
+5 => Застраховка гражданска отговорност до април 2017
+
+----------------------TOKENIZATION----------------------
+0 => (Добро; състояние)
+1 => (Напълно; обслужен; автомобил)
+2 => (Газов; инжекцион; Lovato)
+3 => (4; зимни; гуми)
+4 => (Годишен; технически; преглед; до; ноември; 2017)
+5 => (Застраховка; гражданска; отговорност; до; април; 2017)
+
+----------------------MORPHOLOGY----------------------
+0 => [(A добро;добър)] [(N състояние;състояние)] 
+1 => [(ADV напълно;напълно)] [(U обслужен;обслужен)] [(N автомобил;автомобил)] 
+2 => [(A газов;газов)] [(A конституционно;конституционен);(ADV конституционно;конституционно)] [(U lovato;lovato)] 
+3 => [(NU 4;4)] [(A зимни;зимен)] [(N гуми;гума)] 
+4 => [(A годишен;годишен)] [(A технически;технически)] [(N преглед;преглед)] [(PREP до;до)] [(N ноември;ноември)] [(NU 2017;2017)] 
+5 => [(N застраховка;застраховка)] [(A гражданска;граждански)] [(N отговорност;отговорност)] [(PREP до;до)] [(N април;април)] [(NU 2017;2017)] 
+
+----------------------SYNTAX----------------------
+0 => [S [NP [ADJ [A добро]] [NP [N състояние]]]]
+1 => [S [VC [ADVERB [ADV напълно]] [VC [U обслужен]]] [NP [N автомобил]]]
+     [S [NP [VC [ADVERB [ADV напълно]] [VC [U обслужен]]] [NP [N автомобил]]]]
+2 => [S [NP [ADJ [ADJ [A газов]] [ADJ [A конституционно]]] [NP [U lovato]]]]
+     [S [NP [ADJ [A газов]] [NP [ADJ [A конституционно]] [NP [U lovato]]]]]
+3 => [S [NP [M [NU 4]] [NP [ADJ [A зимни]] [NP [N гуми]]]]]
+
+----------------------SYNTAX XML----------------------
+0 => <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>добро </SE></SG><SG type='NP'><SE type='N'>състояние </SE></SG></SG></SG>
+1 => <SG type='S'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>напълно </SE></SG><SG type='VC'><SE type='U'>обслужен </SE></SG></SG><SG type='NP'><SE type='N'>автомобил </SE></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>напълно </SE></SG><SG type='VC'><SE type='U'>обслужен </SE></SG></SG><SG type='NP'><SE type='N'>автомобил </SE></SG></SG></SG>
+2 => <SG type='S'><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>газов </SE></SG><SG type='ADJ'><SE type='A'>конституционно </SE></SG></SG><SG type='NP'><SE type='U'>lovato </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>газов </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>конституционно </SE></SG><SG type='NP'><SE type='U'>lovato </SE></SG></SG></SG></SG>
+3 => <SG type='S'><SG type='NP'><SG type='M'><SE type='NU'>4 </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>зимни </SE></SG><SG type='NP'><SE type='N'>гуми </SE></SG></SG></SG></SG>
+
+----------------------TEXT----------------------
+Калата е уникална топ състояние* 4×4 *Авангард* един собственик .vsi4ki ekstri
+
+----------------------FORMATED TEXT----------------------
+Калата е уникална топ състояние* 4×4 *Авангард* един собственик. vsi4ki ekstri
+
+----------------------SENTANCES----------------------
+0 => Калата е уникална топ състояние* 4×4 *Авангард* един собственик.
+1 => vsi4ki ekstri
+
+----------------------TOKENIZATION----------------------
+0 => (Калата; е; уникална; топ; състояние; *; 4×4; *; Авангард; *; един; собственик)
+1 => (vsi4ki; ekstri)
+
+----------------------MORPHOLOGY----------------------
+1 => [(U vsi4ki;vsi4ki)] [(U ekstri;ekstri)] 
+
+----------------------SYNTAX----------------------
+
+----------------------SYNTAX XML----------------------
+
+----------------------TEXT----------------------
+Avtomat 6skorosti....vnos Germaniq...mnogo dobro sastoqnie realni kilometri ..euro 4r...obslujena.cenata pri barter e druga..
+
+----------------------FORMATED TEXT----------------------
+Avtomat 6skorosti. vnos Germaniq. mnogo dobro sastoqnie realni kilometri. euro 4r. obslujena. cenata pri barter e druga.
+
+----------------------SENTANCES----------------------
+0 => Avtomat 6skorosti.
+1 => vnos Germaniq.
+2 => mnogo dobro sastoqnie realni kilometri.
+3 => euro 4r. obslujena.
+4 => cenata pri barter e druga.
+
+----------------------TOKENIZATION----------------------
+0 => (Avtomat; 6skorosti)
+1 => (vnos; Germaniq)
+2 => (mnogo; dobro; sastoqnie; realni; kilometri)
+3 => (euro; 4r; obslujena)
+4 => (cenata; pri; barter; e; druga)
+
+----------------------MORPHOLOGY----------------------
+0 => [(U avtomat;avtomat)] [(U 6skorosti;6skorosti)] 
+1 => [(U vnos;vnos)] [(U germaniq;germaniq)] 
+2 => [(U mnogo;mnogo)] [(U dobro;dobro)] [(U sastoqnie;sastoqnie)] [(U realni;realni)] [(U kilometri;kilometri)] 
+3 => [(U euro;euro)] [(U 4r;4r)] [(U obslujena;obslujena)] 
+4 => [(U cenata;cenata)] [(U pri;pri)] [(U barter;barter)] [(U e;e)] [(U druga;druga)] 
+
+----------------------SYNTAX----------------------
+
+----------------------SYNTAX XML----------------------
+
+----------------------TEXT----------------------
+Перфектно техническо състояние!!!напълно обслужена преди 7 хиляди километра,ремък ,ролка ,водна помпа,масло на двигателя ,маслен и въздушен филтър!!! 1.8 моно инжекция 90 конски сили,най здравия мотор на wv!!!!!!!!!!!
+
+----------------------FORMATED TEXT----------------------
+Перфектно техническо състояние! напълно обслужена преди 7 хиляди километра. ремък. ролка. водна помпа. масло на двигателя. маслен и въздушен филтър! 1. 8 моно инжекция 90 конски сили. най здравия мотор на wv!
+
+----------------------SENTANCES----------------------
+0 => Перфектно техническо състояние!
+1 => напълно обслужена преди 7 хиляди километра.
+2 => ремък. ролка.
+3 => водна помпа.
+4 => масло на двигателя.
+5 => маслен и въздушен филтър!
+6 => 1. 8 моно инжекция 90 конски сили.
+7 => най здравия мотор на wv!
+
+----------------------TOKENIZATION----------------------
+0 => (Перфектно; техническо; състояние)
+1 => (напълно; обслужена; преди; 7; хиляди; километра)
+2 => (ремък; ролка)
+3 => (водна; помпа)
+4 => (масло; на; двигателя)
+5 => (маслен; и; въздушен; филтър)
+6 => (1; 8; моно; инжекция; 90; конски; сили)
+7 => (най; здравия; мотор; на; wv)
+
+----------------------MORPHOLOGY----------------------
+0 => [(A перфектно;перфектен);(ADV перфектно;перфектно)] [(A техническо;технически)] [(N състояние;състояние)] 
+1 => [(ADV напълно;напълно)] [(U обслужена;обслужена)] [(V преди;преда);(PREP преди;преди)] [(NU 7;7)] [(CONJ било;било);(N било;било);(V било;бия);(V било;бъда);(V било;съм)] [(N километра;километър)] 
+2 => [(A претовареното;претоварен);(V претовареното;претоваря)] [(A катастрофално;катастрофален);(ADV катастрофално;катастрофално)] 
+3 => [(A водна;воден)] [(N помпа;помпа);(V помпа;помпам)] 
+4 => [(N масло;масло)] [(PREP на;на)] [(N двигателя;двигател)] 
+5 => [(U маслен;маслен)] [(CONJ и;и)] [(A въздушен;въздушен)] [(CONJ било;било);(N било;било);(V било;бия);(V било;бъда);(V било;съм)] 
+6 => [(NU 1;1)] [(NU 8;8)] [(U моно;моно)] [(N инжекция;инжекция)] [(NU 90;90)] [(A конски;конски)] [(N сили;сила);(V сили;силя)] 
+7 => [(PC най;най)] [(A здравия;здрав)] [(N мотор;мотор)] [(PREP на;на)] [(U wv;wv)] 
+
+----------------------SYNTAX----------------------
+0 => [S [NP [ADJ [ADJ [A перфектно]] [ADJ [A техническо]]] [NP [N състояние]]]]
+     [S [NP [ADJ [A перфектно]] [NP [ADJ [A техническо]] [NP [N състояние]]]]]
+1 => [S [VC [VC [ADVERB [ADV напълно]] [VC [U обслужена]]] [PP [PP [PREP преди]] [NP [M [NU 7]] [NP [N било]]]]] [NP [N километра]]]
+     [S [VC [ADVERB [ADV напълно]] [VC [VC [U обслужена]] [PP [PP [PREP преди]] [NP [M [NU 7]] [NP [N било]]]]]] [NP [N километра]]]
+     [S [VC [ADVERB [ADV напълно]] [VC [U обслужена]]] [PP [PP [PP [PREP преди]] [NP [M [NU 7]] [NP [N било]]]] [NP [N километра]]]]
+     [S [NP [VC [VC [ADVERB [ADV напълно]] [VC [U обслужена]]] [PP [PP [PREP преди]] [NP [M [NU 7]] [NP [N било]]]]] [NP [N километра]]]]
+     [S [NP [VC [ADVERB [ADV напълно]] [VC [VC [U обслужена]] [PP [PP [PREP преди]] [NP [M [NU 7]] [NP [N било]]]]]] [NP [N километра]]]]
+3 => [S [NP [ADJ [A водна]] [NP [N помпа]]]]
+5 => [S [NP [ADJ [ADJ [U маслен]] [CONJ и] [ADJ [A въздушен]]] [NP [N било]]]]
+     [S [NP [NP [U маслен]] [CONJ и] [NP [ADJ [A въздушен]] [NP [N било]]]]]
+
+----------------------SYNTAX XML----------------------
+0 => <SG type='S'><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='A'>перфектно </SE></SG><SG type='ADJ'><SE type='A'>техническо </SE></SG></SG><SG type='NP'><SE type='N'>състояние </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>перфектно </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>техническо </SE></SG><SG type='NP'><SE type='N'>състояние </SE></SG></SG></SG></SG>
+1 => <SG type='S'><SG type='VC'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>напълно </SE></SG><SG type='VC'><SE type='U'>обслужена </SE></SG></SG><SG type='PP'><SG type='PP'><SE type='PREP'>преди </SE></SG><SG type='NP'><SG type='M'><SE type='NU'>7 </SE></SG><SG type='NP'><SE type='N'>било </SE></SG></SG></SG></SG><SG type='NP'><SE type='N'>километра </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>напълно </SE></SG><SG type='VC'><SG type='VC'><SE type='U'>обслужена </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>преди </SE></SG><SG type='NP'><SG type='M'><SE type='NU'>7 </SE></SG><SG type='NP'><SE type='N'>било </SE></SG></SG></SG></SG></SG><SG type='NP'><SE type='N'>километра </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>напълно </SE></SG><SG type='VC'><SE type='U'>обслужена </SE></SG></SG><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>преди </SE></SG><SG type='NP'><SG type='M'><SE type='NU'>7 </SE></SG><SG type='NP'><SE type='N'>било </SE></SG></SG></SG><SG type='NP'><SE type='N'>километра </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>напълно </SE></SG><SG type='VC'><SE type='U'>обслужена </SE></SG></SG><SG type='PP'><SG type='PP'><SE type='PREP'>преди </SE></SG><SG type='NP'><SG type='M'><SE type='NU'>7 </SE></SG><SG type='NP'><SE type='N'>било </SE></SG></SG></SG></SG><SG type='NP'><SE type='N'>километра </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>напълно </SE></SG><SG type='VC'><SG type='VC'><SE type='U'>обслужена </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>преди </SE></SG><SG type='NP'><SG type='M'><SE type='NU'>7 </SE></SG><SG type='NP'><SE type='N'>било </SE></SG></SG></SG></SG></SG><SG type='NP'><SE type='N'>километра </SE></SG></SG></SG>
+3 => <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>водна </SE></SG><SG type='NP'><SE type='N'>помпа </SE></SG></SG></SG>
+5 => <SG type='S'><SG type='NP'><SG type='ADJ'><SG type='ADJ'><SE type='U'>маслен </SE></SG><SE type='CONJ'>и </SE><SG type='ADJ'><SE type='A'>въздушен </SE></SG></SG><SG type='NP'><SE type='N'>било </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='NP'><SE type='U'>маслен </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='ADJ'><SE type='A'>въздушен </SE></SG><SG type='NP'><SE type='N'>било </SE></SG></SG></SG></SG>
+
+----------------------TEXT----------------------
+Нов внос. Колата е в перфектно състояние
+
+----------------------FORMATED TEXT----------------------
+Нов внос. Колата е в перфектно състояние
+
+----------------------SENTANCES----------------------
+0 => Нов внос.
+1 => Колата е в перфектно състояние
+
+----------------------TOKENIZATION----------------------
+0 => (Нов; внос)
+1 => (Колата; е; в; перфектно; състояние)
+
+----------------------MORPHOLOGY----------------------
+0 => [(A нов;нов)] [(N внос;внос)] 
+1 => [(N колата;кола)] [(PC е;е);(V е;съм)] [(PREP в;в)] [(A перфектно;перфектен);(ADV перфектно;перфектно)] [(N състояние;състояние)] 
+
+----------------------SYNTAX----------------------
+0 => [S [NP [ADJ [A нов]] [NP [N внос]]]]
+1 => [S [NP [N колата]] [VC [VC [V е]] [PP [PP [PP [PREP в]] [ADJ [A перфектно]]] [NP [N състояние]]]]]
+     [S [NP [N колата]] [VC [VC [V е]] [PP [PP [PP [PREP в]] [ADVERB [ADV перфектно]]] [NP [N състояние]]]]]
+     [S [NP [N колата]] [VC [VC [V е]] [PP [PP [PREP в]] [NP [ADJ [A перфектно]] [NP [N състояние]]]]]]
+
+----------------------SYNTAX XML----------------------
+0 => <SG type='S'><SG type='NP'><SG type='ADJ'><SE type='A'>нов </SE></SG><SG type='NP'><SE type='N'>внос </SE></SG></SG></SG>
+1 => <SG type='S'><SG type='NP'><SE type='N'>колата </SE></SG><SG type='VC'><SG type='VC'><SE type='V'>е </SE></SG><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>в </SE></SG><SG type='ADJ'><SE type='A'>перфектно </SE></SG></SG><SG type='NP'><SE type='N'>състояние </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SE type='N'>колата </SE></SG><SG type='VC'><SG type='VC'><SE type='V'>е </SE></SG><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>в </SE></SG><SG type='ADVERB'><SE type='ADV'>перфектно </SE></SG></SG><SG type='NP'><SE type='N'>състояние </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SE type='N'>колата </SE></SG><SG type='VC'><SG type='VC'><SE type='V'>е </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>в </SE></SG><SG type='NP'><SG type='ADJ'><SE type='A'>перфектно </SE></SG><SG type='NP'><SE type='N'>състояние </SE></SG></SG></SG></SG></SG>
+
+----------------------TEXT----------------------
+колата е в много добро състояние.докарана на ход и валидни документи още половин година.коментар за сериозни.
+
+----------------------FORMATED TEXT----------------------
+колата е в много добро състояние. докарана на ход и валидни документи още половин година. коментар за сериозни.
+
+----------------------SENTANCES----------------------
+0 => колата е в много добро състояние.
+1 => докарана на ход и валидни документи още половин година.
+2 => коментар за сериозни.
+
+----------------------TOKENIZATION----------------------
+0 => (колата; е; в; много; добро; състояние)
+1 => (докарана; на; ход; и; валидни; документи; още; половин; година)
+2 => (коментар; за; сериозни)
+
+----------------------MORPHOLOGY----------------------
+0 => [(N колата;кола)] [(PC е;е);(V е;съм)] [(PREP в;в)] [(ADV много;много)] [(A добро;добър)] [(N състояние;състояние)] 
+1 => [(V докарана;докарам)] [(PREP на;на)] [(N ход;ход)] [(CONJ и;и)] [(A валидни;валиден)] [(N документи;документ)] [(ADV още;още)] [(V повелите;поведа);(N повелите;повеля);(V повелите;повея)] [(N година;година)] 
+2 => [(N коментар;коментар)] [(PREP за;за)] [(A сериозни;сериозен)] 
+
+----------------------SYNTAX----------------------
+0 => [S [NP [N колата]] [VC [VC [V е]] [PP [PP [PP [PP [PREP в]] [ADVERB [ADV много]]] [ADJ [A добро]]] [NP [N състояние]]]]]
+     [S [NP [N колата]] [VC [VC [V е]] [PP [PP [PP [PREP в]] [ADVERB [ADV много]]] [NP [ADJ [A добро]] [NP [N състояние]]]]]]
+1 => [S [VC [VC [V докарана]] [PP [PP [PP [PP [PREP на]] [NP [NP [N ход]] [CONJ и] [NP [ADJ [A валидни]] [NP [N документи]]]]] [ADVERB [ADV още]]] [NP [N повелите]]]] [NP [N година]]]
+     [S [VC [VC [V докарана]] [PP [PP [PP [PREP на]] [NP [NP [N ход]] [CONJ и] [NP [ADJ [A валидни]] [NP [N документи]]]]] [ADVERB [ADV още]]]] [NP [VC [V повелите]] [NP [N година]]]]
+     [S [VC [VC [V докарана]] [PP [PP [PREP на]] [NP [NP [N ход]] [CONJ и] [NP [ADJ [A валидни]] [NP [N документи]]]]]] [NP [VC [ADVERB [ADV още]] [VC [V повелите]]] [NP [N година]]]]
+     [S [VC [V докарана]] [PP [PP [PP [PP [PP [PREP на]] [NP [NP [N ход]] [CONJ и] [NP [ADJ [A валидни]] [NP [N документи]]]]] [ADVERB [ADV още]]] [NP [N повелите]]] [NP [N година]]]]
+     [S [NP [VC [VC [V докарана]] [PP [PP [PP [PP [PREP на]] [NP [NP [N ход]] [CONJ и] [NP [ADJ [A валидни]] [NP [N документи]]]]] [ADVERB [ADV още]]] [NP [N повелите]]]] [NP [N година]]]]
+
+----------------------SYNTAX XML----------------------
+0 => <SG type='S'><SG type='NP'><SE type='N'>колата </SE></SG><SG type='VC'><SG type='VC'><SE type='V'>е </SE></SG><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>в </SE></SG><SG type='ADVERB'><SE type='ADV'>много </SE></SG></SG><SG type='ADJ'><SE type='A'>добро </SE></SG></SG><SG type='NP'><SE type='N'>състояние </SE></SG></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SE type='N'>колата </SE></SG><SG type='VC'><SG type='VC'><SE type='V'>е </SE></SG><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>в </SE></SG><SG type='ADVERB'><SE type='ADV'>много </SE></SG></SG><SG type='NP'><SG type='ADJ'><SE type='A'>добро </SE></SG><SG type='NP'><SE type='N'>състояние </SE></SG></SG></SG></SG></SG>
+1 => <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>докарана </SE></SG><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>на </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>ход </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='ADJ'><SE type='A'>валидни </SE></SG><SG type='NP'><SE type='N'>документи </SE></SG></SG></SG></SG><SG type='ADVERB'><SE type='ADV'>още </SE></SG></SG><SG type='NP'><SE type='N'>повелите </SE></SG></SG></SG><SG type='NP'><SE type='N'>година </SE></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>докарана </SE></SG><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>на </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>ход </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='ADJ'><SE type='A'>валидни </SE></SG><SG type='NP'><SE type='N'>документи </SE></SG></SG></SG></SG><SG type='ADVERB'><SE type='ADV'>още </SE></SG></SG></SG><SG type='NP'><SG type='VC'><SE type='V'>повелите </SE></SG><SG type='NP'><SE type='N'>година </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SG type='VC'><SE type='V'>докарана </SE></SG><SG type='PP'><SG type='PP'><SE type='PREP'>на </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>ход </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='ADJ'><SE type='A'>валидни </SE></SG><SG type='NP'><SE type='N'>документи </SE></SG></SG></SG></SG></SG><SG type='NP'><SG type='VC'><SG type='ADVERB'><SE type='ADV'>още </SE></SG><SG type='VC'><SE type='V'>повелите </SE></SG></SG><SG type='NP'><SE type='N'>година </SE></SG></SG></SG>
+     <SG type='S'><SG type='VC'><SE type='V'>докарана </SE></SG><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>на </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>ход </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='ADJ'><SE type='A'>валидни </SE></SG><SG type='NP'><SE type='N'>документи </SE></SG></SG></SG></SG><SG type='ADVERB'><SE type='ADV'>още </SE></SG></SG><SG type='NP'><SE type='N'>повелите </SE></SG></SG><SG type='NP'><SE type='N'>година </SE></SG></SG></SG>
+     <SG type='S'><SG type='NP'><SG type='VC'><SG type='VC'><SE type='V'>докарана </SE></SG><SG type='PP'><SG type='PP'><SG type='PP'><SG type='PP'><SE type='PREP'>на </SE></SG><SG type='NP'><SG type='NP'><SE type='N'>ход </SE></SG><SE type='CONJ'>и </SE><SG type='NP'><SG type='ADJ'><SE type='A'>валидни </SE></SG><SG type='NP'><SE type='N'>документи </SE></SG></SG></SG></SG><SG type='ADVERB'><SE type='ADV'>още </SE></SG></SG><SG type='NP'><SE type='N'>повелите </SE></SG></SG></SG><SG type='NP'><SE type='N'>година </SE></SG></SG></SG>

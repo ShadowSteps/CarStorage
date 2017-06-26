@@ -1,0 +1,16 @@
+{
+    "name": "john/job.core",
+    "version" : "1.0.3",
+    "license": "proprietary",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Shadows\\CarStorage\\Core\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.0",
+        "mashape/unirest-php": "3.0.*",
+        "php-ai/php-ml": "0.4.1"
+    }
+}

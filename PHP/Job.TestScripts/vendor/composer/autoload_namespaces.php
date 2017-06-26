@@ -8,4 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'Unirest\\' => array($vendorDir . '/mashape/unirest-php/src'),
     'Phpml' => array($vendorDir . '/php-ai/php-ml/src'),
+    'NlpTools\\' => array($vendorDir . '/nlp-tools/nlp-tools/src'),
 );

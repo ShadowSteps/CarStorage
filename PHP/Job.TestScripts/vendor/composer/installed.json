@@ -123,5 +123,175 @@
         "license": [
             "proprietary"
         ]
+    },
+    {
+        "name": "vanderlee/php-sentence",
+        "version": "1.0.3",
+        "version_normalized": "1.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/vanderlee/php-sentence.git",
+            "reference": "16305bae4af7fbdb4d938e3926da92f86914b781"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/vanderlee/php-sentence/zipball/16305bae4af7fbdb4d938e3926da92f86914b781",
+            "reference": "16305bae4af7fbdb4d938e3926da92f86914b781",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2017-05-21T15:47:11+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "classes/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Simple text sentence splitting and counting. Supports atleast english, german and dutch, possibly more.",
+        "homepage": "https://github.com/vanderlee/php-sentence.git",
+        "keywords": [
+            "boundary",
+            "count",
+            "disambiguation",
+            "segmentation",
+            "sentence",
+            "split"
+        ]
+    },
+    {
+        "name": "nlp-tools/nlp-tools",
+        "version": "v0.1.3",
+        "version_normalized": "0.1.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/angeloskath/php-nlp-tools.git",
+            "reference": "bbccab0f3ca7277bdf7b292ba67ca644efd0cefe"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/angeloskath/php-nlp-tools/zipball/bbccab0f3ca7277bdf7b292ba67ca644efd0cefe",
+            "reference": "bbccab0f3ca7277bdf7b292ba67ca644efd0cefe",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3"
+        },
+        "time": "2016-11-03T15:34:42+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "NlpTools\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "WTFPL"
+        ],
+        "authors": [
+            {
+                "name": "Angelos Katharopoulos",
+                "email": "angelos@yourse.gr"
+            }
+        ],
+        "description": "NlpTools is a set of php 5.3+ classes for beginner to semi advanced natural language processing work.",
+        "keywords": [
+            "machine learning",
+            "nlp"
+        ]
+    },
+    {
+        "name": "john/job.nlp",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "dist": {
+            "type": "path",
+            "url": "../Job.NLP",
+            "reference": "6ccf06f5e13d5f5b12c53e9110ab3ba79e96fca7",
+            "shasum": null
+        },
+        "require": {
+            "nlp-tools/nlp-tools": "0.1.*",
+            "php": ">=7.0",
+            "vanderlee/php-sentence": "1.0.*"
+        },
+        "require-dev": {
+            "john/job.utils": "1.0.*",
+            "mashape/unirest-php": "3.0.*"
+        },
+        "type": "project",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Shadows\\CarStorage\\NLP\\": "src/"
+            }
+        },
+        "license": [
+            "proprietary"
+        ]
+    },
+    {
+        "name": "john/job.utils",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "dist": {
+            "type": "path",
+            "url": "../Job.Utils",
+            "reference": "117e39abedcfc7611ec406bfea8b1a6c9c02cea7",
+            "shasum": null
+        },
+        "require": {
+            "php": ">=7.0"
+        },
+        "type": "project",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Shadows\\CarStorage\\Utils\\": "src/"
+            }
+        },
+        "license": [
+            "proprietary"
+        ]
+    },
+    {
+        "name": "john/job.crawler",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "dist": {
+            "type": "path",
+            "url": "../Job.Crawler",
+            "reference": "bd84b660d25bcebb883e239c3955a719ec362f8b",
+            "shasum": null
+        },
+        "require": {
+            "john/job.core": "1.0.*",
+            "john/job.nlp": "1.0.*",
+            "john/job.utils": "1.0.*",
+            "mashape/unirest-php": "3.0.*",
+            "php": ">=7.0"
+        },
+        "type": "project",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Shadows\\CarStorage\\Crawler\\": "src/"
+            }
+        },
+        "license": [
+            "proprietary"
+        ]
     }
 ]

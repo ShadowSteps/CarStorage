@@ -1,0 +1,26 @@
+{
+    "name": "john/job.nlp",
+    "version" : "1.0.0",
+    "license": "proprietary",
+    "type": "project",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../Job.Utils"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Shadows\\CarStorage\\NLP\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.0",
+        "nlp-tools/nlp-tools": "0.1.*",
+        "vanderlee/php-sentence": "1.0.*"
+    },
+    "require-dev": {
+        "mashape/unirest-php": "3.0.*",
+        "john/job.utils": "1.0.*"
+    }
+}

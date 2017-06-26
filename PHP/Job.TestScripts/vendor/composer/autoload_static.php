@@ -9,11 +9,26 @@ class ComposerStaticInit7a32a06bf3b0d6f51ebb6200b97cb6ac
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
+            'Shadows\\CarStorage\\Utils\\' => 25,
+            'Shadows\\CarStorage\\NLP\\' => 23,
+            'Shadows\\CarStorage\\Crawler\\' => 27,
             'Shadows\\CarStorage\\Core\\' => 24,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Shadows\\CarStorage\\Utils\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/john/job.utils/src',
+        ),
+        'Shadows\\CarStorage\\NLP\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/john/job.nlp/src',
+        ),
+        'Shadows\\CarStorage\\Crawler\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/john/job.crawler/src',
+        ),
         'Shadows\\CarStorage\\Core\\' => 
         array (
             0 => __DIR__ . '/..' . '/john/job.core/src',
@@ -35,6 +50,17 @@ class ComposerStaticInit7a32a06bf3b0d6f51ebb6200b97cb6ac
                 0 => __DIR__ . '/..' . '/php-ai/php-ml/src',
             ),
         ),
+        'N' => 
+        array (
+            'NlpTools\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/nlp-tools/nlp-tools/src',
+            ),
+        ),
+    );
+
+    public static $classMap = array (
+        'Sentence' => __DIR__ . '/..' . '/vanderlee/php-sentence/classes/Sentence.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -43,6 +69,7 @@ class ComposerStaticInit7a32a06bf3b0d6f51ebb6200b97cb6ac
             $loader->prefixLengthsPsr4 = ComposerStaticInit7a32a06bf3b0d6f51ebb6200b97cb6ac::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit7a32a06bf3b0d6f51ebb6200b97cb6ac::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit7a32a06bf3b0d6f51ebb6200b97cb6ac::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit7a32a06bf3b0d6f51ebb6200b97cb6ac::$classMap;
 
         }, null, ClassLoader::class);
     }
