@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b78ef1c3298672a80c680c084b6247a8",
+    "content-hash": "dd5fa2f696cdf171056780cab836adde",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -937,11 +937,11 @@
         },
         {
             "name": "john/job.core",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "dist": {
                 "type": "path",
                 "url": "../Job.Core",
-                "reference": "c265b47fc004488c6f1a7ef4f0d75ac18414da33",
+                "reference": "405e0662d7a7feec076c83a56668044fe9a36a19",
                 "shasum": null
             },
             "require": {
@@ -957,7 +957,10 @@
             },
             "license": [
                 "proprietary"
-            ]
+            ],
+            "transport-options": {
+                "symlink": true
+            }
         },
         {
             "name": "mashape/unirest-php",

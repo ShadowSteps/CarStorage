@@ -19,7 +19,7 @@ use Shadows\CarStorage\Core\ML\FacilityProblem\Facility;
 use Shadows\CarStorage\Core\ML\Feature\Feature;
 use Shadows\CarStorage\Core\ML\Feature\IndexFeatureExtractor;
 use Shadows\CarStorage\Core\Utils\RequestDataMapper;
-use Shadows\CarStorage\Utils\DocumentHelper\DocumentHelper;
+use Shadows\CarStorage\Core\Utils\DocumentHelper;
 
 class IndexClustering
 {

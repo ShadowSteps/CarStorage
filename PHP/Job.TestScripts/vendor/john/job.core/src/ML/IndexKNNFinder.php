@@ -13,7 +13,7 @@ use Phpml\Math\Distance\Euclidean;
 use Shadows\CarStorage\Core\Index\DocumentsQueue;
 use Shadows\CarStorage\Core\Index\SolrClient;
 use Shadows\CarStorage\Core\ML\Feature\IndexFeatureExtractor;
-use Shadows\CarStorage\Utils\DocumentHelper\DocumentHelper;
+use Shadows\CarStorage\Core\Utils\DocumentHelper;
 
 class IndexKNNFinder
 {

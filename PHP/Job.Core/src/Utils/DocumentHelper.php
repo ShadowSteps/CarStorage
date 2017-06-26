@@ -1,6 +1,6 @@
 <?php
 
-namespace Shadows\CarStorage\Utils\DocumentHelper;
+namespace Shadows\CarStorage\Core\Utils;
 
 use Phpml\Classification\KNearestNeighbors;
 use Shadows\CarStorage\Core\Index\JobIndexInformation;
