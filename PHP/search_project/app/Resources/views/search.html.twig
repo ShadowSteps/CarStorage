@@ -2,6 +2,7 @@
 {% block javascripts %}
     <script>
         $(document).ready(function () {
+            window.sr = ScrollReveal();
             $(".search-container").searchUiBuilder();
         });
     </script>
@@ -32,11 +33,11 @@
             </div>
         </div>
         <div class="navigation-title">
+            <span class="navigation-title-text no-select">
+                Търсене в налични обяви
+            </span>
         </div>
         <div class="content-holder">
-            <div class="content-title">
-                <span>Търсене в налични обяви </span>
-            </div>
             <div class="content">
                 <div class="search-container">
                 </div>
