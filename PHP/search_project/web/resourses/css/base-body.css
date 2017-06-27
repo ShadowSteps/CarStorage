@@ -112,7 +112,7 @@ html body {
     padding: 10px;
     width: 100%;
     text-align: center;
-    background-color: #bdc3c7;
+    background-color: #fff;
 }
 
 .body-content .content-holder .content .search-results-holder .pagination .paging-container-top,
@@ -121,11 +121,23 @@ html body {
 }
 
 .light-theme .current {
-    background: #666;
+    background: #3498db;
     color: #FFF;
     border-color: #444;
     box-shadow: none;
     cursor: default;
+}
+.light-theme .page-link {
+    background: #2980b9;
+    color: #FFF;
+    border-color: #444;
+    box-shadow: none;
+    cursor: default;
+}
+.light-theme a:hover {
+    cursor:pointer;
+    background: #3498db none repeat scroll 0 0;
+    text-decoration: none;
 }
 
 .simple-pagination {

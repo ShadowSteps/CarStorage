@@ -171,9 +171,13 @@
 .body-content .content-holder .content .search-results-holder .search-result em {
     background-color: #3498db;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 3px;
     padding: 0 7px;
     text-decoration: underline;
+}
+.body-content .content-holder .content .search-results-holder .search-result .result-title em{
+    background-color:#fff;
+    color:#3498db;
 }
 
 .body-content .content-holder .content .search-results-holder .search-result .result-title {
@@ -194,7 +198,6 @@
 .body-content .content-holder .content .search-results-holder .search-result .result-title span i {
     color:#fff;
 }
-
 
 .body-content .content-holder .content .search-results-holder .search-result .result-description {
     display: inline-block;

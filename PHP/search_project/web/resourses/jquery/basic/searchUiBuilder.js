@@ -335,20 +335,25 @@ $.fn.searchUiBuilder = function (settings) {
         }).on('ifToggled', function(event){
             var target = $(event.target);
             var checked = target.prop("checked");
+
             if(target.attr("id") == "all-field-option"){
-                container.find("#keywords-field-option")
-                    .prop("checked", false)
-                    .iCheck('update');
-                container.find("#description-field-option")
-                    .prop("checked", false)
-                    .iCheck('update');
-                container.find("#title-field-option")
-                    .prop("checked", false)
-                    .iCheck('update');
-            }else{
-                container.find("#all-field-option")
-                    .prop("checked", false)
-                    .iCheck('update');
+                if(target.attr("id") !== "highlight-field-option") {
+                    container.find("#keywords-field-option")
+                        .prop("checked", false)
+                        .iCheck('update');
+                    container.find("#description-field-option")
+                        .prop("checked", false)
+                        .iCheck('update');
+                    container.find("#title-field-option")
+                        .prop("checked", false)
+                        .iCheck('update');
+                }
+            }else {
+                if (target.attr("id") !== "highlight-field-option") {
+                    container.find("#all-field-option")
+                        .prop("checked", false)
+                        .iCheck('update');
+                }
             }
             $(this).iCheck('update');
         });
