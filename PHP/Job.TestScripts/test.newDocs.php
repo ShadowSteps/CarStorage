@@ -7,7 +7,7 @@
  */
 require_once __DIR__."/vendor/autoload.php";
 use Shadows\CarStorage\Core\Communication\JobInformation;
-use Shadows\CarStorage\Crawler\Core\Crawler;
+use AdSearchEngine\Core\Crawler\Crawler;
 define("CONTROL_API_URL", "http://192.168.50.26:8080/dev/carstorage/api");
 define("AUTH_TOKEN", "bb8f7752-033d-4b48-8dc6-a6fbeb73673a");
 define("AVAILABLE_PLUGINS", [

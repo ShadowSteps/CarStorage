@@ -1,5 +1,5 @@
 <?php
-use Shadows\CarStorage\Crawler\Core\Crawler;
+use AdSearchEngine\Core\Crawler\Crawler;
 
 require_once __DIR__ . "/vendor/autoload.php";
 require_once __DIR__ . "/config.php";

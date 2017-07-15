@@ -9,7 +9,7 @@
 namespace Shadows\CarStorage\Crawler\Utils;
 
 
-use Shadows\CarStorage\Crawler\Exception\ConfigParameterNotFoundException;
+use CarStorage\Crawler\Exception\ConfigParameterNotFoundException;
 
 class ConstConfigHelper
 {

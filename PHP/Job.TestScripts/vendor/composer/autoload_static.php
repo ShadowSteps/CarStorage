@@ -60,6 +60,8 @@ class ComposerStaticInit7a32a06bf3b0d6f51ebb6200b97cb6ac
     );
 
     public static $classMap = array (
+        'PHPlot' => __DIR__ . '/..' . '/davefx/phplot/phplot/phplot.php',
+        'PHPlot_truecolor' => __DIR__ . '/..' . '/davefx/phplot/phplot/phplot.php',
         'Sentence' => __DIR__ . '/..' . '/vanderlee/php-sentence/classes/Sentence.php',
     );
 

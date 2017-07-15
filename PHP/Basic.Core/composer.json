@@ -1,0 +1,23 @@
+  {
+  "name": "ad-search-engine/core",
+  "license": "proprietary",
+  "type": "library",
+  "description": "Core libraries for building the ad-search-engine projects.",
+  "autoload": {
+    "psr-4": {
+      "AdSearchEngine\\Core\\": "src/"
+    }
+  },
+    "repositories": [
+      {
+        "type": "path",
+        "url": "../Interfaces"
+      }
+    ],
+  "require": {
+    "php": ">=7.1",
+    "ad-search-engine/interfaces": "1.0.0",
+    "php-ai/php-ml": "0.4.*",
+    "symfony/symfony": "3.3.*"
+  }
+}

@@ -6,5 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'PHPlot' => $vendorDir . '/davefx/phplot/phplot/phplot.php',
+    'PHPlot_truecolor' => $vendorDir . '/davefx/phplot/phplot/phplot.php',
     'Sentence' => $vendorDir . '/vanderlee/php-sentence/classes/Sentence.php',
 );

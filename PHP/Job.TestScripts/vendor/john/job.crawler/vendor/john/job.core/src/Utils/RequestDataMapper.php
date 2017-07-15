@@ -9,11 +9,11 @@
 namespace Shadows\CarStorage\Core\Utils;
 
 use Shadows\CarStorage\Core\Communication\ErrorInformation;
-use Shadows\CarStorage\Core\Communication\JobExtractResult;
+use Shadows\CarStorage\Core\Communication\CrawlerExtractJobResultInformation;
 use Shadows\CarStorage\Core\Communication\JobInformation;
-use Shadows\CarStorage\Core\Communication\JobRegistration;
+use Shadows\CarStorage\Core\Communication\CrawlerHarvestJobResultInformation;
 use Shadows\CarStorage\Core\Communication\JobStatus;
-use Shadows\CarStorage\Core\Index\JobIndexInformation;
+use CarStorage\Crawler\Index\AutomobileIndexInformation;
 
 class RequestDataMapper
 {
@@ -27,9 +27,9 @@ class RequestDataMapper
         return $data;
     }
 
-    public static function ConvertStdToJobRegistration(\stdClass $object) : JobRegistration {
+    public static function ConvertStdToJobRegistration(\stdClass $object) : CrawlerHarvestJobResultInformation {
         $extractor = new StdClassExtractor($object);
-        $data = new JobRegistration($extractor->GetString("Id"), []);
+        $data = new CrawlerHarvestJobResultInformation($extractor->GetString("Id"), []);
         $list = $object->NewJobs;
         if (is_array($list)){
             foreach ($list as $subObject) {
@@ -40,16 +40,16 @@ class RequestDataMapper
         return $data;
     }
 
-    public static function ConvertStdToJobExtractResult(\stdClass $object) : JobExtractResult {
+    public static function ConvertStdToJobExtractResult(\stdClass $object) : CrawlerExtractJobResultInformation {
         $registration = self::ConvertStdToJobRegistration($object->jobRegistration);
         $index = self::ConvertStdToJobIndexInformation($object->jobIndexInformation->add->doc);
-        $data = new JobExtractResult($registration, $index);
+        $data = new CrawlerExtractJobResultInformation($registration, $index);
         return $data;
     }
 
-    public static function ConvertStdToJobIndexInformation(\stdClass $object) : JobIndexInformation {
+    public static function ConvertStdToJobIndexInformation(\stdClass $object) : AutomobileIndexInformation {
         $extractor = new StdClassExtractor($object);
-        $data = new JobIndexInformation(
+        $data = new AutomobileIndexInformation(
             $extractor->GetString("id"),
             $extractor->GetString("title"),
             $extractor->GetString("description"),

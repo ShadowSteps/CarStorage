@@ -9,7 +9,7 @@
 namespace Shadows\CarStorage\Core\Communication;
 
 
-class ErrorInformation extends JSONObject implements \JsonSerializable
+class ErrorInformation extends JSONCommunicationObject implements \JsonSerializable
 {
     /**
      * @var string

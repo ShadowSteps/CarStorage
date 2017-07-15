@@ -1,15 +1,15 @@
 <?php
 use Phpml\Math\Distance\Euclidean;
-use Shadows\CarStorage\Core\Index\SolrClient;
+use Shadows\CarStorage\Core\Index\SOLRClient;
 use Shadows\CarStorage\Core\ML\Feature\Feature;
-use Shadows\CarStorage\Core\ML\Feature\IndexFeatureExtractor;
+use Shadows\CarStorage\Core\ML\Feature\IndexTextFeatureExtractor;
 
 require_once __DIR__ . "/vendor/autoload.php";
 
 try {
-    $client = new SolrClient("http://localhost:8983/solr/carstorage/");
+    $client = new SOLRClient("http://localhost:8983/solr/carstorage/");
     $step = 100;
-    $featureExtractor = new IndexFeatureExtractor($client);
+    $featureExtractor = new IndexTextFeatureExtractor($client);
     $start = microtime(true);
     $features = $featureExtractor->getFeatureVector();
     $time_elapsed_secs = microtime(true) - $start . PHP_EOL;

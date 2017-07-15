@@ -9,8 +9,8 @@
 namespace Shadows\CarStorage\Crawler\Scheduler;
 
 
-use Shadows\CarStorage\Core\Communication\JobExtractResult;
-use Shadows\CarStorage\Core\Communication\JobRegistration;
+use Shadows\CarStorage\Core\Communication\CrawlerExtractJobResultInformation;
+use Shadows\CarStorage\Core\Communication\CrawlerHarvestJobResultInformation;
 use Shadows\CarStorage\Core\Communication\JobStatus;
 use Shadows\CarStorage\Core\Utils\RequestDataMapper;
 use Shadows\CarStorage\Crawler\Utils\Configuration;
@@ -65,7 +65,7 @@ class Client
         return RequestDataMapper::ConvertStdToJobInformation($std);
     }
 
-    public function Register(JobRegistration $registration): JobStatus {
+    public function Register(CrawlerHarvestJobResultInformation $registration): JobStatus {
         $response = Request::post(
             $this->controlBaseApiUrl . "/job/register",
             ["AUTH_TOKEN" => Configuration::AuthenticationToken()],
@@ -75,7 +75,7 @@ class Client
         return RequestDataMapper::ConvertStdToJobStatus($std);
     }
 
-    public function Index(JobExtractResult $information): JobStatus {
+    public function Index(CrawlerExtractJobResultInformation $information): JobStatus {
         $response = Request::post(
             $this->controlBaseApiUrl . "/job/index",
             ["AUTH_TOKEN" => Configuration::AuthenticationToken()],

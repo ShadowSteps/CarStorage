@@ -1,0 +1,15 @@
+{
+  "name": "ad-search-engine/interfaces",
+  "license": "proprietary",
+  "type": "library",
+  "description": "Interfaces for building the ad-search-engine projects.",
+  "version": "1.0.0",
+  "autoload": {
+    "psr-4": {
+      "AdSearchEngine\\Interfaces\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.1"
+  }
+}

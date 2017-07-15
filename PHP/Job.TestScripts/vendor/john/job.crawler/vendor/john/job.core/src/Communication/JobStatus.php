@@ -9,7 +9,7 @@
 namespace Shadows\CarStorage\Core\Communication;
 
 
-class JobStatus extends JSONObject
+class JobStatus extends JSONCommunicationObject
 {
     /**
      * @var bool

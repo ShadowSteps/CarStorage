@@ -1,0 +1,22 @@
+{
+    "name": "carstorage-search-engine/core",
+    "version" : "1.0.7",
+    "license": "proprietary",
+    "type": "library",
+    "description": "Basic library for common objects in carstorage search engine",
+    "autoload": {
+        "psr-4": {
+            "CarStorage\\Core\\": "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../Basic.Interfaces"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "ad-search-engine/interfaces": "1.*"
+    }
+}

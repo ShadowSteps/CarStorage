@@ -9,7 +9,10 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Shadows\CarStorage\Core\Index\SOLRClient;
 use Shadows\CarStorage\Core\ML\IndexKNNFinder;
+use Shadows\CarStorage\Core\ML\IndexRegression;
+use Shadows\CarStorage\Core\ML\RegressionModel\IndexLinearRegression;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,4 +63,19 @@ class ServicesController extends Controller
         $data = $indexKNNFinder->FindNearest(5, $id);
         return new Response(json_encode($data));
     }
+
+    /**
+     * @Route("/services/getMeanPrice", name="meanPrice")
+     */
+    public function meanPriceAction(Request $request)
+    {
+        $id = $request->get("id");
+        $tempPath = __DIR__ . "/../../../../tmp/";
+        $model = $tempPath . "price-model";
+        $regression = new IndexRegression(unserialize(file_get_contents($model)), new SOLRClient("http://192.168.50.26:8983/solr/carstorage/"),$tempPath. "/features");
+        $price = $regression->GetItemMeanPrice($id);
+        return new Response(json_encode(["price" => (int)round($price)]));
+    }
+
+
 }

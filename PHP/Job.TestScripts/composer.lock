@@ -4,15 +4,50 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cd8689554c63a5c1a44ff1b277195b6",
+    "content-hash": "aebb341f3ea31ac06e3e12f9a21147d6",
     "packages": [
         {
+            "name": "davefx/phplot",
+            "version": "6.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davefx/PHPlot.git",
+                "reference": "d2e201ecaabb0428116c89cebe281a8f54096450"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davefx/PHPlot/zipball/d2e201ecaabb0428116c89cebe281a8f54096450",
+                "reference": "d2e201ecaabb0428116c89cebe281a8f54096450",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "phplot/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "description": "PHPlot - Create charts in PHP",
+            "homepage": "http://phplot.sourceforge.net",
+            "keywords": [
+                "chart",
+                "phplot"
+            ],
+            "time": "2016-10-19T07:14:15+00:00"
+        },
+        {
             "name": "john/job.core",
-            "version": "1.0.4",
+            "version": "1.0.7",
             "dist": {
                 "type": "path",
                 "url": "../Job.Core",
-                "reference": "a8e4d58ff4b2411c5997e98ff8975d92d095a842",
+                "reference": "2c9453a6275b1f952493fd6def18852d73faffa8",
                 "shasum": null
             },
             "require": {

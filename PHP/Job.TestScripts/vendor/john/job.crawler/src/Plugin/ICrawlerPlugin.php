@@ -9,12 +9,12 @@
 namespace Shadows\CarStorage\Crawler\Plugin;
 
 
-use Shadows\CarStorage\Core\Communication\JobExtractResult;
+use Shadows\CarStorage\Core\Communication\CrawlerExtractJobResultInformation;
 use Shadows\CarStorage\Core\Communication\JobInformation;
-use Shadows\CarStorage\Core\Communication\JobRegistration;
+use Shadows\CarStorage\Core\Communication\CrawlerHarvestJobResultInformation;
 
 interface ICrawlerPlugin
 {
-    public function doHarvestJob(JobInformation $information, \DOMDocument $document): JobRegistration;
-    public function doExtractJob(JobInformation $information, \DOMDocument $document): JobExtractResult;
+    public function doHarvestJob(JobInformation $information, \DOMDocument $document): CrawlerHarvestJobResultInformation;
+    public function doExtractJob(JobInformation $information, \DOMDocument $document): CrawlerExtractJobResultInformation;
 }

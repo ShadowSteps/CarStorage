@@ -99,32 +99,6 @@
         ]
     },
     {
-        "name": "john/job.core",
-        "version": "1.0.4",
-        "version_normalized": "1.0.4.0",
-        "dist": {
-            "type": "path",
-            "url": "../Job.Core",
-            "reference": "a8e4d58ff4b2411c5997e98ff8975d92d095a842",
-            "shasum": null
-        },
-        "require": {
-            "mashape/unirest-php": "3.0.*",
-            "php": ">=7.0",
-            "php-ai/php-ml": "0.4.1"
-        },
-        "type": "project",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Shadows\\CarStorage\\Core\\": "src/"
-            }
-        },
-        "license": [
-            "proprietary"
-        ]
-    },
-    {
         "name": "vanderlee/php-sentence",
         "version": "1.0.3",
         "version_normalized": "1.0.3.0",
@@ -288,6 +262,69 @@
         "autoload": {
             "psr-4": {
                 "Shadows\\CarStorage\\Crawler\\": "src/"
+            }
+        },
+        "license": [
+            "proprietary"
+        ]
+    },
+    {
+        "name": "davefx/phplot",
+        "version": "6.2.1",
+        "version_normalized": "6.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/davefx/PHPlot.git",
+            "reference": "d2e201ecaabb0428116c89cebe281a8f54096450"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/davefx/PHPlot/zipball/d2e201ecaabb0428116c89cebe281a8f54096450",
+            "reference": "d2e201ecaabb0428116c89cebe281a8f54096450",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">5.3.0"
+        },
+        "time": "2016-10-19T07:14:15+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "phplot/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL"
+        ],
+        "description": "PHPlot - Create charts in PHP",
+        "homepage": "http://phplot.sourceforge.net",
+        "keywords": [
+            "chart",
+            "phplot"
+        ]
+    },
+    {
+        "name": "john/job.core",
+        "version": "1.0.7",
+        "version_normalized": "1.0.7.0",
+        "dist": {
+            "type": "path",
+            "url": "../Job.Core",
+            "reference": "2c9453a6275b1f952493fd6def18852d73faffa8",
+            "shasum": null
+        },
+        "require": {
+            "mashape/unirest-php": "3.0.*",
+            "php": ">=7.0",
+            "php-ai/php-ml": "0.4.1"
+        },
+        "type": "project",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Shadows\\CarStorage\\Core\\": "src/"
             }
         },
         "license": [

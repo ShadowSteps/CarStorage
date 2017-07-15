@@ -24,6 +24,7 @@
   "require": {
     "php": ">=7.0",
     "john/job.core": "1.0.*",
-    "john/job.crawler": "1.0.*"
+    "john/job.crawler": "1.0.*",
+    "davefx/phplot": "6.2.1"
   }
 }

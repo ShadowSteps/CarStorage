@@ -9,7 +9,7 @@
 namespace Shadows\CarStorage\Crawler\Utils;
 
 
-use Shadows\CarStorage\Crawler\Exception\XPathElementNotFoundException;
+use AdSearchEngine\Core\Crawler\Exception\XPathElementNotFoundException;
 
 class XPathHelper
 {

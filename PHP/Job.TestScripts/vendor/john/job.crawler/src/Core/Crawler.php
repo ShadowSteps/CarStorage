@@ -12,19 +12,19 @@ namespace Shadows\CarStorage\Crawler\Core;
 use Phpml\Classification\KNearestNeighbors;
 use Shadows\CarStorage\Core\Communication\JobInformation;
 use Shadows\CarStorage\Core\Enum\JobType;
-use Shadows\CarStorage\Core\Index\JobIndexInformation;
+use CarStorage\Crawler\Index\AutomobileIndexInformation;
 use Shadows\CarStorage\Crawler\Utils\NLPHelper;
-use Shadows\CarStorage\Core\Utils\DocumentHelper;
+use Shadows\CarStorage\Core\Utils\DocumentConvertHelper;
 use Shadows\CarStorage\Utils\Exception\XPathElementNotFoundException;
-use Shadows\CarStorage\Crawler\Plugin\ICrawlerPlugin;
-use Shadows\CarStorage\Crawler\Scheduler\Client;
+use AdSearchEngine\Core\Crawler\Plugin\ICrawlerPlugin;
+use AdSearchEngine\Core\Utils\APIClient;
 use Shadows\CarStorage\Crawler\Utils\Configuration;
 use Unirest\Request;
 
 class Crawler
 {
     /**
-     * @var Client
+     * @var APIClient
      */
     private $client;
 
@@ -38,7 +38,7 @@ class Crawler
      */
     public function __construct()
     {
-        $this->client = new Client(Configuration::ControlApiUrl());
+        $this->client = new APIClient(Configuration::ControlApiUrl());
         $this->NLP = new NLPHelper();
     }
 
@@ -86,7 +86,7 @@ class Crawler
                         //$additionalKeywords = $this->getNLP()->ExtractKeywordsFromDescription($extractResult->getJobIndexInformation()->getDescription());
                         //$extractResult->getJobIndexInformation()
                         //    ->addKeywords($additionalKeywords);
-                        $this->joinDocToCluster($extractResult->getJobIndexInformation());
+                        $this->joinDocToCluster($extractResult->getAdIndexInformation());
                         //TODO uncomment ->index
                         $this->client
                            ->Index($extractResult);
@@ -98,12 +98,12 @@ class Crawler
         }
     }
 
-    private function joinDocToCluster(JobIndexInformation $indexDoc)
+    private function joinDocToCluster(AutomobileIndexInformation $indexDoc)
     {
         $features = unserialize(file_get_contents(__DIR__."/../../../tmp/features"));
-        $documentHelper = new DocumentHelper( $features);
+        $documentHelper = new DocumentConvertHelper( $features);
         /**
-         * @var $documentHelper DocumentHelper
+         * @var $documentHelper DocumentConvertHelper
          */
         $centroids = unserialize(file_get_contents(__DIR__."/../../../tmp/centroids"));
         list($trainingSet, $trainingResults) = $documentHelper->defineSets($centroids);

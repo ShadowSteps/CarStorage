@@ -92,6 +92,8 @@ $.fn.searchUiBuilder = function (settings) {
         });
         var findMore = $("<a class='find-more' href='#" + id + "'>Намери подобни</a>")
             .click(findNearest);
+        var findMean = $("<a class='find-more' href='#" + id + "'>Определи пазарна цена</a>")
+            .click(findMeanPrice);
         var result = $("<div class='search-result'>" +
             "<div class='result-title'><span><i class='fa fa-car' aria-hidden='true'></i>|" + title + "</span></div>" +
             "<div class='result-description'><span><i class='fa fa-file-text-o' aria-hidden='true'></i>|<b>Описание</b>: " + description + "</span></div>" +
@@ -104,6 +106,7 @@ $.fn.searchUiBuilder = function (settings) {
             "</div>" +
             "<div class='result-separator'></div>");
         result.find(".result-visit").prepend(findMore);
+        result.find(".result-visit").prepend(findMean);
         $(".search-results-holder .results-container").append(result);
     }
 
@@ -159,6 +162,25 @@ $.fn.searchUiBuilder = function (settings) {
             that.parent().parent().find(".nearest-holder").slideDown();
             that.addClass("clicked");
             that.text("Скриване на подобни");
+        });
+    }
+
+    function findMeanPrice() {
+        var that = $(this);
+        if (that.hasClass("clicked")) {
+            return;
+        }
+        var id = that.attr("href").replace("#", "");
+        $.ajax({
+            url: "services/getMeanPrice",
+            type: "GET",
+            data: {"id": id},
+            dataType: "json"
+        }).done(function (result) {
+            var info = $(result);
+            that.parent().parent().find(".result-price").append("&nbsp;<span style='color:red'>Средна пазарна цена: " + info[0].price + "</span>");
+            that.addClass("clicked");
+            that.remove();
         });
     }
 

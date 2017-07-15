@@ -10,7 +10,7 @@ namespace Shadows\CarStorage\Core\Communication;
 
 
 
-class JobRegistration extends JSONObject
+class JobRegistration extends JSONCommunicationObject
 {
     /**
      * @var string

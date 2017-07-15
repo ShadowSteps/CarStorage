@@ -9,11 +9,12 @@
 namespace Shadows\CarStorage\Crawler\Plugin;
 
 
-use Shadows\CarStorage\Core\Communication\JobExtractResult;
+use AdSearchEngine\Core\Crawler\Plugin\ICrawlerPlugin;
+use Shadows\CarStorage\Core\Communication\CrawlerExtractJobResultInformation;
 use Shadows\CarStorage\Core\Communication\JobInformation;
-use Shadows\CarStorage\Core\Communication\JobRegistration;
+use Shadows\CarStorage\Core\Communication\CrawlerHarvestJobResultInformation;
 use Shadows\CarStorage\Core\Enum\JobType;
-use Shadows\CarStorage\Core\Index\JobIndexInformation;
+use CarStorage\Crawler\Index\AutomobileIndexInformation;
 use Shadows\CarStorage\Utils\Exception\XPathElementNotFoundException;
 use Shadows\CarStorage\Utils\XPath\XPathHelper;
 
@@ -33,7 +34,7 @@ class CarsCrawlerPlugin implements ICrawlerPlugin
         "Ноември" => '11',
         "Декември" => '12'
     ];
-    public function doHarvestJob(JobInformation $information, \DOMDocument $document): JobRegistration
+    public function doHarvestJob(JobInformation $information, \DOMDocument $document): CrawlerHarvestJobResultInformation
     {
         $form = $document->getElementById("carsForm");
         $XPath = new \DOMXPath($document);
@@ -41,7 +42,7 @@ class CarsCrawlerPlugin implements ICrawlerPlugin
         $innerTable = XPathHelper::FindElement("table", $mainTable, $XPath);
         $buttonsTable = XPathHelper::FindElementByClass("table", "ver13black", $innerTable, $XPath);
         $resultTable = XPathHelper::FindElementByClass("table", "tableListResults", $innerTable, $XPath);
-        $jobRegistration = new JobRegistration($information->getId(), []);
+        $jobRegistration = new CrawlerHarvestJobResultInformation($information->getId(), []);
         $nextPageLinks = XPathHelper::FindElementList("a", $buttonsTable, $XPath);
         $carLinks = XPathHelper::FindElementListByClass("a", "ver15black", $resultTable, $XPath);
         for ($i = 0; $i < $nextPageLinks->length; $i++) {
@@ -70,7 +71,7 @@ class CarsCrawlerPlugin implements ICrawlerPlugin
         return $jobRegistration;
     }
 
-    public function doExtractJob(JobInformation $information, \DOMDocument $document): JobExtractResult
+    public function doExtractJob(JobInformation $information, \DOMDocument $document): CrawlerExtractJobResultInformation
     {
         $form = $document->getElementsByTagName("body")->item(0);
         $XPath = new \DOMXPath($document);
@@ -129,9 +130,9 @@ class CarsCrawlerPlugin implements ICrawlerPlugin
         $descriptionRow = XPathHelper::FindElement("tr", $descriptionInner, $XPath, 2);
         $description = trim(str_replace(["\n","\t"], "",$descriptionRow->textContent));
         $keywords = array_map("mb_strtolower", $keywords);
-        return new JobExtractResult(
-            new JobRegistration($information->getId(), []),
-            new JobIndexInformation(str_replace("-", "", $information->getId()), $headerText, $description?:"", $information->getUrl(), floatval($price), mb_strtolower($currency), $date, $kilometers, implode(";",$keywords))
+        return new CrawlerExtractJobResultInformation(
+            new CrawlerHarvestJobResultInformation($information->getId(), []),
+            new AutomobileIndexInformation(str_replace("-", "", $information->getId()), $headerText, $description?:"", $information->getUrl(), floatval($price), mb_strtolower($currency), $date, $kilometers, implode(";",$keywords))
         );
     }
 }
