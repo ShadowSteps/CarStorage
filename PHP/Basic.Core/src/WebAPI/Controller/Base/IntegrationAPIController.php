@@ -9,14 +9,12 @@
 namespace AdSearchEngine\Core\WebAPI\Controller\Base;
 
 
-use AdSearchEngine\Core\WebAPI\Controller\Base\BaseAPIController;
 use AdSearchEngine\Interfaces\Index\ServerClient\IIndexServerClient;
-use Shadows\CarStorage\Core\Index\SOLRClient;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class IntegrationAPIController extends BaseAPIController
 {
+    public static $indexClientServiceName = "search_engine.indexClient";
+
     private $crawlerAuthToken;
     /**
      * @var IIndexServerClient
@@ -28,8 +26,17 @@ class IntegrationAPIController extends BaseAPIController
      */
     public function getIndexServerClient(): IIndexServerClient
     {
+        if (!isset($this->indexServerClient)) {
+            if (!$this->has(self::$indexClientServiceName))
+                throw new FatalErrorException("Index client service not registered!");
+            $indexClient = $this->get(self::$indexClientServiceName);
+            if (!($indexClient instanceof IIndexServerClient))
+                throw new FatalErrorException("Index client service registered is not of required type!");
+            $this->indexServerClient = $indexClient;
+        }
         return $this->indexServerClient;
     }
+
     /**
      * @return mixed
      */
@@ -38,13 +45,12 @@ class IntegrationAPIController extends BaseAPIController
         return $this->crawlerAuthToken;
     }
 
-    protected function init(Request $request)
+    /**
+     * @param mixed $crawlerAuthToken
+     */
+    public function setCrawlerAuthToken(string $crawlerAuthToken)
     {
-        if (!$request->headers->has("AUTH_TOKEN"))
-            throw new BadRequestHttpException();
-        $crawlerId =  $request->headers->get("AUTH_TOKEN");
-        if (!$this->getContext()->getCrawlerSet()->Exists($crawlerId))
-            throw new BadRequestHttpException();
-        $this->crawlerAuthToken = $crawlerId;
+        $this->crawlerAuthToken = $crawlerAuthToken;
     }
+
 }

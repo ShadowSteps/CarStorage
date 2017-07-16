@@ -2,24 +2,41 @@
 
 namespace AdSearchEngine\Core\WebAPI\Controller;
 
-use AdSearchEngine\Core\WebAPI\Controller\Base\BaseAPIController;
+use AdSearchEngine\Core\Data\Postgres\Exceptions\NoJobsFoundException;
+use AdSearchEngine\Core\Utils\HashHelper;
+use AdSearchEngine\Core\WebAPI\Controller\Base\IntegrationAPIController;
 use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerHarvestJobResultInformation;
+use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerJobInformation;
+use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerStateInformation;
+use AdSearchEngine\Interfaces\Data\DTO\Data\JobData;
 use AdSearchEngine\Interfaces\WebAPI\Controller\IJobSchedulerController;
+use Doctrine\ORM\EntityNotFoundException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Routing\Annotation\Route;
 
-class JobSchedulerController extends BaseAPIController implements IJobSchedulerController
+class JobSchedulerController extends IntegrationAPIController implements IJobSchedulerController
 {
-
+    /**
+     * @Route("/job/register", name="FinishJob")
+     * @Method("POST")
+     * @param CrawlerHarvestJobResultInformation $jobResultInformation
+     * @ParamConverter(
+     *     name="jobResultInformation",
+     *     class="AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerHarvestJobResultInformation",
+     *     converter="job_scheduler_param_converter"
+     * )
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function finishJobAction(CrawlerHarvestJobResultInformation $jobResultInformation)
     {
-        $response = new JobStatus(false);
+        $response = new CrawlerStateInformation(false);
         $code = 200;
         try {
-            $std = RequestHelper::GetJsonStdFromRequest($request);
-            $requestData = RequestDataMapper::ConvertStdToJobRegistration($std);
             $this->getRepository()
-                ->FinishJob($requestData->getId(), $this->getCrawlerAuthToken());
+                ->FinishJob($jobResultInformation->getId(), $this->getCrawlerAuthToken());
             $alreadyAdded = [];
-            foreach ($requestData->getNewJobs() as $newJob){
+            foreach ($jobResultInformation->getNewJobs() as $newJob){
                 $hash = HashHelper::SHA256($newJob->getUrl());
                 try {
                     $existing = $this->getContext()
@@ -53,18 +70,49 @@ class JobSchedulerController extends BaseAPIController implements IJobSchedulerC
                 ->SaveChanges();
         }
         catch (BadRequestHttpException $exp){
-            Logger::warning("Bad request RegisterJob.", $exp);
+            $this->getLogger()->warning("Bad request RegisterJob.", $exp);
             $code = 400;
         }
         catch (\Exception $exp) {
-            Logger::error("Internal server error on request RegisterJob.", $exp);
+            $this->getLogger()->error("Internal server error on request RegisterJob.", $exp);
             $code = 500;
         }
         return $this->response($response, $code);
     }
 
+    /**
+     * @Route("/job/next",name="GetNextJob")
+     * @Method("GET")
+     */
     public function getNextJobAction()
     {
-        // TODO: Implement getNextJobAction() method.
+        $response = null;
+        $code = 200;
+        try {
+            $job = $this->getContext()
+                ->getJobSet()
+                ->GetNextFreeJob();
+            $this->getContext()
+                ->getJobSet()
+                ->LockJob($job->getId());
+            $this->getContext()
+                ->getCrawlerSet()
+                ->RegisterCall($this->getCrawlerAuthToken());
+            $this->getContext()
+                ->SaveChanges();
+            $response = new CrawlerJobInformation($job->getId(), $job->getUrl(), $job->getJobType());
+        }
+        catch (BadRequestHttpException $exp){
+            $this->getLogger()->warning("Bad request GetNextJob.", $exp);
+            $code = 400;
+        }
+        catch (NoJobsFoundException $exp) {
+            $response = new CrawlerStateInformation();
+        }
+        catch (\Exception $exp) {
+            $this->getLogger()->error("Internal server error on request GetNextJob.", $exp);
+            $code = 500;
+        }
+        return $this->response($response, $code);
     }
 }

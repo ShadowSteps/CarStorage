@@ -2,7 +2,7 @@
 
 namespace AdSearchEngine\Core\Index\MachineLearning;
 
-use AdSearchEngine\Code\Index\IndexDocumentsQueue;
+use AdSearchEngine\Core\Index\IndexDocumentsQueue;
 use AdSearchEngine\Core\Index\MachineLearning\Feature\Feature;
 use AdSearchEngine\Core\Index\MachineLearning\Utils\DocumentConvertHelper;
 use AdSearchEngine\Interfaces\Index\ServerClient\IIndexServerClient;

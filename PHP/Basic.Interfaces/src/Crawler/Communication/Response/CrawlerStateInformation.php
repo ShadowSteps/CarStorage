@@ -8,7 +8,7 @@ class CrawlerStateInformation extends JSONCommunicationObject
 {
     private $active = false;
 
-    public function __construct($active = false)
+    public function __construct(bool $active = false)
     {
         $this->active = $active;
     }

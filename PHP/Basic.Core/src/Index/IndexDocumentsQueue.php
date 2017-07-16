@@ -1,5 +1,5 @@
 <?php
-namespace AdSearchEngine\Code\Index;
+namespace AdSearchEngine\Core\Index;
 
 
 use AdSearchEngine\Interfaces\Index\ServerClient\IIndexServerClient;

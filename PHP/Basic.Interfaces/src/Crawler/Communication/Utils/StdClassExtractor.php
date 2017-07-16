@@ -40,8 +40,10 @@ class StdClassExtractor
         return intval($this->stdObject->{$paramName});
     }
 
-    public function GetDateTime(string $paramName, string $format = "Y-m-d H:i:s"): \DateTime {
+    public function GetDateTime(string $paramName, string $format = "Y-m-d\\TH:i:s\\Z"): \DateTime {
         $dateString = $this->stdObject->{$paramName};
+        if ($dateString instanceof \stdClass)
+            $dateString = $dateString->date;
         $dateString = preg_replace('/\\.([0-9]{6})[0-9]+/', '.$1', $dateString);
         if (!isset($dateString)||($Date = \DateTime::createFromFormat($format, $dateString)) === FALSE)
             throw new InvalidArgumentException("paramName:$paramName");
@@ -56,7 +58,7 @@ class StdClassExtractor
 
     public function GetBoolean(string $paramName): bool {
         if (!isset($this->stdObject->{$paramName}))
-            throw new InvalidArgumentException("paramName:$paramName");
+             throw new InvalidArgumentException("paramName:$paramName");
         $var = $this->stdObject->{$paramName};
         switch (true) {
             case $var === true:
@@ -87,7 +89,7 @@ class StdClassExtractor
             case "bool":
                 return $this->GetBoolean($paramName);
                 break;
-            case "\DateTime":
+            case "DateTime":
                 return $this->GetDateTime($paramName);
                 break;
             default:

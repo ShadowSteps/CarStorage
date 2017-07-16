@@ -10,6 +10,7 @@ namespace CarStorage\Crawler\Plugin;
 
 
 use AdSearchEngine\Core\Crawler\Plugin\ICrawlerPlugin;
+use AdSearchEngine\Interfaces\Crawler\Communication\Enum\JobType;
 use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerExtractJobResultInformation;
 use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerHarvestJobResultInformation;
 use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerJobInformation;

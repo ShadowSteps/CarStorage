@@ -2,6 +2,8 @@
 
 namespace AdSearchEngine\Core\Index\ServerClient;
 
+use AdSearchEngine\Interfaces\Index\ServerClient\IIndexServerClient;
+use Unirest\Request;
 use Unirest\Response;
 
 abstract class AIndexServerClient implements IIndexServerClient

@@ -2,7 +2,7 @@
 
 namespace AdSearchEngine\Core\Index\MachineLearning\RegressionModel;
 
-use AdSearchEngine\Code\Index\IndexDocumentsQueue;
+use AdSearchEngine\Core\Index\IndexDocumentsQueue;
 use AdSearchEngine\Core\Index\MachineLearning\Utils\DocumentConvertHelper;
 use AdSearchEngine\Interfaces\Index\MachineLearning\RegressionModel\IIndexRegressionModel;
 

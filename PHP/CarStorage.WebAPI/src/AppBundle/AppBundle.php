@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle;
+namespace CarStorage\WebAPI;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

@@ -32,7 +32,7 @@ class Program
             try {
                 $crawler->doNextJob();
             }
-            catch (Exception $exp) {
+            catch (\Exception $exp) {
                 echo "Exception while doing job: ".$exp->getMessage().PHP_EOL;
             }
             usleep(50000 + random_int(0,350000));

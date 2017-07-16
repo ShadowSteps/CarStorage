@@ -10,10 +10,6 @@ class AutomobileIndexInformation extends AdIndexInformation
     /**
      * @var string
      */
-    private $id;
-    /**
-     * @var string
-     */
     private $title;
     /**
      * @var string
@@ -38,17 +34,17 @@ class AutomobileIndexInformation extends AdIndexInformation
     /**
      * @var \DateTime
      */
-    private $date;
+    private $year;
     /**
      * @var int
      */
-    private $kilometers;
+    private $km;
     /**
      * @var int|null
      */
     private $cluster;
 
-    public function __construct(string $id, string $title, string $description, string $url, float $price, string $currency, \DateTime $year, int $kilometers, string $keywords = '', int $cluster = null)
+    public function __construct(string $id, string $title, string $description, string $url, float $price, string $currency, \DateTime $year, int $km, string $keywords = '', int $cluster = -1)
     {
         parent::__construct($id, $cluster);
         $this->title = $title;
@@ -57,8 +53,8 @@ class AutomobileIndexInformation extends AdIndexInformation
         $this->keywords = $keywords;
         $this->price = $price;
         $this->currency = $currency;
-        $this->date = $year;
-        $this->kilometers = $kilometers;
+        $this->year = $year;
+        $this->km = $km;
         $this->cluster = $cluster;
     }
 
@@ -66,13 +62,6 @@ class AutomobileIndexInformation extends AdIndexInformation
         $this->keywords .= ";" . implode(" ; ", $keyword);
     }
 
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
 
     /**
      * @return string
@@ -125,17 +114,17 @@ class AutomobileIndexInformation extends AdIndexInformation
     /**
      * @return \DateTime
      */
-    public function getDate(): \DateTime
+    public function getYear(): \DateTime
     {
-        return $this->date;
+        return $this->year;
     }
 
     /**
      * @return int
      */
-    public function getKilometers(): int
+    public function getKm(): int
     {
-        return $this->kilometers;
+        return $this->km;
     }
 
     /**
@@ -149,7 +138,7 @@ class AutomobileIndexInformation extends AdIndexInformation
     /**
      * @param int|null $cluster
      */
-    public function setCluster($cluster)
+    public function setCluster(int $cluster)
     {
         $this->cluster = $cluster;
     }

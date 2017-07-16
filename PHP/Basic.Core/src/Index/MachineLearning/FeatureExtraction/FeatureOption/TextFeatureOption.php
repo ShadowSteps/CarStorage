@@ -51,7 +51,7 @@ class TextFeatureOption
     }
 
     public function normalize(string $word): string {
-        $function = $this->splitFunction;
+        $function = $this->normalizeFunction;
         return $function($word);
     }
 }

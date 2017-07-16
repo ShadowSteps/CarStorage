@@ -2,6 +2,7 @@
   "name": "ad-search-engine/core",
   "license": "proprietary",
   "type": "library",
+    "version": "1.0.4",
   "description": "Core libraries for building the ad-search-engine projects.",
   "autoload": {
     "psr-4": {
@@ -18,6 +19,11 @@
     "php": ">=7.1",
     "ad-search-engine/interfaces": "1.0.0",
     "php-ai/php-ml": "0.4.*",
-    "symfony/symfony": "3.3.*"
+    "symfony/symfony": "3.3.*",
+    "doctrine/orm": "2.5.*",
+    "symfony/monolog-bundle": "^3.0",
+    "sensio/distribution-bundle": "^5.0",
+    "sensio/framework-extra-bundle": "^3.0.2",
+    "mashape/unirest-php": "3.0.*"
   }
 }

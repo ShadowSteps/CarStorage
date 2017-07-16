@@ -4,6 +4,6 @@
 /PHP/CarStorage.WebAPI/vendor/
 /PHP/CarStorage.Crawler/composer.lock
 /PHP/Basic.Core/src/Index/MachineLearning/RegressionModel/var/*
-/PHP/Job.TestScripts/vendor/
+/PHP/CarStorage.MachineLearning.Scripts/vendor/
 /PHP/.idea/
 /PHP/tmp/*

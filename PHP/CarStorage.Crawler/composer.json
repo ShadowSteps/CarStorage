@@ -12,6 +12,10 @@
         {
             "type": "path",
             "url": "../Basic.Core"
+        },
+        {
+            "type": "path",
+            "url": "../Basic.Interfaces"
         }
     ],
     "require": {

@@ -11,6 +11,7 @@ namespace AdSearchEngine\Core\Crawler;
 
 use AdSearchEngine\Core\Crawler\Exception\XPathElementNotFoundException;
 use AdSearchEngine\Core\Index\MachineLearning\Utils\DocumentConvertHelper;
+use AdSearchEngine\Interfaces\Crawler\Communication\Enum\JobType;
 use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerJobInformation;
 use AdSearchEngine\Interfaces\Crawler\ICrawler;
 use AdSearchEngine\Interfaces\Index\AdIndexInformation;
@@ -39,7 +40,7 @@ class Crawler implements ICrawler
             return;
         $classifier = $this->documentHelper->getKNNClassifierForCentroids($this->clusterCentroids);
         $doc = $indexDoc->jsonSerialize();
-        $convertedDoc = $this->documentHelper->convertDocumentForClustering($doc);
+        $convertedDoc = $this->documentHelper->convertDocumentForClustering((object)$doc);
         if (count($convertedDoc) > 0)
             $indexDoc->setCluster($classifier->predict($convertedDoc));
     }

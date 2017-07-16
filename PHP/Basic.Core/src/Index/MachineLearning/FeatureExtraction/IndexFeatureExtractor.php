@@ -2,7 +2,7 @@
 
 namespace AdSearchEngine\Core\Index\MachineLearning\FeatureExtraction;
 
-use AdSearchEngine\Code\Index\IndexDocumentsQueue;
+use AdSearchEngine\Core\Index\IndexDocumentsQueue;
 use AdSearchEngine\Core\Index\MachineLearning\Feature\BooleanNumericFeature;
 use AdSearchEngine\Core\Index\MachineLearning\Feature\NumericFeature;
 use AdSearchEngine\Core\Index\MachineLearning\Feature\NumericFeatureCharacteristics;

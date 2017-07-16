@@ -4,6 +4,7 @@ namespace AdSearchEngine\Core\Utils;
 
 use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerExtractJobResultInformation;
 use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerHarvestJobResultInformation;
+use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerJobInformation;
 use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerStateInformation;
 use AdSearchEngine\Interfaces\Crawler\Communication\Response\ErrorInformation;
 use AdSearchEngine\Interfaces\Utils\IAPIClient;
@@ -91,7 +92,7 @@ class APIClient implements IAPIClient
         );
         $std = $this->ValidateResponse($response);
         $status = CrawlerStateInformation::fromSTD($std);
-        if (!$status->isStatus())
+        if (!$status->isActive())
             return $status;
         return CrawlerJobInformation::fromSTD($std);
     }
@@ -110,7 +111,7 @@ class APIClient implements IAPIClient
     public function AddDocument(CrawlerExtractJobResultInformation $information): CrawlerStateInformation
     {
         $response = Request::post(
-            $this->controlBaseApiUrl . "/job/index",
+            $this->controlBaseApiUrl . "/document/add",
             ["AUTH_TOKEN" => $this->authorizationToken],
             json_encode($information->jsonSerialize())
         );
@@ -120,8 +121,8 @@ class APIClient implements IAPIClient
 
     public function DeleteDocument(string $id): CrawlerStateInformation
     {
-        $response = Request::post(
-            $this->controlBaseApiUrl . "/job/remove/".$id,
+        $response = Request::delete(
+            $this->controlBaseApiUrl . "/document/remove/".$id,
             ["AUTH_TOKEN" => $this->authorizationToken]
         );
         $std = $this->ValidateResponse($response);

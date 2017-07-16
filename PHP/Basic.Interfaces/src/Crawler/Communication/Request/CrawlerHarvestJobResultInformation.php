@@ -4,6 +4,7 @@ namespace AdSearchEngine\Interfaces\Crawler\Communication\Request;
 
 use AdSearchEngine\Interfaces\Crawler\Communication\JSONCommunicationObject;
 use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerJobInformation;
+use AdSearchEngine\Interfaces\Crawler\Communication\Utils\StdClassExtractor;
 
 class CrawlerHarvestJobResultInformation extends JSONCommunicationObject
 {
@@ -33,5 +34,16 @@ class CrawlerHarvestJobResultInformation extends JSONCommunicationObject
     public function getNewJobs(): array
     {
         return $this->newJobs;
+    }
+
+    public static function fromSTD(\stdClass $object) {
+        $extractor = new StdClassExtractor($object);
+        $id = $extractor->GetString("id");
+        $jobsArray = [];
+        $newJobs = $object->newJobs;
+        foreach ($newJobs as $job) {
+            $jobsArray[] = CrawlerJobInformation::fromSTD($job);
+        }
+        return new self($id, $jobsArray);
     }
 }

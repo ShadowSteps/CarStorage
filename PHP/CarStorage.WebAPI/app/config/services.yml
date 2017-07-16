@@ -4,6 +4,30 @@ parameters:
 #    parameter_name: value
 
 services:
+     search_engine.context:
+          class: AdSearchEngine\Core\Data\Postgres\AdSearchEngineContext
+          arguments: ["%database_host%", "%database_user%", "%database_password%", "%database_name%", "%database_port%"]
+     search_engine.repository:
+          class: AdSearchEngine\Core\Repository\Repository
+          arguments: ["@search_engine.context"]
+     search_engine.logger:
+          class: AdSearchEngine\Core\Utils\MonologLogger
+          arguments: ["@logger"]
+     search_engine.indexClient:
+          class: AdSearchEngine\Core\Index\ServerClient\SOLRClient
+          arguments: ["%search_engine.index_server.api_url%"]
+     controller.auth_event_subscriber:
+          class: AdSearchEngine\Core\WebAPI\EventSubscriber\TokenSubscriber
+          tags: [kernel.event_subscriber]
+     controller.param_converter.job_scheduler_param_converter:
+          class: AdSearchEngine\Core\WebAPI\ParamConverter\JobSchedulerParamConverter
+          tags:
+               - { name: request.param_converter, converter: job_scheduler_param_converter }
+     controller.param_converter.document_param_converter:
+          class: AdSearchEngine\Core\WebAPI\ParamConverter\DocumentParamConverter
+          arguments: ["CarStorage\\Crawler\\Index\\AutomobileIndexInformation"]
+          tags:
+               - { name: request.param_converter, converter: document_param_converter}
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

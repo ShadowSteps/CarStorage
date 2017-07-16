@@ -18,7 +18,7 @@ class SOLRClient extends AIndexServerClient
     protected function ValidateResponse(Response $response) {
         if ($response->code != 200) {
             if (!isset($response->body->error))
-                throw new \Exception("Unknown error of solr request!");
+                throw new \Exception("Unknown error of solr request! Body: ".$response->raw_body);
             if (isset($response->body->error->msg))
                 throw new \Exception("Error from SOLR API: {$response->body->error->msg}!");
             throw new \Exception("Error from SOLR API with no message!");
@@ -36,10 +36,18 @@ class SOLRClient extends AIndexServerClient
             throw new \Exception("Could not find response body!");
     }
 
-    public function AddFileToIndex(AdIndexInformation $information) {
+    public function AddFileToIndex(AdIndexInformation $information): void {
         $postUrl = $this->getApiUrl() . "/update";
         $bodyJSON = $information->jsonSerialize();
-        $body = json_encode($bodyJSON);
+        $body = [
+            "add" => [
+                $bodyJSON
+            ],
+            "commit" => [
+                "waitSearcher" => false
+            ]
+        ];
+        $body = json_encode($body);
         $response = $this->doPOST($postUrl, $body, ["Content-Type"=>"application/json"]);
         $this->ValidateResponse($response);
     }
@@ -47,7 +55,7 @@ class SOLRClient extends AIndexServerClient
     /**
      * @param AdIndexInformation[] $documents
      */
-    public function UpdateDocumentArray(array $documents) {
+    public function UpdateDocumentArray(array $documents): void {
         $postUrl = rtrim($this->getApiUrl(), "/") . "/update";
         $body = [
             "add" => [],
@@ -94,28 +102,28 @@ class SOLRClient extends AIndexServerClient
         return $response->body->response->docs;
     }
 
-    public function GetMaxOfNumericFeature(string $feature) {
+    public function GetMaxOfNumericFeature(string $feature): float {
         $getURL = rtrim($this->getApiUrl(), "/") . "/select?indent=on&q=*:*&rows=1&wt=json&sort=$feature desc";
         $response = $this->doGET($getURL);
         $this->ValidateSelectResponse($response);
         return $response->body->response->docs[0]->{$feature};
     }
 
-    public function GetMinOfNumericFeature(string $feature) {
+    public function GetMinOfNumericFeature(string $feature): float {
         $getURL = rtrim($this->getApiUrl(), "/") . "/select?indent=on&q=*:*&rows=1&wt=json&sort=$feature asc";
         $response = $this->doGET($getURL);
         $this->ValidateSelectResponse($response);
         return $response->body->response->docs[0]->{$feature};
     }
 
-    public function GetAverageOfNumericFeature(string $feature, string $query = "*:*") {
+    public function GetAverageOfNumericFeature(string $feature, string $query = "*:*"): float {
         $getURL = rtrim($this->getApiUrl(), "/") . "/select?indent=on&q=".$this->NormalizeQuery($query)."&rows=0&wt=json&json.facet={\"x\":\"avg($feature)\"}";
         $response = $this->doGET($getURL);
         $this->ValidateSelectResponse($response);
         return $response->body->facets->x;
     }
 
-    public function GetSigmaDispersionOfNumericFeature(string $feature) {
+    public function GetSigmaDispersionOfNumericFeature(string $feature): float {
         $average = $this->GetAverageOfNumericFeature($feature);
         $step = 100;
         $documentsCount = $this->GetDocumentsCount();
