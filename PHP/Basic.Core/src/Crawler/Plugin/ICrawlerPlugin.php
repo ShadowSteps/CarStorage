@@ -8,9 +8,9 @@
 
 namespace AdSearchEngine\Core\Crawler\Plugin;
 
-use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerExtractJobResultInformation;
-use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerHarvestJobResultInformation;
-use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerJobInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerExtractJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerHarvestJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Response\CrawlerJobInformation;
 
 interface ICrawlerPlugin
 {

@@ -8,6 +8,7 @@
 
 namespace AdSearchEngine\Interfaces\Index\ServerClient;
 
+use AdSearchEngine\Interfaces\Communication\Search\SearchQuery;
 use AdSearchEngine\Interfaces\Index\AdIndexInformation;
 
 interface IIndexServerClient
@@ -21,6 +22,7 @@ interface IIndexServerClient
     public function UpdateDocumentArrayField(string $fieldName, array $values): void;
     public function GetDocumentsCount(string $query = "*:*"): int;
     public function Select(string $query, int $start, int $count, string $sort = null): array;
+    public function DeleteById(string $documentId): void;
     public function SelectDocumentById(string $documentId): \stdClass;
     public function GetMaxOfNumericFeature(string $feature): float;
     public function GetMinOfNumericFeature(string $feature): float;
@@ -29,4 +31,5 @@ interface IIndexServerClient
     public function GetMedianOfNumericFeature(string $feature, string $query = "*:*"): float;
     public function GetFirstQuartileOfNumericFeature(string $feature, string $query = "*:*"): float;
     public function GetThirdQuartileOfNumericFeature(string $feature, string $query = "*:*"): float;
+    public function Search(SearchQuery $query): array;
 }

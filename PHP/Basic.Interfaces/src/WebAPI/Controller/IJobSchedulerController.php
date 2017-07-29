@@ -9,7 +9,7 @@
 namespace AdSearchEngine\Interfaces\WebAPI\Controller;
 
 
-use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerHarvestJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerHarvestJobResultInformation;
 
 interface IJobSchedulerController
 {

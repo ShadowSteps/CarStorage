@@ -30,8 +30,11 @@ class TokenSubscriber implements EventSubscriberInterface
             if (!$event->getRequest()->headers->has("AUTH_TOKEN"))
                 throw new UnauthorizedHttpException("Token");
             $crawlerId =  $event->getRequest()->headers->get("AUTH_TOKEN");
+            $UUIDv4 = '/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i';
+            if(!preg_match($UUIDv4, $crawlerId))
+                throw new UnauthorizedHttpException("Token");
             if (!$controller[0]->getContext()->getCrawlerSet()->Exists($crawlerId))
-                throw new AccessDeniedHttpException();
+                throw new UnauthorizedHttpException("Token");
             $controller[0]->setCrawlerAuthToken($crawlerId);
         }
     }

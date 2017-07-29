@@ -9,7 +9,7 @@
 namespace AdSearchEngine\Interfaces\WebAPI\Controller;
 
 
-use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerExtractJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerExtractJobResultInformation;
 
 interface IDocumentController
 {

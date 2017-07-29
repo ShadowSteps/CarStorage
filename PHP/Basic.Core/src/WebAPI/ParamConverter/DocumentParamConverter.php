@@ -3,7 +3,7 @@
 namespace AdSearchEngine\Core\WebAPI\ParamConverter;
 
 use AdSearchEngine\Core\WebAPI\Utils\RequestHelper;
-use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerExtractJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerExtractJobResultInformation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,7 +48,7 @@ class DocumentParamConverter implements ParamConverterInterface
     public function supports(ParamConverter $configuration)
     {
         return (in_array($configuration->getClass(), [
-            'AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerExtractJobResultInformation'
+            'AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerExtractJobResultInformation'
         ]));
     }
 }

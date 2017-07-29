@@ -10,10 +10,10 @@ class RequestHelper
     public static function GetJsonStdFromRequest(Request $request) : \stdClass {
         $content = $request->getContent();
         if (strlen($content) <= 0)
-            throw new BadRequestHttpException();
+            throw new BadRequestHttpException("Empty request content!");
         $std = json_decode($content);
         if (!$std)
-            throw new BadRequestHttpException();
+            throw new BadRequestHttpException("Request is not in json format!");
         return $std;
     }
 }

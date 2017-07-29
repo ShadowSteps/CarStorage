@@ -8,7 +8,7 @@
 
 namespace AdSearchEngine\Interfaces\Index;
 
-use AdSearchEngine\Interfaces\Crawler\Communication\Utils\StdClassExtractor;
+use AdSearchEngine\Interfaces\Communication\Utils\StdClassExtractor;
 use JsonSerializable;
 
 abstract class AdIndexInformation implements JsonSerializable

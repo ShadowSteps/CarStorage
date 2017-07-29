@@ -3,6 +3,7 @@
 namespace AdSearchEngine\Core\WebAPI\Controller\Base;
 
 use AdSearchEngine\Interfaces\Data\IAdSearchEngineContext;
+use AdSearchEngine\Interfaces\Index\ServerClient\IIndexServerClient;
 use AdSearchEngine\Interfaces\Repository\IRepository;
 use AdSearchEngine\Interfaces\Utils\ILogger;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,6 +15,8 @@ class BaseAPIController extends Controller
     public static $contextServiceName = "search_engine.context";
     public static $repositoryServiceName = "search_engine.repository";
     public static $loggerServiceName = "search_engine.logger";
+    public static $indexClientServiceName = "search_engine.indexClient";
+
     /**
      * @var IAdSearchEngineContext
      */
@@ -28,6 +31,11 @@ class BaseAPIController extends Controller
      * @var ILogger
      */
     private $logger;
+
+    /**
+     * @var IIndexServerClient
+     */
+    private $indexServerClient;
 
     public function getRepository(): IRepository
     {
@@ -66,6 +74,23 @@ class BaseAPIController extends Controller
             $this->logger = $logger;
         }
         return $this->logger;
+    }
+
+    /**
+     * @return IIndexServerClient
+     * @throws FatalErrorException
+     */
+    public function getIndexServerClient(): IIndexServerClient
+    {
+        if (!isset($this->indexServerClient)) {
+            if (!$this->has(self::$indexClientServiceName))
+                throw new FatalErrorException("Index client service not registered!");
+            $indexClient = $this->get(self::$indexClientServiceName);
+            if (!($indexClient instanceof IIndexServerClient))
+                throw new FatalErrorException("Index client service registered is not of required type!");
+            $this->indexServerClient = $indexClient;
+        }
+        return $this->indexServerClient;
     }
 
 

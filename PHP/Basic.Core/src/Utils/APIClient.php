@@ -2,11 +2,12 @@
 
 namespace AdSearchEngine\Core\Utils;
 
-use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerExtractJobResultInformation;
-use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerHarvestJobResultInformation;
-use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerJobInformation;
-use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerStateInformation;
-use AdSearchEngine\Interfaces\Crawler\Communication\Response\ErrorInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerExtractJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerHarvestJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Response\CrawlerJobInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Response\CrawlerStateInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Response\ErrorInformation;
+use AdSearchEngine\Interfaces\Communication\Search\SearchQuery;
 use AdSearchEngine\Interfaces\Utils\IAPIClient;
 use Unirest\Request;
 use Unirest\Response;
@@ -22,7 +23,7 @@ class APIClient implements IAPIClient
         $this->authorizationToken = $authToken;
     }
 
-    private function ValidateResponse(Response $response) : \stdClass {
+    private function ValidateResponse(Response $response) {
         $content = $response->raw_body;
         if (strlen($content) <= 0)
             throw new \Exception("Response is empty!");
@@ -41,48 +42,6 @@ class APIClient implements IAPIClient
         }
         return $std;
     }
-
-    public function GetNextJob(): CrawlerStateInformation {
-        $response = Request::get(
-            $this->controlBaseApiUrl . "/job/next",
-            ["AUTH_TOKEN" => $this->authorizationToken]
-        );
-        $std = $this->ValidateResponse($response);
-        $status = CrawlerStateInformation::fromSTD($std);
-        if (!$status->isStatus())
-            return $status;
-        return CrawlerJobInformation::fromSTD($std);
-    }
-
-    public function Register(CrawlerHarvestJobResultInformation $registration): JobStatus {
-        $response = Request::post(
-            $this->controlBaseApiUrl . "/job/register",
-            ["AUTH_TOKEN" => $this->authorizationToken],
-            json_encode($registration->jsonSerialize())
-        );
-        $std = $this->ValidateResponse($response);
-        return CrawlerStateInformation::fromSTD($std);
-    }
-
-    public function Index(CrawlerExtractJobResultInformation $information): JobStatus {
-        $response = Request::post(
-            $this->controlBaseApiUrl . "/job/index",
-            ["AUTH_TOKEN" => Configuration::AuthenticationToken()],
-            json_encode($information)
-        );
-        $std = $this->ValidateResponse($response);
-        return RequestDataMapper::ConvertStdToJobStatus($std);
-    }
-
-    public function Delete(string $id): JobStatus {
-        $response = Request::post(
-            $this->controlBaseApiUrl . "/job/remove/".$id,
-            ["AUTH_TOKEN" => Configuration::AuthenticationToken()]
-        );
-        $std = $this->ValidateResponse($response);
-        return RequestDataMapper::ConvertStdToJobStatus($std);
-    }
-
 
     public function GetNextCrawlerJob(): CrawlerStateInformation
     {
@@ -127,5 +86,16 @@ class APIClient implements IAPIClient
         );
         $std = $this->ValidateResponse($response);
         return CrawlerStateInformation::fromSTD($std);
+    }
+
+    public function Search(SearchQuery $query): array
+    {
+        $response = Request::post(
+            $this->controlBaseApiUrl . "/search/search",
+            [],
+            json_encode($query->jsonSerialize())
+        );
+        $std = $this->ValidateResponse($response);
+        return $std;
     }
 }

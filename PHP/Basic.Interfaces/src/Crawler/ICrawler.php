@@ -9,7 +9,7 @@
 namespace AdSearchEngine\Interfaces\Crawler;
 
 
-use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerJobInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Response\CrawlerJobInformation;
 
 interface ICrawler
 {

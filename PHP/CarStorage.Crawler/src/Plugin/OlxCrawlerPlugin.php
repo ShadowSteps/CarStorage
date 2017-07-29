@@ -9,19 +9,20 @@
 namespace Shadows\CarStorage\Crawler\Plugin;
 
 
+
+use AdSearchEngine\Core\Crawler\Exception\XPathElementNotFoundException;
 use AdSearchEngine\Core\Crawler\Plugin\ICrawlerPlugin;
-use Shadows\CarStorage\Core\Communication\CrawlerExtractJobResultInformation;
-use Shadows\CarStorage\Core\Communication\JobInformation;
-use Shadows\CarStorage\Core\Communication\CrawlerHarvestJobResultInformation;
-use Shadows\CarStorage\Core\Enum\JobType;
+use AdSearchEngine\Core\Crawler\Utils\XPathHelper;
+use AdSearchEngine\Interfaces\Communication\Crawler\Enum\JobType;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerExtractJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerHarvestJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Response\CrawlerJobInformation;
 use CarStorage\Crawler\Index\AutomobileIndexInformation;
-use Shadows\CarStorage\Utils\Exception\XPathElementNotFoundException;
-use Shadows\CarStorage\Utils\XPath\XPathHelper;
 
 class OlxCrawlerPlugin implements ICrawlerPlugin
 {
 
-    public function doHarvestJob(JobInformation $information, \DOMDocument $document): CrawlerHarvestJobResultInformation
+    public function doHarvestJob(CrawlerJobInformation $information, \DOMDocument $document): CrawlerHarvestJobResultInformation
     {
         $section = $document->getElementById("body-container");
         $XPath = new \DOMXPath($document);
@@ -35,7 +36,7 @@ class OlxCrawlerPlugin implements ICrawlerPlugin
             $pageNode = $nextPageLinks->item($i);
             $url = $pageNode->attributes->getNamedItem("href")->nodeValue;
             if (strlen($url) > 0){
-                $jobRegistration->addNewJob(new JobInformation(
+                $jobRegistration->addNewJob(new CrawlerJobInformation(
                     "new",
                     $url,
                     JobType::Harvest
@@ -46,7 +47,7 @@ class OlxCrawlerPlugin implements ICrawlerPlugin
             $pageNode = $carLinks->item($i);
             $url = $pageNode->attributes->getNamedItem("href")->nodeValue;
             if (strlen($url) > 0){
-                $jobRegistration->addNewJob(new JobInformation(
+                $jobRegistration->addNewJob(new CrawlerJobInformation(
                     "new",
                     $url,
                     JobType::Extract
@@ -56,7 +57,7 @@ class OlxCrawlerPlugin implements ICrawlerPlugin
         return $jobRegistration;
     }
 
-    public function doExtractJob(JobInformation $information, \DOMDocument $document): CrawlerExtractJobResultInformation
+    public function doExtractJob(CrawlerJobInformation $information, \DOMDocument $document): CrawlerExtractJobResultInformation
     {
         $offerActionsContainer = $document->getElementById("offeractions");
         $offerContainer = $document->getElementById("offerdescription");

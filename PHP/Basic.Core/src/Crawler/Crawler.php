@@ -11,8 +11,9 @@ namespace AdSearchEngine\Core\Crawler;
 
 use AdSearchEngine\Core\Crawler\Exception\XPathElementNotFoundException;
 use AdSearchEngine\Core\Index\MachineLearning\Utils\DocumentConvertHelper;
-use AdSearchEngine\Interfaces\Crawler\Communication\Enum\JobType;
-use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerJobInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Enum\JobType;
+use AdSearchEngine\Interfaces\Communication\Crawler\Response\CrawlerJobInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Response\CrawlerStateInformation;
 use AdSearchEngine\Interfaces\Crawler\ICrawler;
 use AdSearchEngine\Interfaces\Index\AdIndexInformation;
 use AdSearchEngine\Interfaces\Utils\IAPIClient;
@@ -84,10 +85,11 @@ class Crawler implements ICrawler
         }
     }
 
-    public function doNextJob(): void
+    public function doNextJob(): CrawlerStateInformation
     {
         $nextJob = $this->apiClient->GetNextCrawlerJob();
         if ($nextJob->isActive() && $nextJob instanceof CrawlerJobInformation)
             $this->doCrawlerJob($nextJob);
+        return $nextJob;
     }
 }

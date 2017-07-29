@@ -10,8 +10,8 @@ namespace AdSearchEngine\Core\WebAPI\Controller;
 
 
 use AdSearchEngine\Core\WebAPI\Controller\Base\IntegrationAPIController;
-use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerExtractJobResultInformation;
-use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerStateInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerExtractJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Response\CrawlerStateInformation;
 use AdSearchEngine\Interfaces\WebAPI\Controller\IDocumentController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -26,7 +26,7 @@ class DocumentController extends IntegrationAPIController implements IDocumentCo
      * @param CrawlerExtractJobResultInformation $jobResultInformation
      * @ParamConverter(
      *     name="jobResultInformation",
-     *     class="AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerExtractJobResultInformation",
+     *     class="AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerExtractJobResultInformation",
      *     converter="document_param_converter"
      * )
      * @return \Symfony\Component\HttpFoundation\Response
@@ -69,6 +69,8 @@ class DocumentController extends IntegrationAPIController implements IDocumentCo
             $this->getContext()
                 ->getJobSet()
                 ->Delete($id);
+            $this->getIndexServerClient()
+                ->DeleteById(str_replace("-", "", $id));
             $this->getContext()
                 ->SaveChanges();
             $response = new CrawlerStateInformation(true);

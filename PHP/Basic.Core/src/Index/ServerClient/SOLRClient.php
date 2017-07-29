@@ -9,6 +9,8 @@
 namespace AdSearchEngine\Core\Index\ServerClient;
 
 
+use AdSearchEngine\Core\Index\ServerClient\Utils\SOLRQueryGenerator;
+use AdSearchEngine\Interfaces\Communication\Search\SearchQuery;
 use AdSearchEngine\Interfaces\Index\AdIndexInformation;
 use Unirest\Request\Body;
 use Unirest\Response;
@@ -193,5 +195,56 @@ class SOLRClient extends AIndexServerClient
     public function SelectDocumentById(string $documentId): \stdClass
     {
         return $this->Select("id:$documentId", 0, 1)[0];
+    }
+
+    public function DeleteById(string $documentId): void
+    {
+        $postUrl = rtrim($this->getApiUrl(), "/") . "/update";
+        $body = [
+            "delete" => [
+                "id" => $documentId
+            ],
+            "commit" => [
+                "waitSearcher" => false
+            ]
+        ];
+        $body = json_encode($body);
+        $response = $this->doPOST($postUrl, $body, ["Content-Type"=>"application/json"]);
+        $this->ValidateResponse($response);
+    }
+
+    public function Search(SearchQuery $query): array
+    {
+        $searchCriteria = $query->getFieldsSearchCriteria();
+        $q = "";
+        $qf = "";
+        $fq = [];
+        foreach ($searchCriteria as $criteria) {
+            $qf .= $criteria->getFieldName() . "^" . $criteria->getFieldWeight() . " ";
+            $words = explode(" ",$criteria->getSearchTerm());
+            foreach ($words as $word) {
+                $word = mb_strtolower($word);
+                if (!mb_strstr($q, $word))
+                    $q .= ' ' . $word;
+            }
+        }
+        foreach ($query->getFieldsRangeCriteria() as $criterion) {
+            $fq[] = ($criterion->getFieldName().":[".$criterion->getFieldMin()." TO ".$criterion->getFieldMax()."]");
+        }
+        $q = (trim($q));
+        $qf = (trim($qf));
+        $URL = rtrim($this->getApiUrl(), "/") . "/select?wt=json&defType=edismax&qf=$qf";
+        $headers = array(
+            'Content-Type' => 'application/json'
+        );
+        $data = array(
+            "query" => $q,
+            "offset" => (($query->getPage() - 1)*$query->getItemsPerPage()),
+            "limit" => $query->getItemsPerPage(),
+            "filter" => $fq
+        );
+        $response = $this->doPOST($URL, json_encode($data), $headers);
+        $this->ValidateSelectResponse($response);
+        return $response->body->response->docs;
     }
 }

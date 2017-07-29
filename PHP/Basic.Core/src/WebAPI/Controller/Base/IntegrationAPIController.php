@@ -8,34 +8,10 @@
 
 namespace AdSearchEngine\Core\WebAPI\Controller\Base;
 
-
-use AdSearchEngine\Interfaces\Index\ServerClient\IIndexServerClient;
-
 class IntegrationAPIController extends BaseAPIController
 {
-    public static $indexClientServiceName = "search_engine.indexClient";
 
     private $crawlerAuthToken;
-    /**
-     * @var IIndexServerClient
-     */
-    private $indexServerClient;
-
-    /**
-     * @return IIndexServerClient
-     */
-    public function getIndexServerClient(): IIndexServerClient
-    {
-        if (!isset($this->indexServerClient)) {
-            if (!$this->has(self::$indexClientServiceName))
-                throw new FatalErrorException("Index client service not registered!");
-            $indexClient = $this->get(self::$indexClientServiceName);
-            if (!($indexClient instanceof IIndexServerClient))
-                throw new FatalErrorException("Index client service registered is not of required type!");
-            $this->indexServerClient = $indexClient;
-        }
-        return $this->indexServerClient;
-    }
 
     /**
      * @return mixed

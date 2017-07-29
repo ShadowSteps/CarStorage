@@ -9,13 +9,14 @@
 namespace CarStorage\Crawler\Plugin;
 
 
+use AdSearchEngine\Core\Crawler\Exception\XPathElementNotFoundException;
 use AdSearchEngine\Core\Crawler\Plugin\ICrawlerPlugin;
-use AdSearchEngine\Interfaces\Crawler\Communication\Enum\JobType;
-use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerExtractJobResultInformation;
-use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerHarvestJobResultInformation;
-use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerJobInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Enum\JobType;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerExtractJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerHarvestJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Response\CrawlerJobInformation;
 use CarStorage\Crawler\Index\AutomobileIndexInformation;
-use CarStorage\Crawler\Utils\XPathHelper;
+use AdSearchEngine\Core\Crawler\Utils\XPathHelper;
 
 class CarsCrawlerPlugin implements ICrawlerPlugin
 {

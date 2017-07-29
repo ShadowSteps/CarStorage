@@ -11,6 +11,7 @@ namespace CarStorage\Crawler;
 
 use AdSearchEngine\Core\Crawler\Crawler;
 use AdSearchEngine\Core\Utils\APIClient;
+use AdSearchEngine\Interfaces\Communication\Crawler\Response\CrawlerJobInformation;
 use CarStorage\Crawler\Utils\Configuration;
 
 class Program
@@ -30,7 +31,11 @@ class Program
         while ($maxTries == -1 || $i < $maxTries) {
             $i++;
             try {
-                $crawler->doNextJob();
+                $jobInformation = $crawler->doNextJob();
+                if ($jobInformation instanceof CrawlerJobInformation)
+                    echo "Job done ({$jobInformation->getJobType()}): ". $jobInformation->getUrl().PHP_EOL;
+                else
+                    echo "No new jobs available!".PHP_EOL;
             }
             catch (\Exception $exp) {
                 echo "Exception while doing job: ".$exp->getMessage().PHP_EOL;

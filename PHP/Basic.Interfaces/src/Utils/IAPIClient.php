@@ -9,9 +9,10 @@
 namespace AdSearchEngine\Interfaces\Utils;
 
 
-use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerExtractJobResultInformation;
-use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerHarvestJobResultInformation;
-use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerStateInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerExtractJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerHarvestJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Response\CrawlerStateInformation;
+use AdSearchEngine\Interfaces\Communication\Search\SearchQuery;
 
 interface IAPIClient
 {
@@ -19,4 +20,5 @@ interface IAPIClient
     public function RegisterNewCrawlerJobs(CrawlerHarvestJobResultInformation $registration): CrawlerStateInformation;
     public function AddDocument(CrawlerExtractJobResultInformation $information): CrawlerStateInformation;
     public function DeleteDocument(string $id): CrawlerStateInformation;
+    public function Search(SearchQuery $query): array;
 }

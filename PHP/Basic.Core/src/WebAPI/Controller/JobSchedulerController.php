@@ -5,9 +5,9 @@ namespace AdSearchEngine\Core\WebAPI\Controller;
 use AdSearchEngine\Core\Data\Postgres\Exceptions\NoJobsFoundException;
 use AdSearchEngine\Core\Utils\HashHelper;
 use AdSearchEngine\Core\WebAPI\Controller\Base\IntegrationAPIController;
-use AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerHarvestJobResultInformation;
-use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerJobInformation;
-use AdSearchEngine\Interfaces\Crawler\Communication\Response\CrawlerStateInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerHarvestJobResultInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Response\CrawlerJobInformation;
+use AdSearchEngine\Interfaces\Communication\Crawler\Response\CrawlerStateInformation;
 use AdSearchEngine\Interfaces\Data\DTO\Data\JobData;
 use AdSearchEngine\Interfaces\WebAPI\Controller\IJobSchedulerController;
 use Doctrine\ORM\EntityNotFoundException;
@@ -23,7 +23,7 @@ class JobSchedulerController extends IntegrationAPIController implements IJobSch
      * @param CrawlerHarvestJobResultInformation $jobResultInformation
      * @ParamConverter(
      *     name="jobResultInformation",
-     *     class="AdSearchEngine\Interfaces\Crawler\Communication\Request\CrawlerHarvestJobResultInformation",
+     *     class="AdSearchEngine\Interfaces\Communication\Crawler\Request\CrawlerHarvestJobResultInformation",
      *     converter="job_scheduler_param_converter"
      * )
      * @return \Symfony\Component\HttpFoundation\Response
