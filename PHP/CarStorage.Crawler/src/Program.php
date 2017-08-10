@@ -40,7 +40,7 @@ class Program
             catch (\Exception $exp) {
                 echo "Exception while doing job: ".$exp->getMessage().PHP_EOL;
             }
-            usleep(50000 + random_int(0,350000));
+            usleep(300000 + random_int(0,700000));
         }
     }
 }

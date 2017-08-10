@@ -20,5 +20,5 @@ interface IAPIClient
     public function RegisterNewCrawlerJobs(CrawlerHarvestJobResultInformation $registration): CrawlerStateInformation;
     public function AddDocument(CrawlerExtractJobResultInformation $information): CrawlerStateInformation;
     public function DeleteDocument(string $id): CrawlerStateInformation;
-    public function Search(SearchQuery $query): array;
+    public function Search(SearchQuery $query);
 }

@@ -12,6 +12,8 @@ use AdSearchEngine\Core\Data\Postgres\Entities\Crawlers;
 use AdSearchEngine\Core\Data\Postgres\Entities\Jobs;
 use AdSearchEngine\Core\Data\Postgres\Exceptions\NoJobsFoundException;
 use AdSearchEngine\Core\Data\Postgres\Sets\Base\BaseSet;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class JobSet extends BaseSet implements IJobSet
@@ -81,18 +83,14 @@ class JobSet extends BaseSet implements IJobSet
 
     public function GetNextFreeJob(): Job
     {
-        $date = new \DateTime();
-        $date->sub(new \DateInterval("P2D"));
-        $criteria = new Criteria();
-        $criteria->where($criteria->expr()->eq('locked', false));
-        $criteria->orWhere($criteria->expr()->lte('dateAdded', $date));
-        $criteria->orderBy(['dateAdded'=>'ASC']);
-        $result = $this->getManager()
-            ->getRepository('AdSearchEngine\Core\Data\Postgres\Entities\Jobs')
-            ->matching($criteria);
-        if ($result->isEmpty())
+        $rsm = new ResultSetMappingBuilder($this->getManager());
+        $rsm->addRootEntityFromClassMetadata('AdSearchEngine\Core\Data\Postgres\Entities\Jobs', "j");
+        $query = $this->getManager()->createNativeQuery(
+            'SELECT * FROM jobs as j WHERE random() < 0.01 and locked = false limit 1', $rsm);
+        $result = $query->getResult();
+        if (!count($result))
             throw new NoJobsFoundException("No jobs found!");
-        $entity = $result->first();
+        $entity = array_pop($result);
         return $this->ConvertEntityToDTO($entity);
     }
 

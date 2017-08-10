@@ -88,7 +88,7 @@ class APIClient implements IAPIClient
         return CrawlerStateInformation::fromSTD($std);
     }
 
-    public function Search(SearchQuery $query): array
+    public function Search(SearchQuery $query)
     {
         $response = Request::post(
             $this->controlBaseApiUrl . "/search/search",

@@ -245,6 +245,6 @@ class SOLRClient extends AIndexServerClient
         );
         $response = $this->doPOST($URL, json_encode($data), $headers);
         $this->ValidateSelectResponse($response);
-        return $response->body->response->docs;
+        return ["count" => $response->body->response->numFound, "result" => $response->body->response->docs];
     }
 }

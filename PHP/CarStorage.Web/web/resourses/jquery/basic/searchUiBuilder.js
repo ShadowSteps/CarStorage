@@ -90,10 +90,10 @@ $.fn.searchUiBuilder = function (settings) {
     }
 
     function createResultField(id, title, description, keywords, url, price, km, year) {
-        var findMore = $("<a class='find-more' href='#" + id + "'>Намери подобни</a>")
+        /*var findMore = $("<a class='find-more' href='#" + id + "'>Намери подобни</a>")
             .click(findNearest);
         var findMean = $("<a class='find-more' href='#" + id + "'>Определи пазарна цена</a>")
-            .click(findMeanPrice);
+            .click(findMeanPrice);*/
         var result = $("<div class='search-result'>" +
             "<div class='result-title'><span><i class='fa fa-car' aria-hidden='true'></i>|" + title + "</span></div>" +
             "<div class='result-description'><span><i class='fa fa-file-text-o' aria-hidden='true'></i>|<b>Описание</b>: " + description + "</span></div>" +
@@ -105,8 +105,8 @@ $.fn.searchUiBuilder = function (settings) {
             "<div class='nearest-holder' style='display: none'></div>" +
             "</div>" +
             "<div class='result-separator'></div>");
-        result.find(".result-visit").prepend(findMore);
-        result.find(".result-visit").prepend(findMean);
+        //result.find(".result-visit").prepend(findMore);
+        //result.find(".result-visit").prepend(findMean);
         $(".search-results-holder .results-container").append(result);
     }
 
@@ -191,13 +191,13 @@ $.fn.searchUiBuilder = function (settings) {
             data: parameters,
             dataType: "json"
         }).done(function (result) {
-            var docs = $(result);
+            var docs = $(result.result);
             $(".search-results-holder").show();
             $(".search-results-holder .results-container *").remove();
             var results = container.find("#results-field-from").val();
             if (results <= 0 || results == "")
                 results = 15;
-            initPagination(docs.length, results, parameters.page);
+            initPagination(result.count, results, parameters.page);
             if (docs.length == 0)
                 $(".search-results-holder .results-container").append("<div class='search-result-empty'>Няма открити резултати.</div>");
             docs.each(function (key, val) {

@@ -59,7 +59,10 @@ class Crawler implements ICrawler
             $plugin = new $pluginName();
             if (!($plugin instanceof ICrawlerPlugin))
                 throw new \Exception("Given plugin does not implement ICrawlerPlugin!");
-            $response = Request::get($url);
+            $headers = [];
+            $headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36";
+            //$headers["User-Agent"] = "CarStorage Search Engine Bot";
+            $response = Request::get($url, $headers);
             if ($response->code != 200)
                 throw new \Exception("Crawler got job with non existing url!");
             $content = $response->raw_body;

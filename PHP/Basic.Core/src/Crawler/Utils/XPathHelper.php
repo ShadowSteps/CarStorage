@@ -57,6 +57,20 @@ class XPathHelper
         return $list->item($elementNumber);
     }
 
+    public static function FindElementListByAttributeValue($tagName, $attribute, $value, $parentNode, \DOMXPath $path) {
+        $list = $path->query('.//' . $tagName . "[@$attribute='$value']", $parentNode);
+        if ($list->length <= 0)
+            throw new XPathElementNotFoundException("No elements found!");
+        return $list;
+    }
+
+    public static function FindElementByAttributeValue($tagName, $attribute, $value, $parentNode, \DOMXPath $path, $elementNumber = 0) {
+        $list = self::FindElementListByAttributeValue($tagName, $attribute, $value, $parentNode, $path);
+        if ($list->length <= $elementNumber)
+            throw new XPathElementNotFoundException("Element with index $elementNumber not found!");
+        return $list->item($elementNumber);
+    }
+
     public static function FindElementListByClass($element, $className, $parent, \DOMXPath $path)
     {
         $list = $path->query('.//' . $element.'[contains(concat(\' \', normalize-space(@class), \' \'), \' '.$className.' \')]', $parent);
